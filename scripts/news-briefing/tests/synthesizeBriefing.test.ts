@@ -15,8 +15,8 @@ import {
 describe("synthesizeBriefing", () => {
   test("rejects malformed raw briefing files with a schema error", async () => {
     const rootDirectoryPath = mkdtempSync(path.join(tmpdir(), "briefings-synthesize-"))
-    const rawDirectoryPath = path.join(rootDirectoryPath, "public/briefings/raw")
-    const briefingDirectoryPath = path.join(rootDirectoryPath, "public/briefings")
+    const rawDirectoryPath = path.join(rootDirectoryPath, "briefings/raw")
+    const briefingDirectoryPath = path.join(rootDirectoryPath, "briefings")
 
     mkdirSync(rawDirectoryPath, { recursive: true })
     writeFileSync(
@@ -37,8 +37,8 @@ describe("synthesizeBriefing", () => {
 
   test("rejects malformed pi selection output with a schema error", async () => {
     const rootDirectoryPath = mkdtempSync(path.join(tmpdir(), "briefings-synthesize-"))
-    const rawDirectoryPath = path.join(rootDirectoryPath, "public/briefings/raw")
-    const briefingDirectoryPath = path.join(rootDirectoryPath, "public/briefings")
+    const rawDirectoryPath = path.join(rootDirectoryPath, "briefings/raw")
+    const briefingDirectoryPath = path.join(rootDirectoryPath, "briefings")
 
     mkdirSync(rawDirectoryPath, { recursive: true })
     writeFileSync(
@@ -60,8 +60,8 @@ describe("synthesizeBriefing", () => {
 
   test("rejects malformed pi synthesis output with a schema error", async () => {
     const rootDirectoryPath = mkdtempSync(path.join(tmpdir(), "briefings-synthesize-"))
-    const rawDirectoryPath = path.join(rootDirectoryPath, "public/briefings/raw")
-    const briefingDirectoryPath = path.join(rootDirectoryPath, "public/briefings")
+    const rawDirectoryPath = path.join(rootDirectoryPath, "briefings/raw")
+    const briefingDirectoryPath = path.join(rootDirectoryPath, "briefings")
 
     mkdirSync(rawDirectoryPath, { recursive: true })
     writeFileSync(
@@ -90,8 +90,8 @@ describe("synthesizeBriefing", () => {
 
   test("runs the synthesis Effect with injectable services", async () => {
     const rootDirectoryPath = mkdtempSync(path.join(tmpdir(), "briefings-synthesize-effect-"))
-    const rawDirectoryPath = path.join(rootDirectoryPath, "public/briefings/raw")
-    const briefingDirectoryPath = path.join(rootDirectoryPath, "public/briefings")
+    const rawDirectoryPath = path.join(rootDirectoryPath, "briefings/raw")
+    const briefingDirectoryPath = path.join(rootDirectoryPath, "briefings")
 
     mkdirSync(rawDirectoryPath, { recursive: true })
     writeFileSync(
@@ -155,8 +155,8 @@ describe("synthesizeBriefing", () => {
 
   test("includes the previous day's headlines in the selection prompt", async () => {
     const rootDirectoryPath = mkdtempSync(path.join(tmpdir(), "briefings-synthesize-previous-"))
-    const rawDirectoryPath = path.join(rootDirectoryPath, "public/briefings/raw")
-    const briefingDirectoryPath = path.join(rootDirectoryPath, "public/briefings")
+    const rawDirectoryPath = path.join(rootDirectoryPath, "briefings/raw")
+    const briefingDirectoryPath = path.join(rootDirectoryPath, "briefings")
 
     mkdirSync(rawDirectoryPath, { recursive: true })
     mkdirSync(briefingDirectoryPath, { recursive: true })
@@ -199,8 +199,8 @@ describe("synthesizeBriefing", () => {
 
   test("selects stories from compact metadata, hydrates them, and writes the final briefing JSON", async () => {
     const rootDirectoryPath = mkdtempSync(path.join(tmpdir(), "briefings-synthesize-"))
-    const rawDirectoryPath = path.join(rootDirectoryPath, "public/briefings/raw")
-    const briefingDirectoryPath = path.join(rootDirectoryPath, "public/briefings")
+    const rawDirectoryPath = path.join(rootDirectoryPath, "briefings/raw")
+    const briefingDirectoryPath = path.join(rootDirectoryPath, "briefings")
 
     mkdirSync(rawDirectoryPath, { recursive: true })
     mkdirSync(briefingDirectoryPath, { recursive: true })

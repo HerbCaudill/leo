@@ -1,6 +1,4 @@
-import { getBriefingIndexPath, getGeneratedBriefingGitPaths } from "./briefingPaths.ts"
-import { PUBLIC_BRIEFINGS_DIRECTORY_PATH } from "./constants.ts"
-import { generateBriefingIndex } from "./generateBriefingIndex.ts"
+import { getGeneratedBriefingGitPaths } from "./briefingPaths.ts"
 import { runProcessWithForwardedOutput } from "./runProcessWithForwardedOutput.ts"
 import type { CommitAndPushGeneratedBriefingsArgs } from "./types.ts"
 
@@ -11,18 +9,11 @@ export async function commitAndPushGeneratedBriefings(
 ): Promise<void> {
   if (args.dates.length === 0) return
 
-  const briefingDirectoryPath = args.briefingDirectoryPath ?? PUBLIC_BRIEFINGS_DIRECTORY_PATH
   const runCommand = args.runCommand ?? runProcessWithForwardedOutput
   const generatedPaths = getGeneratedBriefingGitPaths(args.dates)
   const commitMessage = `Briefing: add generated briefings for ${args.dates.join(", ")}`
 
-  generateBriefingIndex(briefingDirectoryPath)
-
-  await runCommand("git", [
-    "add",
-    getBriefingIndexPath("public/briefings").replaceAll("\\", "/"),
-    ...generatedPaths,
-  ])
+  await runCommand("git", ["add", ...generatedPaths])
   await runCommand("git", ["commit", "-m", commitMessage])
   await runCommand("git", ["pull", "--rebase", "--autostash"])
   await runCommand("git", ["push"])

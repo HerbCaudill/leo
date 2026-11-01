@@ -225,7 +225,7 @@ export function describeMorningBriefingDryRun(
     date: args.date,
     destinations: {
       t3: "Two new dated threads, Morning briefing and News briefing, pinned in T3 Code",
-      news: join(args.cwd ?? BRIEFINGS_REPOSITORY_PATH, "public/briefings", `${args.date}.json`),
+      news: join(args.cwd ?? BRIEFINGS_REPOSITORY_PATH, "briefings", `${args.date}.json`),
       obsidian: join(args.dailyNotesDirectoryPath ?? DAILY_NOTES_DIRECTORY_PATH, `${args.date}.md`),
     },
     lanes: MORNING_BRIEFING_LANES.map(lane => ({ key: lane.key, sources: lane.sources })),

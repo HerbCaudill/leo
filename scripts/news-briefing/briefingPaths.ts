@@ -2,9 +2,9 @@ import path from "node:path"
 
 const datedBriefingJsonFileNamePattern = /^\d{4}-\d{2}-\d{2}\.json$/
 
-const publicBriefingsGitDirectoryPath = "public/briefings"
+const briefingsGitDirectoryPath = "briefings"
 
-const rawBriefingsGitDirectoryPath = "public/briefings/raw"
+const rawBriefingsGitDirectoryPath = "briefings/raw"
 
 /** Build the raw briefing JSON path for a date. */
 export function getRawBriefingPath(
@@ -26,22 +26,14 @@ export function getSelectionBriefingPath(
   return path.join(rawDirectoryPath, `${date}-selection.json`)
 }
 
-/** Build the final public briefing JSON path for a date. */
+/** Build the final briefing JSON path for a date. */
 export function getFinalBriefingPath(
-  /** The directory containing public briefing JSON files. */
+  /** The directory containing final briefing JSON files. */
   briefingDirectoryPath: string,
   /** The briefing date. */
   date: string,
 ): string {
   return path.join(briefingDirectoryPath, `${date}.json`)
-}
-
-/** Build the public briefing index JSON path. */
-export function getBriefingIndexPath(
-  /** The directory containing public briefing JSON files. */
-  briefingDirectoryPath: string,
-): string {
-  return path.join(briefingDirectoryPath, "index.json")
 }
 
 /** Build the generated briefing paths to stage in git for the given dates. */
@@ -51,7 +43,7 @@ export function getGeneratedBriefingGitPaths(
 ): string[] {
   return dates
     .flatMap(date => [
-      getFinalBriefingPath(publicBriefingsGitDirectoryPath, date),
+      getFinalBriefingPath(briefingsGitDirectoryPath, date),
       getRawBriefingPath(rawBriefingsGitDirectoryPath, date),
       getSelectionBriefingPath(rawBriefingsGitDirectoryPath, date),
     ])

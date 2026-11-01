@@ -39,7 +39,7 @@ describe("formatPreviousHeadlinesBlock", () => {
 describe("readPreviousBriefingHeadlinesEffect", () => {
   test("returns an empty list when the previous briefing is missing", async () => {
     const rootDirectoryPath = mkdtempSync(path.join(tmpdir(), "briefings-previous-"))
-    const briefingDirectoryPath = path.join(rootDirectoryPath, "public/briefings")
+    const briefingDirectoryPath = path.join(rootDirectoryPath, "briefings")
 
     mkdirSync(briefingDirectoryPath, { recursive: true })
 
@@ -52,7 +52,7 @@ describe("readPreviousBriefingHeadlinesEffect", () => {
 
   test("collects headlines across sections from the previous day's briefing", async () => {
     const rootDirectoryPath = mkdtempSync(path.join(tmpdir(), "briefings-previous-"))
-    const briefingDirectoryPath = path.join(rootDirectoryPath, "public/briefings")
+    const briefingDirectoryPath = path.join(rootDirectoryPath, "briefings")
 
     mkdirSync(briefingDirectoryPath, { recursive: true })
     writeFileSync(
@@ -83,7 +83,7 @@ describe("readPreviousBriefingHeadlinesEffect", () => {
 
   test("returns an empty list when the previous briefing is malformed", async () => {
     const rootDirectoryPath = mkdtempSync(path.join(tmpdir(), "briefings-previous-"))
-    const briefingDirectoryPath = path.join(rootDirectoryPath, "public/briefings")
+    const briefingDirectoryPath = path.join(rootDirectoryPath, "briefings")
 
     mkdirSync(briefingDirectoryPath, { recursive: true })
     writeFileSync(path.join(briefingDirectoryPath, "2026-04-19.json"), "{ not valid json")

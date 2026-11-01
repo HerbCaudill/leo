@@ -8,5 +8,5 @@
   "useTabs": false,
   "printWidth": 100,
   "sortTailwindcss": {},
-  "ignorePatterns": ["public/briefings/**/*.json"]
+  "ignorePatterns": ["briefings/**/*.json"]
 }

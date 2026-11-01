@@ -33,7 +33,7 @@ describe("runNewsBriefingPipeline", () => {
           Effect.sync(() => {
             events.push(`synthesize:${date}`)
 
-            return `public/briefings/${date}.json`
+            return `briefings/${date}.json`
           }),
       }),
       ClockService.LiveFromNow(() => times.shift() ?? 7000),
@@ -73,7 +73,7 @@ describe("runNewsBriefingPipeline", () => {
       },
       runSynthesisStage: async date => {
         events.push(`synthesize:${date}`)
-        return `public/briefings/${date}.json`
+        return `briefings/${date}.json`
       },
     })
 
@@ -108,7 +108,7 @@ describe("runNewsBriefingPipeline", () => {
         ],
         date,
       }),
-      runSynthesisStage: async () => "public/briefings/2026-04-20.json",
+      runSynthesisStage: async () => "briefings/2026-04-20.json",
     })
 
     expect(messages).toEqual([

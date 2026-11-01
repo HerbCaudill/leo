@@ -3,7 +3,7 @@ import { clearExistingBriefingFiles as clearExistingBriefingFilesDefault } from 
 import { commitAndPushGeneratedBriefings as commitAndPushGeneratedBriefingsDefault } from "./commitAndPushGeneratedBriefings.ts"
 import {
   NEWS_SOURCE_CONFIGS,
-  PUBLIC_BRIEFINGS_DIRECTORY_PATH,
+  BRIEFINGS_DIRECTORY_PATH,
   RAW_BRIEFINGS_DIRECTORY_PATH,
 } from "./constants.ts"
 import { fetchPageHtmlWithCurl } from "./fetchPageHtmlWithCurl.ts"
@@ -27,7 +27,7 @@ export function makeNewsBriefingRuntime(
   /** Runtime overrides for tests or alternate CLI wiring. */
   options: NewsBriefingRuntimeOptions = {},
 ): NewsBriefingRuntime {
-  const briefingDirectoryPath = options.briefingDirectoryPath ?? PUBLIC_BRIEFINGS_DIRECTORY_PATH
+  const briefingDirectoryPath = options.briefingDirectoryPath ?? BRIEFINGS_DIRECTORY_PATH
   const rawDirectoryPath = options.rawDirectoryPath ?? RAW_BRIEFINGS_DIRECTORY_PATH
   const sourceConfigs = options.sourceConfigs ?? NEWS_SOURCE_CONFIGS
   const fetchPageHtml = options.fetchPageHtml ?? fetchPageHtmlWithCurl

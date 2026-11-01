@@ -8,8 +8,8 @@ export const CANDIDATE_SOURCE_NAME_COLUMN_WIDTH = 28
 export const DEFAULT_MAX_HEADLINES_PER_SOURCE = 30
 export const MAX_ARTICLE_AGE_DAYS = 2
 export const RECENT_SOURCE_URL_LOOKBACK_DAYS = 7
-export const PUBLIC_BRIEFINGS_DIRECTORY_PATH = "public/briefings"
-export const RAW_BRIEFINGS_DIRECTORY_PATH = "public/briefings/raw"
+export const BRIEFINGS_DIRECTORY_PATH = "briefings"
+export const RAW_BRIEFINGS_DIRECTORY_PATH = "briefings/raw"
 
 export const NEWS_SOURCE_CONFIGS: NewsSourceConfig[] = [
   { homepageUrl: "https://www.bbc.com/news", key: "bbc", name: "BBC News", region: "world" },

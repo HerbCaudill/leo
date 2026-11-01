@@ -78,7 +78,7 @@ function writeWebhookUrl(content: string): string {
 test("sends the saved news JSON path to its own webhook", async () => {
   const fetch = vi.fn().mockResolvedValue(new Response(null, { status: 202 }))
   await presentBriefingInT3({
-    payload: { date: "2026-10-14", briefingPath: "/briefings/public/briefings/2026-10-14.json" },
+    payload: { date: "2026-10-14", briefingPath: "/briefings/briefings/2026-10-14.json" },
     webhookUrlPath: writeWebhookUrl("https://relay.example/news"),
     fetch,
     openT3: async () => {},
@@ -88,7 +88,7 @@ test("sends the saved news JSON path to its own webhook", async () => {
     expect.objectContaining({
       body: JSON.stringify({
         date: "2026-10-14",
-        briefingPath: "/briefings/public/briefings/2026-10-14.json",
+        briefingPath: "/briefings/briefings/2026-10-14.json",
       }),
       method: "POST",
     }),

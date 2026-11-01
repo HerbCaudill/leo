@@ -64,7 +64,7 @@ async function main(): Promise<void> {
           webhookUrlPath: NEWS_T3_WEBHOOK_URL_PATH,
           payload: {
             date,
-            briefingPath: join(BRIEFINGS_REPOSITORY_PATH, "public/briefings", `${date}.json`),
+            briefingPath: join(BRIEFINGS_REPOSITORY_PATH, "briefings", `${date}.json`),
           },
         }),
     })

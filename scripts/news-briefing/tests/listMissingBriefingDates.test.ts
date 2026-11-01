@@ -8,8 +8,8 @@ import { listMissingBriefingDates } from "../listMissingBriefingDates.ts"
 describe("listMissingBriefingDates", () => {
   test("returns raw dates that do not yet have final briefing JSON", () => {
     const rootDirectoryPath = mkdtempSync(path.join(tmpdir(), "briefings-missing-"))
-    const rawDirectoryPath = path.join(rootDirectoryPath, "public/briefings/raw")
-    const briefingDirectoryPath = path.join(rootDirectoryPath, "public/briefings")
+    const rawDirectoryPath = path.join(rootDirectoryPath, "briefings/raw")
+    const briefingDirectoryPath = path.join(rootDirectoryPath, "briefings")
 
     mkdirSync(rawDirectoryPath, { recursive: true })
     mkdirSync(briefingDirectoryPath, { recursive: true })
@@ -33,8 +33,8 @@ describe("listMissingBriefingDates", () => {
 
     expect(
       listMissingBriefingDates({
-        briefingDirectoryPath: path.join(rootDirectoryPath, "public/briefings"),
-        rawDirectoryPath: path.join(rootDirectoryPath, "public/briefings/raw"),
+        briefingDirectoryPath: path.join(rootDirectoryPath, "briefings"),
+        rawDirectoryPath: path.join(rootDirectoryPath, "briefings/raw"),
       }),
     ).toEqual([])
   })

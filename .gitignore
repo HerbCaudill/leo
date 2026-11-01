@@ -26,10 +26,10 @@ dist-ssr
 .env*.local
 
 # Generated at build time
-public/briefings/index.json
+briefings/index.json
 
 # Generated news synthesis intermediates
-public/briefings/raw/synthesis/
+briefings/raw/synthesis/
 
 # Beads / Dolt files (added by bd init)
 .dolt/
