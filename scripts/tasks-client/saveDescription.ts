@@ -23,7 +23,7 @@ export async function saveDescription(
 ): Promise<void> {
   const requestId = `briefings-description:${createHash("sha256").update(args.eventKey).digest("hex")}`
   const path = join(
-    args.statePath ?? join(homedir(), ".local/state/briefings-tasks/descriptions"),
+    args.statePath ?? join(homedir(), ".local/state/tasks-client/descriptions"),
     journalFileName(requestId),
   )
   const intention = existsSync(path)

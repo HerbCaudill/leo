@@ -1,7 +1,7 @@
-import { createTasksClient } from "../tasks/createTasksClient.ts"
-import { targetFromRecord } from "../tasks/targetFromRecord.ts"
-import { saveDescription } from "../tasks/saveDescription.ts"
-import type { TasksClient } from "../tasks/types.ts"
+import { createTasksClient } from "../tasks-client/createTasksClient.ts"
+import { targetFromRecord } from "../tasks-client/targetFromRecord.ts"
+import { saveDescription } from "../tasks-client/saveDescription.ts"
+import type { TasksClient } from "../tasks-client/types.ts"
 import type { Capture, CaptureDraft, CaptureTarget } from "./types.ts"
 
 /** Recover the original capture identity and verify the current destination before archiving. */

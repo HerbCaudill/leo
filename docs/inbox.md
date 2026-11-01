@@ -6,4 +6,4 @@ An independently locked worker processes relevant research in persistent Codex s
 
 On Windows, intake reads X bookmarks instead of reminders. See [X bookmark intake](x-bookmarks.md).
 
-See [Tasks integration](tasks-integration.md) for the CLI binding, durable request journals and legacy source resolution.
+See [Tasks integration](tasks-integration.md) for the CLI binding and durable request journals.

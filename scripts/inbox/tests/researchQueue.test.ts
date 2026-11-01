@@ -14,10 +14,10 @@ vi.mock("../constants.ts", () => ({
   VAULT_PATH: `${fixture.root}/vault`,
 }))
 vi.mock("../../morning-briefing/codexAgent.ts", () => ({ runCodexAgent: vi.fn() }))
-vi.mock("../../tasks/createTasksClient.ts", () => ({
+vi.mock("../../tasks-client/createTasksClient.ts", () => ({
   createTasksClient: () => ({ spaceId: "space", get: fixture.get, write: fixture.write }),
 }))
-vi.mock("../../tasks/saveDescription.ts", () => ({
+vi.mock("../../tasks-client/saveDescription.ts", () => ({
   saveDescription: async (args: unknown) => fixture.write(args),
 }))
 

@@ -41,7 +41,7 @@ The repo holds the headless jobs behind Leo. There is no web app.
 - [News briefing](docs/news-briefing.md): `scripts/news-briefing/`, writing to `briefings/`.
 - [Inbox processing](docs/inbox.md): `scripts/inbox/`, with [X bookmark intake](docs/x-bookmarks.md).
 - [Heartbeat](docs/heartbeat.md): `scripts/heartbeat/`.
-- [Tasks integration](docs/tasks-integration.md): `scripts/tasks/`.
+- [Tasks integration](docs/tasks-integration.md): `scripts/tasks-client/`.
 - [Windows setup](docs/windows-briefing.md): the mini owns the scheduled jobs.
 
 ## Boundary with dotfiles

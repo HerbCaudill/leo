@@ -2,10 +2,10 @@ import { createHash } from "node:crypto"
 import { existsSync, readFileSync } from "node:fs"
 import { homedir } from "node:os"
 import { join } from "node:path"
-import { createTasksClient } from "../tasks/createTasksClient.ts"
-import { saveDescription } from "../tasks/saveDescription.ts"
-import { journalFileName } from "../tasks/journalFileName.ts"
-import type { BoardRecord, TasksClient } from "../tasks/types.ts"
+import { createTasksClient } from "../tasks-client/createTasksClient.ts"
+import { saveDescription } from "../tasks-client/saveDescription.ts"
+import { journalFileName } from "../tasks-client/journalFileName.ts"
+import type { BoardRecord, TasksClient } from "../tasks-client/types.ts"
 import { writeTextAtomically } from "./atomicWrite.ts"
 import type {
   CreatedMorningBriefingTask,
@@ -29,7 +29,7 @@ export async function createInboxTasks(args: {
 }): Promise<MorningBriefingTaskOutcome> {
   if (!args.tasks.length) return { created: [], deferred: [] }
   const client = args.client ?? createTasksClient()
-  const statePath = args.statePath ?? join(homedir(), ".local/state/briefings-tasks/captures")
+  const statePath = args.statePath ?? join(homedir(), ".local/state/tasks-client/captures")
   if (!args.date) throw new Error("Briefing date is required for stable capture identity")
   const created: CreatedMorningBriefingTask[] = []
   let titles: Set<string>

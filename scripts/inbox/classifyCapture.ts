@@ -7,7 +7,7 @@ import {
   CODEX_COMMAND_PATH,
   MORNING_BRIEFING_MODEL,
 } from "../morning-briefing/constants.ts"
-import { loadTasks } from "../tasks/loadTasks.ts"
+import { loadTasks } from "../tasks-client/loadTasks.ts"
 import { INBOX_STATE_PATH } from "./constants.ts"
 import type { Capture, CaptureDraft } from "./types.ts"
 

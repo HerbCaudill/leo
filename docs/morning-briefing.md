@@ -18,7 +18,7 @@ Each agent writes schema-constrained JSON plus its complete JSONL event stream. 
 
 Private artifacts never enter Git. Each run has its own directory under `~/.local/state/morning-briefing/YYYY-MM-DD/`, including `carryover.md`, per-lane results and event logs, `merged.json`, synthesis attempts, `final.md`, the presentation event log, and `manifest.json`. A single-run lock prevents scheduled runs from overlapping.
 
-Task capture, research publication and duplicate detection use the managed Tasks CLI. See [Tasks integration](docs/tasks-integration.md) for the enrolled-space binding, journal recovery and legacy-history rules.
+Task capture, research publication and duplicate detection use the managed Tasks CLI. See [Tasks integration](tasks-integration.md) for the enrolled-space binding and journal recovery.
 
 ## Scan filing
 

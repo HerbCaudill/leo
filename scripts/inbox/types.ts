@@ -32,7 +32,7 @@ export type CaptureProcessor = {
   date: string
   /** Read-only source classifier. */
   classify: (capture: Capture) => Promise<CaptureDraft>
-  /** Resolve legacy records and verify any existing target. */
+  /** Check the journal's space and verify any existing target. */
   prepareRecord?: (record: CaptureRecord) => Promise<CaptureRecord>
   /** Idempotent transfer with write-ahead checkpoints. */
   transfer: (
@@ -65,10 +65,8 @@ export type CaptureTarget = {
 
 /** Durable transfer journal, also used as the research queue. */
 export type CaptureRecord = {
-  /** Journal version; legacy records require explicit provenance resolution. */
+  /** Journal version; older records have none and are only kept as receipts. */
   version?: 2
-  /** Original legacy journal retained during conversion. */
-  legacy?: unknown
   /** Source capture. */
   capture: Capture
   /** Classification saved before creating a task. */
@@ -82,34 +80,3 @@ export type CaptureRecord = {
   /** Local processing date for the archive heading. */
   date: string
 }
-
-/** Google Task fields needed for transfer and verification. */
-export type GoogleTask = {
-  /** Task identifier. */
-  id: string
-  /** Title. */
-  title: string
-  /** Operational context. */
-  notes?: string
-  /** Completion state. */
-  status?: string
-  /** Whether the task was deleted. */
-  deleted?: boolean
-  /** Google-provided browser link. */
-  webViewLink?: string
-  /** Parent identifier for a subtask. */
-  parent?: string
-  /** Lexicographic order among siblings. */
-  position?: string
-}
-
-/** Structured API request. */
-export type GwsRequest = {
-  /** Query and path parameters. */
-  params?: Record<string, string | number | boolean>
-  /** Fields to insert or patch. */
-  body?: Record<string, string>
-}
-
-/** Injectable API boundary. */
-export type GwsRunner = (command: readonly string[], request: GwsRequest) => Promise<unknown>

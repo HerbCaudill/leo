@@ -26,7 +26,7 @@ test("does not turn unavailable or ambiguous reads into empty results", async ()
     .mockResolvedValueOnce(response({ resolution: "ambiguous", items: [] }))
   const client = createTasksClient({ spaceId: "space", run })
   await expect(client.list("task")).rejects.toThrow("unavailable")
-  await expect(client.resolve("google-tasks:old")).rejects.toThrow("ambiguous")
+  await expect(client.get("task", "old")).rejects.toThrow("ambiguous")
 })
 
 test("preserves the original write identity and inspects an uncertain receipt without blindly retrying", async () => {

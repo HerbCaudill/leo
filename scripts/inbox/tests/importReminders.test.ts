@@ -1,9 +1,9 @@
 import { expect, test, vi } from "vitest"
 import { importReminders, mapReminder } from "../importReminders.ts"
-import type { TasksClient } from "../../tasks/types.ts"
+import type { TasksClient } from "../../tasks-client/types.ts"
 
 const saveDescription = vi.hoisted(() => vi.fn(async () => {}))
-vi.mock("../../tasks/saveDescription.ts", () => ({ saveDescription }))
+vi.mock("../../tasks-client/saveDescription.ts", () => ({ saveDescription }))
 
 const reminder = { id: "x-apple-reminder://ABC", title: "Call plumber" }
 

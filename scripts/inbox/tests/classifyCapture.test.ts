@@ -9,7 +9,7 @@ const fixture = vi.hoisted(() => ({
 }))
 vi.mock("../constants.ts", () => ({ INBOX_STATE_PATH: fixture.root }))
 vi.mock("../../morning-briefing/codexAgent.ts", () => ({ runCodexAgent: vi.fn() }))
-vi.mock("../../tasks/loadTasks.ts", () => ({ loadTasks: async () => [] }))
+vi.mock("../../tasks-client/loadTasks.ts", () => ({ loadTasks: async () => [] }))
 
 test("requires valid routing and a research scope before accepting a bookmark classification", async () => {
   const capture = {

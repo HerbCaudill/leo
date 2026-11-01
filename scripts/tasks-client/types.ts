@@ -61,8 +61,6 @@ export type TasksClient = {
   list: (kind: BoardRecord["kind"]) => Promise<BoardRecord[]>
   /** Get a current exact target. */
   get: (kind: "task" | "project", id: string) => Promise<BoardRecord>
-  /** Resolve preserved provenance, including promotions. */
-  resolve: (sourceId: string) => Promise<BoardRecord>
   /** Send a durable write with immutable identity. */
   write: (
     command: string,

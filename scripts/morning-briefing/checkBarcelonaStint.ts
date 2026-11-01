@@ -3,7 +3,7 @@ import { promisify } from "node:util"
 import { pathToFileURL } from "node:url"
 import { getManagedInvocation } from "../getManagedInvocation.ts"
 
-import { createTasksClient } from "../tasks/createTasksClient.ts"
+import { createTasksClient } from "../tasks-client/createTasksClient.ts"
 import { analyzeBarcelonaStint, type BarcelonaStintInput } from "./analyzeBarcelonaStint.ts"
 
 const exec = promisify(execFile)

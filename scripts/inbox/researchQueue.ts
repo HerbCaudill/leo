@@ -9,8 +9,8 @@ import {
 } from "../morning-briefing/constants.ts"
 import { acquireMorningBriefingRunLock } from "../morning-briefing/runLock.ts"
 import { INBOX_STATE_PATH, VAULT_PATH } from "./constants.ts"
-import { createTasksClient } from "../tasks/createTasksClient.ts"
-import { migrateCaptureRecord } from "../tasks/migrateCaptureRecord.ts"
+import { createTasksClient } from "../tasks-client/createTasksClient.ts"
+import { assertCaptureSpace } from "../tasks-client/assertCaptureSpace.ts"
 import { publishResearch } from "./publishResearch.ts"
 import type { CaptureRecord } from "./types.ts"
 
@@ -31,17 +31,14 @@ export async function researchQueue(): Promise<void> {
     for (const file of readdirSync(capturesPath)
       .filter(file => file.endsWith(".json"))
       .sort()) {
-      let record = JSON.parse(readFileSync(join(capturesPath, file), "utf8")) as CaptureRecord
+      const record = JSON.parse(readFileSync(join(capturesPath, file), "utf8")) as CaptureRecord
       const resultPath = join(INBOX_STATE_PATH, "research", `${record.capture.id}.json`)
       const donePath = `${resultPath}.done`
       const noteOnly =
         record.capture.source?.kind === "x" && record.draft.disposition === "research"
       if ((!record.target && !noteOnly) || !record.draft.research || existsSync(donePath)) continue
       try {
-        if (!noteOnly) {
-          record = await migrateCaptureRecord(record)
-          writeTextAtomically(join(capturesPath, file), JSON.stringify(record, null, 2))
-        }
+        if (!noteOnly) assertCaptureSpace(record, createTasksClient().spaceId)
         const current = noteOnly ? undefined : await findTask(record)
         if (current?.status === "done") {
           writeTextAtomically(donePath, "Task already completed.\n")

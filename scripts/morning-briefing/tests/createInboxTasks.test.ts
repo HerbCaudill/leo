@@ -3,7 +3,7 @@ import { tmpdir } from "node:os"
 import { join } from "node:path"
 import { expect, test, vi } from "vitest"
 import { createInboxTasks } from "../createInboxTasks.ts"
-import type { TasksClient } from "../../tasks/types.ts"
+import type { TasksClient } from "../../tasks-client/types.ts"
 
 test("deduplicates completed tasks and resumes a saved capture after description failure", async () => {
   const statePath = mkdtempSync(join(tmpdir(), "briefing-capture-"))

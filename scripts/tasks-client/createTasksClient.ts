@@ -64,7 +64,6 @@ export function createTasksClient(
       return items
     },
     get: (kind, id) => identity("get", { kind, id }),
-    resolve: sourceId => identity("resolve", { sourceId }),
     async write(command, input, requestId) {
       const status = await run("status", {})
       if (status.status !== "ok" || status.metadata?.spaceId !== spaceId)

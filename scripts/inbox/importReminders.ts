@@ -2,9 +2,9 @@ import { execFile } from "node:child_process"
 import { createHash } from "node:crypto"
 import { join } from "node:path"
 import { promisify } from "node:util"
-import { createTasksClient } from "../tasks/createTasksClient.ts"
-import { saveDescription } from "../tasks/saveDescription.ts"
-import type { TasksClient } from "../tasks/types.ts"
+import { createTasksClient } from "../tasks-client/createTasksClient.ts"
+import { saveDescription } from "../tasks-client/saveDescription.ts"
+import type { TasksClient } from "../tasks-client/types.ts"
 
 /** Apple Reminders list that Siri captures land in. */
 const REMINDERS_LIST = "Reminders"

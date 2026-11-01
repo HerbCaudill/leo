@@ -1,13 +1,9 @@
 import { expect, test, vi } from "vitest"
 import { transferCapture } from "../transferCapture.ts"
-import type { TasksClient } from "../../tasks/types.ts"
-import { saveDescription } from "../../tasks/saveDescription.ts"
+import type { TasksClient } from "../../tasks-client/types.ts"
+import { saveDescription } from "../../tasks-client/saveDescription.ts"
 
-vi.mock("../../tasks/saveDescription.ts", () => ({ saveDescription: vi.fn() }))
-
-vi.mock("../runGoogleTasks.ts", () => ({
-  runGoogleTasks: vi.fn().mockRejectedValue(new Error("Legacy provider invoked")),
-}))
+vi.mock("../../tasks-client/saveDescription.ts", () => ({ saveDescription: vi.fn() }))
 
 const capture = { id: "hash", timestamp: "2026-09-30T10:00:00Z", raw: "Call plumber" }
 const draft = { title: "Call plumber", question: "", research: "", duplicate: null }

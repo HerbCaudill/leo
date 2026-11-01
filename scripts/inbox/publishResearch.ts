@@ -1,7 +1,7 @@
 import { basename } from "node:path"
-import { createTasksClient } from "../tasks/createTasksClient.ts"
-import { saveDescription } from "../tasks/saveDescription.ts"
-import type { BoardRecord } from "../tasks/types.ts"
+import { createTasksClient } from "../tasks-client/createTasksClient.ts"
+import { saveDescription } from "../tasks-client/saveDescription.ts"
+import type { BoardRecord } from "../tasks-client/types.ts"
 import { VAULT_PATH } from "./constants.ts"
 
 /** Link research and append ordered execution steps without inventing a subtask hierarchy. */

@@ -13,7 +13,7 @@ vi.mock("../constants.ts", () => ({
   VAULT_PATH: `${fixture.root}/vault`,
 }))
 vi.mock("../../morning-briefing/codexAgent.ts", () => ({ runCodexAgent: vi.fn() }))
-vi.mock("../../tasks/createTasksClient.ts", () => ({ createTasksClient: fixture.client }))
+vi.mock("../../tasks-client/createTasksClient.ts", () => ({ createTasksClient: fixture.client }))
 
 test("researches a queued bookmark without a Tasks target and retries until its note is verified", async () => {
   const state = join(fixture.root, "state")
