@@ -87,12 +87,10 @@ test("uses an X event key and reuses acknowledged targets on retries", async () 
   const client = {
     spaceId: "space",
     list: vi.fn().mockResolvedValue([]),
-    write: vi
-      .fn()
-      .mockResolvedValue({
-        createdIds: ["new"],
-        records: [{ ...record, creationKey: "capture:x:x-123" }],
-      }),
+    write: vi.fn().mockResolvedValue({
+      createdIds: ["new"],
+      records: [{ ...record, creationKey: "capture:x:x-123" }],
+    }),
     get: vi.fn().mockResolvedValue(record),
   } as unknown as TasksClient
   const bookmark = {

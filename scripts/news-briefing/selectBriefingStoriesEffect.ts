@@ -22,7 +22,10 @@ export function selectBriefingStoriesEffect(
     const pi = yield* PiService
     const rawBriefingPath = getRawBriefingPath(rawDirectoryPath, date)
     const selectionPath = getSelectionBriefingPath(rawDirectoryPath, date)
-    const previousHeadlines = yield* readPreviousBriefingHeadlinesEffect(briefingDirectoryPath, date)
+    const previousHeadlines = yield* readPreviousBriefingHeadlinesEffect(
+      briefingDirectoryPath,
+      date,
+    )
     const previousHeadlinesBlock = formatPreviousHeadlinesBlock(previousHeadlines)
     const selectionPrompt = `${SELECTION_PROMPT}\n\nRaw briefing date: ${date}${previousHeadlinesBlock}`
     const selectionOutput = yield* pi.run({ prompt: selectionPrompt, rawBriefingPath })

@@ -13,18 +13,16 @@ test("reports missing account tabs even when the debugging port responds", async
 test("does not call an unresponsive account tab healthy", async () => {
   vi.stubGlobal(
     "fetch",
-    vi
-      .fn()
-      .mockResolvedValue({
-        ok: true,
-        json: async () => [
-          {
-            type: "page",
-            url: "https://web.whatsapp.com/",
-            webSocketDebuggerUrl: "ws://127.0.0.1/tab",
-          },
-        ],
-      }),
+    vi.fn().mockResolvedValue({
+      ok: true,
+      json: async () => [
+        {
+          type: "page",
+          url: "https://web.whatsapp.com/",
+          webSocketDebuggerUrl: "ws://127.0.0.1/tab",
+        },
+      ],
+    }),
   )
   vi.stubGlobal(
     "WebSocket",
@@ -39,18 +37,16 @@ test("does not call an unresponsive account tab healthy", async () => {
 test("requires a loaded page rather than a successful connection alone", async () => {
   vi.stubGlobal(
     "fetch",
-    vi
-      .fn()
-      .mockResolvedValue({
-        ok: true,
-        json: async () => [
-          {
-            type: "page",
-            url: "https://web.whatsapp.com/",
-            webSocketDebuggerUrl: "ws://127.0.0.1/tab",
-          },
-        ],
-      }),
+    vi.fn().mockResolvedValue({
+      ok: true,
+      json: async () => [
+        {
+          type: "page",
+          url: "https://web.whatsapp.com/",
+          webSocketDebuggerUrl: "ws://127.0.0.1/tab",
+        },
+      ],
+    }),
   )
   vi.stubGlobal(
     "WebSocket",
