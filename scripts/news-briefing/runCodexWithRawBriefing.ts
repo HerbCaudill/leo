@@ -5,7 +5,7 @@ import { runCodexAgent } from "../morning-briefing/codexAgent.ts"
 import { BRIEFINGS_REPOSITORY_PATH, CODEX_COMMAND_PATH } from "../morning-briefing/constants.ts"
 import type { RunCodexArgs } from "./types.ts"
 
-const NEWS_BRIEFING_MODEL = "gpt-5.6-terra"
+const NEWS_BRIEFING_LEVEL = 55
 
 /** Run a read-only Codex agent on a raw briefing file and return its final message. */
 export async function runCodexWithRawBriefing(
@@ -20,7 +20,7 @@ export async function runCodexWithRawBriefing(
       cwd: BRIEFINGS_REPOSITORY_PATH,
       environment: process.env,
       eventsPath: join(directoryPath, "events.jsonl"),
-      model: NEWS_BRIEFING_MODEL,
+      level: NEWS_BRIEFING_LEVEL,
       outputPath,
       prompt: `<file name="${args.rawBriefingPath}">\n${readFileSync(args.rawBriefingPath, "utf8")}\n</file>\n\n${args.prompt}`,
       sandbox: "read-only",

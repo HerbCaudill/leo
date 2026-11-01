@@ -19,7 +19,7 @@ test("gives a read-only Codex agent the file contents and returns its final mess
   ).resolves.toBe('{"stories":[]}')
 
   const args = vi.mocked(runCodexAgent).mock.calls[0]![0]
-  expect(args).toMatchObject({ model: "gpt-5.6-terra", sandbox: "read-only" })
+  expect(args).toMatchObject({ level: 55, sandbox: "read-only" })
   expect(args.prompt).toContain('{"articles":[]}')
   expect(args.prompt).toContain("Select stories")
 })

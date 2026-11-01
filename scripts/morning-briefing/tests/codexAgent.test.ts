@@ -9,7 +9,8 @@ describe("getCodexExecArgs", () => {
   test("can preserve a research session and restrict classification to reads", () => {
     const args = getCodexExecArgs({
       cwd: "/repo",
-      model: "gpt-5.6-sol",
+      effort: "high",
+      model: "gpt-6.1-sol",
       outputPath: "/result",
       schemaPath: "/schema",
       threadSource: "inbox-research",
@@ -23,7 +24,8 @@ describe("getCodexExecArgs", () => {
     expect(
       getCodexExecArgs({
         cwd: "/repo",
-        model: "gpt-5.6-sol",
+        effort: "high",
+        model: "gpt-6.1-sol",
         outputPath: "/state/result.json",
         schemaPath: "/repo/result.schema.json",
         threadSource: "morning-briefing-schedule",
@@ -31,7 +33,9 @@ describe("getCodexExecArgs", () => {
     ).toEqual([
       "exec",
       "--model",
-      "gpt-5.6-sol",
+      "gpt-6.1-sol",
+      "--config",
+      'model_reasoning_effort="high"',
       "--sandbox",
       "danger-full-access",
       "--cd",
@@ -61,7 +65,8 @@ describe("getCodexExecArgs", () => {
           NODE_OPTIONS: `--import=data:text/javascript,${encodeURIComponent("setInterval(() => {}, 1000); await new Promise(() => {})")}`,
         },
         eventsPath,
-        model: "gpt-5.6-sol",
+        level: 75,
+        resolveVariant: () => ({ effort: "high", model: "gpt-6.1-sol" }),
         outputPath: join(directoryPath, "result.json"),
         prompt: "Test",
         schemaPath: "/repo/result.schema.json",

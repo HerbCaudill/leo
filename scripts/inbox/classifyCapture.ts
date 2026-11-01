@@ -5,7 +5,7 @@ import { runCodexAgent } from "../morning-briefing/codexAgent.ts"
 import {
   BRIEFINGS_REPOSITORY_PATH,
   CODEX_COMMAND_PATH,
-  MORNING_BRIEFING_MODEL,
+  MORNING_BRIEFING_LEVEL,
 } from "../morning-briefing/constants.ts"
 import { loadTasks } from "../tasks-client/loadTasks.ts"
 import { INBOX_STATE_PATH } from "./constants.ts"
@@ -21,7 +21,7 @@ export async function classifyCapture(capture: Capture, date: string): Promise<C
     cwd: BRIEFINGS_REPOSITORY_PATH,
     environment: process.env,
     eventsPath: `${outputPath}.events.jsonl`,
-    model: MORNING_BRIEFING_MODEL,
+    level: MORNING_BRIEFING_LEVEL,
     outputPath,
     schemaPath: join(import.meta.dirname, "schemas/bookmark-classification.schema.json"),
     sandbox: "read-only",

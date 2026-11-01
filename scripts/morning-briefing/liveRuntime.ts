@@ -10,7 +10,7 @@ import {
   CODEX_COMMAND_PATH,
   DAILY_NOTES_DIRECTORY_PATH,
   MORNING_BRIEFING_LANES,
-  MORNING_BRIEFING_MODEL,
+  MORNING_BRIEFING_LEVEL,
   MORNING_BRIEFING_STATE_DIRECTORY_PATH,
 } from "./constants.ts"
 import { publishDailyBriefingToNote } from "./dailyNote.ts"
@@ -92,7 +92,7 @@ export async function runLiveMorningBriefing(
             gatherDirectoryPath: paths.gatherDirectoryPath,
             lane,
             localMessagesPath: lane.key === "communications" ? paths.localMessagesPath : undefined,
-            model: MORNING_BRIEFING_MODEL,
+            level: MORNING_BRIEFING_LEVEL,
             schemaPath: gatherSchemaPath,
             timeZone: args.timeZone,
           }),
@@ -153,7 +153,7 @@ export async function runLiveMorningBriefing(
             environment,
             gatherResults,
             mergedPath: paths.mergedPath,
-            model: MORNING_BRIEFING_MODEL,
+            level: MORNING_BRIEFING_LEVEL,
             schemaPath: synthesisSchemaPath,
             synthesisDirectoryPath: paths.synthesisDirectoryPath,
             timeZone: args.timeZone,

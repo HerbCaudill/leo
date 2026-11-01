@@ -31,7 +31,7 @@ export async function gatherMorningBriefingLane(
         cwd: args.cwd,
         environment: args.environment,
         eventsPath,
-        model: args.model,
+        level: args.level,
         outputPath,
         prompt,
         schemaPath: args.schemaPath,
@@ -128,8 +128,8 @@ type GatherMorningBriefingLaneArgs = {
   gatherDirectoryPath: string
   /** Source lane to gather. */
   lane: MorningBriefingLane
-  /** Codex model ID. */
-  model: string
+  /** Required intelligence level from 0 to 100. */
+  level: number
   /** Gather output JSON Schema path. */
   schemaPath: string
   /** IANA time zone used to interpret the target date. */

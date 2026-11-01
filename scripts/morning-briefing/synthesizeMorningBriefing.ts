@@ -51,7 +51,7 @@ ${readMorningBriefingContext()}
         cwd: args.cwd,
         environment: args.environment,
         eventsPath,
-        model: args.model,
+        level: args.level,
         outputPath,
         prompt,
         schemaPath: args.schemaPath,
@@ -84,8 +84,8 @@ type SynthesizeMorningBriefingArgs = {
   gatherResults: MorningBriefingGatherResult[]
   /** Combined gather artifact path. */
   mergedPath: string
-  /** Codex model ID. */
-  model: string
+  /** Required intelligence level from 0 to 100. */
+  level: number
   /** Synthesis output JSON Schema path. */
   schemaPath: string
   /** Directory for synthesis attempts and event logs. */

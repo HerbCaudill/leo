@@ -17,8 +17,8 @@ import {
 import { runT3 } from "./runT3.ts"
 
 const LEO_PROJECT_ID = "mcp:4efda691-8e1e-47a1-80e5-dea589320403"
-const TRIAGE_MODEL = "gpt-6-luna"
-const INVESTIGATION_MODEL = "gpt-6.1-sol"
+const TRIAGE_LEVEL = 15
+const INVESTIGATION_LEVEL = 75
 const MEMORY_DIRECTORY_PATH = join(homedir(), "Code/herbcaudill/notes/leo")
 const WATCHING_PATH = join(MEMORY_DIRECTORY_PATH, "Watching.md")
 const LOG_DIRECTORY_PATH = join(MEMORY_DIRECTORY_PATH, "log")
@@ -61,7 +61,7 @@ async function runAgent<T>(
     cwd: MEMORY_DIRECTORY_PATH,
     environment: process.env,
     eventsPath: join(STATE_DIRECTORY_PATH, `last-${args.name}-events.jsonl`),
-    model: args.model,
+    level: args.level,
     outputPath,
     prompt: `${readFileSync(join(import.meta.dirname, `${args.promptName}.prompt.md`), "utf8")}\n\n${args.context}\n`,
     schemaPath: join(import.meta.dirname, `${args.promptName}.schema.json`),
@@ -152,7 +152,7 @@ async function main(): Promise<void> {
     ].slice(-MAX_REVIEWED_SESSION_KEYS)
     const triage = await runAgent<TriageResult>({
       context,
-      model: TRIAGE_MODEL,
+      level: TRIAGE_LEVEL,
       name: "triage",
       promptName: "triage",
     })
@@ -164,7 +164,7 @@ async function main(): Promise<void> {
 
     const result = await runAgent<HeartbeatResult>({
       context: `${context}\n\nWhy the quick check flagged this: ${triage.reason}`,
-      model: INVESTIGATION_MODEL,
+      level: INVESTIGATION_LEVEL,
       name: "investigation",
       promptName: "heartbeat",
     })
@@ -199,8 +199,8 @@ await main()
 type RunAgentArgs = {
   /** Run-specific text appended to the prompt. */
   context: string
-  /** Codex model ID. */
-  model: string
+  /** Required intelligence level from 0 to 100. */
+  level: number
   /** Name used for artifact files and diagnostics. */
   name: string
   /** Base name of the prompt and schema files. */

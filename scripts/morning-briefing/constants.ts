@@ -38,8 +38,8 @@ export const NEWS_T3_WEBHOOK_URL_PATH = join(
   ".config/morning-briefing/news-t3-webhook-url",
 )
 
-/** Model used for source gathering and final synthesis. */
-export const MORNING_BRIEFING_MODEL = "gpt-5.6-sol"
+/** Intelligence level for source gathering and final synthesis. */
+export const MORNING_BRIEFING_LEVEL = 75
 
 /** Independent source groups gathered in parallel. */
 export const MORNING_BRIEFING_LANES = [

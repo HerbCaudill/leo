@@ -4,6 +4,8 @@ import { dirname } from "node:path"
 
 import { writeTextAtomically } from "./atomicWrite.ts"
 import { getAgentChromeMcpArgs } from "./getAgentChromeMcpArgs.ts"
+import { resolveCodexVariant } from "./resolveCodexVariant.ts"
+import type { CodexVariant } from "./resolveCodexVariant.ts"
 
 const AGENT_TIMEOUT_MS = 45 * 60 * 1_000
 const FORCE_KILL_DELAY_MS = 5_000
@@ -18,6 +20,8 @@ export function getCodexExecArgs(
     ...getAgentChromeMcpArgs(process.platform, args.threadSource),
     "--model",
     args.model,
+    "--config",
+    `model_reasoning_effort="${args.effort}"`,
     "--sandbox",
     args.sandbox ?? "danger-full-access",
     "--cd",
@@ -41,7 +45,8 @@ export async function runCodexAgent(
   mkdirSync(dirname(args.outputPath), { recursive: true })
   mkdirSync(dirname(args.eventsPath), { recursive: true })
 
-  const child = spawn(args.codexCommand, getCodexExecArgs(args), {
+  const variant = (args.resolveVariant ?? resolveCodexVariant)(args.level)
+  const child = spawn(args.codexCommand, getCodexExecArgs({ ...args, ...variant }), {
     env: args.environment,
     stdio: ["pipe", "pipe", "pipe"],
   })
@@ -100,6 +105,8 @@ export type GetCodexExecArgsArgs = {
   sandbox?: "read-only" | "danger-full-access"
   /** Working repository path. */
   cwd: string
+  /** Reasoning effort. */
+  effort: string
   /** Model ID. */
   model: string
   /** Schema-constrained final output path. */
@@ -110,13 +117,17 @@ export type GetCodexExecArgsArgs = {
   threadSource: string
 }
 
-export type RunCodexAgentArgs = GetCodexExecArgsArgs & {
+export type RunCodexAgentArgs = Omit<GetCodexExecArgsArgs, "effort" | "model"> & {
   /** Codex executable path. */
   codexCommand: string
   /** Complete JSONL event log path. */
   eventsPath: string
   /** Environment inherited by the agent process. */
   environment: NodeJS.ProcessEnv
+  /** Required intelligence from 0 to 100. */
+  level: number
+  /** Override how a level becomes a model and effort. */
+  resolveVariant?: (level: number) => CodexVariant
   /** Prompt read from a standalone prompt file with run context appended. */
   prompt: string
   /** Optional timeout override; null lets research finish without a fixed time limit. */

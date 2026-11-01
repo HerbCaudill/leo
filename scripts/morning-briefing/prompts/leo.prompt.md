@@ -14,6 +14,7 @@ Check these:
 - **Waiting on others:** things Herb is waiting for from another person, from the meeting transcripts in `~/Code/herbcaudill/notes/meetings/cleaned/`, sent Gmail, and `Follow-ups.md`. Include what's stalled at Tamariu only when another person is holding it up, never the house work itself. Verify an item is still open before reporting it.
 - **Waiting on Herb:** commitments Herb made to someone, from the same sources, that are overdue or close to due. He says his systems for this have withered, so this is one of your main jobs.
 - **Drift from the team:** read recent Slack through the `messaging` skill and meetings. Flag it gently, in one sentence, only if Herb has clearly gone quiet with the team for several days. He says a gentle flag corrects it.
+- **Model scores:** the `fetchedAt` date in `~/.local/state/llm/frontier.json`, which the nightly `llm refresh` updates. Report it, in one line, only if it is more than three days old or the file is missing, and point to `~/.local/state/llm/refresh.log`.
 - **Health:** a checkup or prescription from `Health.md` that needs action. Raise at most one a week, specific and easy to act on, such as one named appointment and how to book it. Record the date you raised it in `Follow-ups.md`. Don't prod about carpal tunnel, daily habits, or his pace.
 
 You have two assigned write actions:
