@@ -30,7 +30,7 @@ pnpm test             # Vitest
 pnpm format           # oxfmt
 pnpm briefing:news    # Fetch today, then synthesize any missing final briefings
 pnpm briefing:morning # Run and present local news and personal morning briefings
-pnpm inbox:process    # Process reminders, Siri captures, and X bookmarks; start research
+pnpm inbox:process    # Process reminders and X bookmarks; start research
 ```
 
 ## Repo map

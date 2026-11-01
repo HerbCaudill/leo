@@ -1,4 +1,4 @@
-import { existsSync, mkdirSync, readFileSync } from "node:fs"
+import { mkdirSync } from "node:fs"
 import { join } from "node:path"
 import { setTimeout } from "node:timers/promises"
 import { formatLocalDate } from "../morning-briefing/date.ts"
@@ -8,14 +8,12 @@ import { importReminders } from "./importReminders.ts"
 import { createTasksClient } from "../tasks/createTasksClient.ts"
 import { targetFromRecord } from "../tasks/targetFromRecord.ts"
 import { migrateCaptureRecord } from "../tasks/migrateCaptureRecord.ts"
-import { parseCaptures } from "./parseCaptures.ts"
-import { processInbox } from "./processInbox.ts"
 import { transferCapture } from "./transferCapture.ts"
 import { classifyCapture } from "./classifyCapture.ts"
 import { processXBookmarks } from "./processXBookmarks.ts"
 import type { CaptureProcessor } from "./types.ts"
 
-/** Process reminders and captures under one shared lock, including the pre-briefing pass. */
+/** Process reminders and X bookmarks under one shared lock, including the pre-briefing pass. */
 export async function runInboxIntake(): Promise<number> {
   mkdirSync(INBOX_STATE_PATH, { recursive: true, mode: 0o700 })
   let release: (() => void) | undefined
@@ -28,44 +26,16 @@ export async function runInboxIntake(): Promise<number> {
     }
   }
   try {
-    const failures: unknown[] = []
-    let processed = 0
-    const sources = [
-      () => (process.platform === "win32" ? Promise.resolve(0) : importReminders()),
-      processCaptures,
-      () =>
-        process.platform === "win32"
-          ? processXBookmarks({
-              ...captureProcessor(),
-              statePath: INBOX_STATE_PATH,
-              jsonPath: join(VAULT_PATH, "documents/x-bookmarks/bookmarks.json"),
-              markdownPath: join(VAULT_PATH, "documents/X bookmarks.md"),
-            })
-          : Promise.resolve(0),
-    ]
-    for (const source of sources) {
-      try {
-        processed += await source()
-      } catch (error) {
-        failures.push(error)
-      }
-    }
-    if (failures.length) throw new Error(failures.map(String).join("\n"))
-    return processed
+    if (process.platform !== "win32") return await importReminders()
+    return await processXBookmarks({
+      ...captureProcessor(),
+      statePath: INBOX_STATE_PATH,
+      jsonPath: join(VAULT_PATH, "documents/x-bookmarks/bookmarks.json"),
+      markdownPath: join(VAULT_PATH, "documents/X bookmarks.md"),
+    })
   } finally {
     release()
   }
-}
-
-/** Transfer Siri captures from the Obsidian inbox. */
-async function processCaptures(): Promise<number> {
-  const inboxPath = join(VAULT_PATH, "inbox.md")
-  if (!existsSync(inboxPath) || !parseCaptures(readFileSync(inboxPath, "utf8")).length) return 0
-  return await processInbox({
-    ...captureProcessor(),
-    inboxPath,
-    archivePath: join(VAULT_PATH, "documents/inbox.archive.md"),
-  })
 }
 
 /** Shared classifier, identity recovery, and Tasks write boundary. */

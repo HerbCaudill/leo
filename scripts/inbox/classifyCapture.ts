@@ -11,12 +11,11 @@ import { loadTasks } from "../tasks/loadTasks.ts"
 import { INBOX_STATE_PATH } from "./constants.ts"
 import type { Capture, CaptureDraft } from "./types.ts"
 
-/** Read-only classification with the same task snapshot and agent journal for every source. */
+/** Read-only bookmark classification against a current task snapshot. */
 export async function classifyCapture(capture: Capture, date: string): Promise<CaptureDraft> {
   const snapshotPath = join(INBOX_STATE_PATH, "tasks.json")
   writeTextAtomically(snapshotPath, JSON.stringify(await loadTasks()))
   const outputPath = join(INBOX_STATE_PATH, "agents", `${capture.id}.classification.json`)
-  const name = capture.source?.kind === "x" ? "classify-bookmark" : "classify"
   await runCodexAgent({
     codexCommand: CODEX_COMMAND_PATH,
     cwd: BRIEFINGS_REPOSITORY_PATH,
@@ -24,13 +23,10 @@ export async function classifyCapture(capture: Capture, date: string): Promise<C
     eventsPath: `${outputPath}.events.jsonl`,
     model: MORNING_BRIEFING_MODEL,
     outputPath,
-    schemaPath: join(
-      import.meta.dirname,
-      `schemas/${name === "classify" ? "classification" : "bookmark-classification"}.schema.json`,
-    ),
+    schemaPath: join(import.meta.dirname, "schemas/bookmark-classification.schema.json"),
     sandbox: "read-only",
     threadSource: "inbox-classification",
-    prompt: `${readFileSync(join(import.meta.dirname, `prompts/${name}.prompt.md`), "utf8")}\n\nRun context:\n${JSON.stringify({ capture, date, snapshotPath })}`,
+    prompt: `${readFileSync(join(import.meta.dirname, "prompts/classify-bookmark.prompt.md"), "utf8")}\n\nRun context:\n${JSON.stringify({ capture, date, snapshotPath })}`,
   })
   const draft = JSON.parse(readFileSync(outputPath, "utf8")) as CaptureDraft
   if (
@@ -39,8 +35,8 @@ export async function classifyCapture(capture: Capture, date: string): Promise<C
     typeof draft.research !== "string" ||
     (draft.duplicate !== null &&
       (!draft.duplicate?.id || !["task", "project"].includes(draft.duplicate.kind))) ||
-    (capture.source &&
-      (!draft.disposition || !["task", "research", "archive"].includes(draft.disposition))) ||
+    !draft.disposition ||
+    !["task", "research", "archive"].includes(draft.disposition) ||
     (draft.disposition === "research" && !draft.research.trim())
   )
     throw new Error("Invalid capture classification")

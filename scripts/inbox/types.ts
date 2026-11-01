@@ -6,7 +6,7 @@ export type Capture = {
   timestamp: string
   /** Original text, without surrounding line breaks. */
   raw: string
-  /** Bookmark provenance; absent for existing Siri captures. */
+  /** Bookmark provenance; absent on older journal records. */
   source?: { kind: "x"; url: string }
 }
 
