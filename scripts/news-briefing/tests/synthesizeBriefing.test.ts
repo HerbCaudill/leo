@@ -9,7 +9,7 @@ import {
   FileSystemService,
   HttpService,
   LoggingService,
-  PiService,
+  CodexService,
 } from "../runtimeServices.ts"
 
 describe("synthesizeBriefing", () => {
@@ -30,12 +30,12 @@ describe("synthesizeBriefing", () => {
         date: "2026-04-20",
         fetchPageHtml: async () => "",
         rawDirectoryPath,
-        runPi: async () => JSON.stringify({ stories: [] }),
+        runCodex: async () => JSON.stringify({ stories: [] }),
       }),
     ).rejects.toThrow("Invalid raw briefing JSON")
   })
 
-  test("rejects malformed pi selection output with a schema error", async () => {
+  test("rejects malformed codex selection output with a schema error", async () => {
     const rootDirectoryPath = mkdtempSync(path.join(tmpdir(), "briefings-synthesize-"))
     const rawDirectoryPath = path.join(rootDirectoryPath, "briefings/raw")
     const briefingDirectoryPath = path.join(rootDirectoryPath, "briefings")
@@ -52,13 +52,13 @@ describe("synthesizeBriefing", () => {
         date: "2026-04-20",
         fetchPageHtml: async () => "",
         rawDirectoryPath,
-        runPi: async () =>
+        runCodex: async () =>
           JSON.stringify({ stories: [{ headline: "Bad section", section: "Sports" }] }),
       }),
-    ).rejects.toThrow("Invalid pi selection JSON")
+    ).rejects.toThrow("Invalid codex selection JSON")
   })
 
-  test("rejects malformed pi synthesis output with a schema error", async () => {
+  test("rejects malformed codex synthesis output with a schema error", async () => {
     const rootDirectoryPath = mkdtempSync(path.join(tmpdir(), "briefings-synthesize-"))
     const rawDirectoryPath = path.join(rootDirectoryPath, "briefings/raw")
     const briefingDirectoryPath = path.join(rootDirectoryPath, "briefings")
@@ -77,7 +77,7 @@ describe("synthesizeBriefing", () => {
         date: "2026-04-20",
         fetchPageHtml: async () => "",
         rawDirectoryPath,
-        runPi: async () => {
+        runCodex: async () => {
           calls += 1
 
           return calls === 1
@@ -85,7 +85,7 @@ describe("synthesizeBriefing", () => {
             : JSON.stringify({ sections: [{ title: "Sports", stories: [] }] })
         },
       }),
-    ).rejects.toThrow("Invalid pi synthesis JSON")
+    ).rejects.toThrow("Invalid codex synthesis JSON")
   })
 
   test("runs the synthesis Effect with injectable services", async () => {
@@ -114,7 +114,7 @@ describe("synthesizeBriefing", () => {
     const timestamps = [0, 1000, 1000, 2500, 2500, 4500]
     const testServices = Layer.mergeAll(
       FileSystemService.Live,
-      PiService.LiveFromRunner(async args => {
+      CodexService.LiveFromRunner(async args => {
         calls.push(args)
 
         return calls.length === 1
@@ -184,7 +184,7 @@ describe("synthesizeBriefing", () => {
       date: "2026-04-20",
       fetchPageHtml: async () => "",
       rawDirectoryPath,
-      runPi: async args => {
+      runCodex: async args => {
         calls.push(args)
 
         return calls.length === 1
@@ -242,7 +242,7 @@ describe("synthesizeBriefing", () => {
         throw new Error(`Unexpected article fetch: ${url}`)
       },
       rawDirectoryPath,
-      runPi: async args => {
+      runCodex: async args => {
         calls.push(args)
 
         if (calls.length === 1) {

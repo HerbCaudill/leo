@@ -10,7 +10,7 @@ describe("runProcessWithForwardedOutput failure output", () => {
     childProcess.stdout = new PassThrough()
     childProcess.stderr = new PassThrough()
 
-    const resultPromise = runProcessWithForwardedOutput("pi", ["-p", "hello"], {
+    const resultPromise = runProcessWithForwardedOutput("codex", ["-p", "hello"], {
       forwardStderr: false,
       spawnProcess: (() => childProcess) as SpawnProcessStub,
     })
@@ -18,7 +18,7 @@ describe("runProcessWithForwardedOutput failure output", () => {
     childProcess.stderr.write("Missing API key\n")
     childProcess.emit("close", 1)
 
-    await expect(resultPromise).rejects.toThrow("pi exited with code 1:\nMissing API key")
+    await expect(resultPromise).rejects.toThrow("codex exited with code 1:\nMissing API key")
   })
 })
 

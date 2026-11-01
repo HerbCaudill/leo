@@ -120,7 +120,7 @@ export type ListMissingBriefingDatesArgs = {
   rawDirectoryPath: string
 }
 
-export type RunPiArgs = {
+export type RunCodexArgs = {
   prompt: string
   rawBriefingPath: string
 }
@@ -132,7 +132,7 @@ export type SynthesizeBriefingArgs = {
   log?: (message: string) => void
   now?: () => number
   rawDirectoryPath: string
-  runPi: (args: RunPiArgs) => Promise<string>
+  runCodex: (args: RunCodexArgs) => Promise<string>
 }
 
 export type ClearExistingBriefingFilesArgs = {

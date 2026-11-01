@@ -12,7 +12,7 @@ describe("runProcessWithForwardedOutput", () => {
     const stdoutChunks: string[] = []
     const stderrChunks: string[] = []
 
-    const resultPromise = runProcessWithForwardedOutput("pi", ["-p", "hello"], {
+    const resultPromise = runProcessWithForwardedOutput("codex", ["-p", "hello"], {
       spawnProcess: (() => childProcess) as SpawnProcessStub,
       stderr: createStringWriter(stderrChunks),
       stdout: createStringWriter(stdoutChunks),
@@ -36,7 +36,7 @@ describe("runProcessWithForwardedOutput", () => {
     const stdoutChunks: string[] = []
     const stderrChunks: string[] = []
 
-    const resultPromise = runProcessWithForwardedOutput("pi", ["-p", "hello"], {
+    const resultPromise = runProcessWithForwardedOutput("codex", ["-p", "hello"], {
       forwardStderr: false,
       forwardStdout: false,
       spawnProcess: (() => childProcess) as SpawnProcessStub,
@@ -58,13 +58,13 @@ describe("runProcessWithForwardedOutput", () => {
     childProcess.stdout = new PassThrough()
     childProcess.stderr = new PassThrough()
 
-    const resultPromise = runProcessWithForwardedOutput("pi", ["-p", "hello"], {
+    const resultPromise = runProcessWithForwardedOutput("codex", ["-p", "hello"], {
       spawnProcess: (() => childProcess) as SpawnProcessStub,
     })
 
     childProcess.emit("close", 2)
 
-    await expect(resultPromise).rejects.toThrow("pi exited with code 2")
+    await expect(resultPromise).rejects.toThrow("codex exited with code 2")
   })
 
   test("rejects when the process fails to spawn", async () => {
@@ -72,7 +72,7 @@ describe("runProcessWithForwardedOutput", () => {
     childProcess.stdout = new PassThrough()
     childProcess.stderr = new PassThrough()
 
-    const resultPromise = runProcessWithForwardedOutput("pi", ["-p", "hello"], {
+    const resultPromise = runProcessWithForwardedOutput("codex", ["-p", "hello"], {
       spawnProcess: (() => childProcess) as SpawnProcessStub,
     })
 

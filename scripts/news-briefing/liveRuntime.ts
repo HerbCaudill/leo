@@ -8,7 +8,7 @@ import {
 } from "./constants.ts"
 import { fetchPageHtmlWithCurl } from "./fetchPageHtmlWithCurl.ts"
 import { listMissingBriefingDates as listMissingBriefingDatesDefault } from "./listMissingBriefingDates.ts"
-import { runPiWithRawBriefing } from "./runPiWithRawBriefing.ts"
+import { runCodexWithRawBriefing } from "./runCodexWithRawBriefing.ts"
 import { synthesizeBriefing as synthesizeBriefingDefault } from "./synthesizeBriefing.ts"
 import type {
   BuildRawBriefingArgs,
@@ -18,7 +18,7 @@ import type {
   NewsSourceConfig,
   RawBriefing,
   RunNewsBriefingPipelineArgs,
-  RunPiArgs,
+  RunCodexArgs,
   SynthesizeBriefingArgs,
 } from "./types.ts"
 
@@ -32,7 +32,7 @@ export function makeNewsBriefingRuntime(
   const sourceConfigs = options.sourceConfigs ?? NEWS_SOURCE_CONFIGS
   const fetchPageHtml = options.fetchPageHtml ?? fetchPageHtmlWithCurl
   const log = options.log ?? console.log
-  const runPi = options.runPi ?? runPiWithRawBriefing
+  const runCodex = options.runCodex ?? runCodexWithRawBriefing
   const buildRawBriefing = options.buildRawBriefing ?? buildRawBriefingDefault
   const synthesizeBriefing = options.synthesizeBriefing ?? synthesizeBriefingDefault
   const clearExistingBriefingFiles =
@@ -57,7 +57,7 @@ export function makeNewsBriefingRuntime(
     fetchPageHtml,
     log,
     rawDirectoryPath,
-    runPi,
+    runCodex,
   })
 
   const listSynthesisDates = (requestedDate?: string): string[] =>
@@ -118,8 +118,8 @@ export type NewsBriefingRuntimeOptions = {
   log?: (message: string) => void
   /** Directory containing raw briefing files. */
   rawDirectoryPath?: string
-  /** Pi runner used by the synthesis stage. */
-  runPi?: (args: RunPiArgs) => Promise<string>
+  /** Codex runner used by the synthesis stage. */
+  runCodex?: (args: RunCodexArgs) => Promise<string>
   /** Source configuration for the fetch stage. */
   sourceConfigs?: NewsSourceConfig[]
   /** Final briefing synthesizer used by synthesize and pipeline entrypoints. */

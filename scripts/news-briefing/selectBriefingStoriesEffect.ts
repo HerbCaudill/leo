@@ -4,11 +4,11 @@ import { SELECTION_PROMPT } from "./constants.ts"
 import { decodeJsonWithSchema } from "./decodeJsonWithSchema.ts"
 import { formatPreviousHeadlinesBlock } from "./formatPreviousHeadlinesBlock.ts"
 import { readPreviousBriefingHeadlinesEffect } from "./readPreviousBriefingHeadlinesEffect.ts"
-import { FileSystemService, PiService, toError } from "./runtimeServices.ts"
+import { FileSystemService, CodexService, toError } from "./runtimeServices.ts"
 import { BriefingSelectionSchema } from "./schemas.ts"
 import type { BriefingSelection } from "./types.ts"
 
-/** Ask pi to select briefing stories and persist the raw selection output. */
+/** Ask codex to select briefing stories and persist the raw selection output. */
 export function selectBriefingStoriesEffect(
   /** The directory where final briefings are written. */
   briefingDirectoryPath: string,
@@ -16,10 +16,10 @@ export function selectBriefingStoriesEffect(
   rawDirectoryPath: string,
   /** The briefing date being synthesized. */
   date: string,
-): Effect.Effect<BriefingSelection, Error, FileSystemService | PiService> {
+): Effect.Effect<BriefingSelection, Error, FileSystemService | CodexService> {
   return Effect.gen(function* () {
     const fileSystem = yield* FileSystemService
-    const pi = yield* PiService
+    const codex = yield* CodexService
     const rawBriefingPath = getRawBriefingPath(rawDirectoryPath, date)
     const selectionPath = getSelectionBriefingPath(rawDirectoryPath, date)
     const previousHeadlines = yield* readPreviousBriefingHeadlinesEffect(
@@ -28,13 +28,13 @@ export function selectBriefingStoriesEffect(
     )
     const previousHeadlinesBlock = formatPreviousHeadlinesBlock(previousHeadlines)
     const selectionPrompt = `${SELECTION_PROMPT}\n\nRaw briefing date: ${date}${previousHeadlinesBlock}`
-    const selectionOutput = yield* pi.run({ prompt: selectionPrompt, rawBriefingPath })
+    const selectionOutput = yield* codex.run({ prompt: selectionPrompt, rawBriefingPath })
 
     yield* fileSystem.writeText(selectionPath, `${selectionOutput.trim()}\n`)
 
     const decodedSelection = yield* Effect.try({
       catch: error => toError(error),
-      try: () => decodeJsonWithSchema(BriefingSelectionSchema, selectionOutput, "pi selection"),
+      try: () => decodeJsonWithSchema(BriefingSelectionSchema, selectionOutput, "codex selection"),
     })
 
     return {

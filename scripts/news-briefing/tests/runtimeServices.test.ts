@@ -13,7 +13,6 @@ import {
   makeLoggingServiceLive,
   makeProcessServiceLive,
   LoggingService,
-  PiService,
   ProcessService,
 } from "../runtimeServices.ts"
 
@@ -48,7 +47,7 @@ describe("runtime services", () => {
     }
   })
 
-  test("builds HTTP, pi, and git services from injectable process edges", async () => {
+  test("builds HTTP and git services from injectable process edges", async () => {
     const commands: Array<{ args: string[]; command: string }> = []
     const ProcessServiceTest = Layer.succeed(
       ProcessService,
@@ -56,47 +55,30 @@ describe("runtime services", () => {
         run: (command, args) =>
           Effect.sync(() => {
             commands.push({ args, command })
-            return command === "pi" ? "pi output" : "git output"
+            return "git output"
           }),
       }),
     )
     const HttpServiceTest = makeHttpServiceLive(url => Promise.resolve(`<html>${url}</html>`))
-    const AppLayer = Layer.mergeAll(HttpServiceTest, PiService.Live, GitService.Live).pipe(
+    const AppLayer = Layer.mergeAll(HttpServiceTest, GitService.Live).pipe(
       Layer.provide(ProcessServiceTest),
     )
 
     const program = Effect.gen(function* () {
       const http = yield* HttpService
-      const pi = yield* PiService
       const git = yield* GitService
 
       const html = yield* http.fetchPageHtml("https://example.com")
-      const piOutput = yield* pi.run({ prompt: "Select stories", rawBriefingPath: "raw/news.json" })
       const gitOutput = yield* git.run("status", ["--short"])
 
-      return { gitOutput, html, piOutput }
+      return { gitOutput, html }
     })
 
     await expect(program.pipe(Effect.provide(AppLayer), Effect.runPromise)).resolves.toEqual({
       gitOutput: "git output",
       html: "<html>https://example.com</html>",
-      piOutput: "pi output",
     })
-    expect(commands).toEqual([
-      {
-        args: [
-          "--provider",
-          "openai",
-          "--model",
-          "gpt-5.6-terra",
-          "-p",
-          "@raw/news.json",
-          "Select stories",
-        ],
-        command: "pi",
-      },
-      { args: ["status", "--short"], command: "git" },
-    ])
+    expect(commands).toEqual([{ args: ["status", "--short"], command: "git" }])
   })
 
   test("provides clock, logging, and process live layers with injectable edges", async () => {

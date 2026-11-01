@@ -5,20 +5,20 @@ import {
   FileSystemService,
   HttpService,
   LoggingService,
-  PiService,
+  CodexService,
 } from "./runtimeServices.ts"
 import type { SynthesizeBriefingArgs } from "./types.ts"
 
 export { synthesizeBriefingEffect } from "./synthesizeBriefingEffect.ts"
 
-/** Run pi in selection and synthesis stages, then write the final briefing JSON. */
+/** Run codex in selection and synthesis stages, then write the final briefing JSON. */
 export async function synthesizeBriefing(
-  /** The synthesis-stage configuration and pi runner dependency. */
+  /** The synthesis-stage configuration and codex runner dependency. */
   args: SynthesizeBriefingArgs,
 ): Promise<string> {
   const services = Layer.mergeAll(
     FileSystemService.Live,
-    PiService.LiveFromRunner(args.runPi),
+    CodexService.LiveFromRunner(args.runCodex),
     HttpService.LiveFromFetcher(args.fetchPageHtml),
     ClockService.LiveFromNow(args.now ?? Date.now),
     LoggingService.LiveFromLogger(args.log ?? (() => undefined)),

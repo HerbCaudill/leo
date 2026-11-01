@@ -10,7 +10,7 @@ import {
   FileSystemService,
   HttpService,
   LoggingService,
-  PiService,
+  CodexService,
 } from "./runtimeServices.ts"
 import { writeSynthesizedBriefingEffect } from "./writeSynthesizedBriefingEffect.ts"
 
@@ -21,7 +21,7 @@ export function synthesizeBriefingEffect(
 ): Effect.Effect<
   string,
   Error,
-  FileSystemService | PiService | HttpService | ClockService | LoggingService
+  FileSystemService | CodexService | HttpService | ClockService | LoggingService
 > {
   return Effect.gen(function* () {
     const rawBriefing = yield* readRawBriefingEffect(args.rawDirectoryPath, args.date)

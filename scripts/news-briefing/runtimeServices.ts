@@ -1,16 +1,15 @@
 import { existsSync, mkdirSync, readFileSync, writeFileSync } from "node:fs"
 import { Context, Effect, Layer } from "effect"
 import { fetchPageHtmlWithCurl } from "./fetchPageHtmlWithCurl.ts"
-import { getPiCommandArgs } from "./getPiCommandArgs.ts"
 import { runProcessWithForwardedOutput } from "./runProcessWithForwardedOutput.ts"
-import type { RunPiArgs } from "./types.ts"
+import type { RunCodexArgs } from "./types.ts"
 
 const FileSystemServiceTag = Context.GenericTag<FileSystemService>(
   "news-briefing/FileSystemService",
 )
 const HttpServiceTag = Context.GenericTag<HttpService>("news-briefing/HttpService")
 const ProcessServiceTag = Context.GenericTag<ProcessService>("news-briefing/ProcessService")
-const PiServiceTag = Context.GenericTag<PiService>("news-briefing/PiService")
+const CodexServiceTag = Context.GenericTag<CodexService>("news-briefing/CodexService")
 const GitServiceTag = Context.GenericTag<GitService>("news-briefing/GitService")
 const ClockServiceTag = Context.GenericTag<ClockService>("news-briefing/ClockService")
 const LoggingServiceTag = Context.GenericTag<LoggingService>("news-briefing/LoggingService")
@@ -25,33 +24,18 @@ const FileSystemServiceLive = Layer.succeed(
   }),
 )
 
-const PiServiceLive = Layer.effect(
-  PiServiceTag,
-  Effect.gen(function* () {
-    const processService = yield* ProcessServiceTag
-
-    return PiServiceTag.of({
-      run: args =>
-        processService.run("pi", getPiCommandArgs(args), {
-          forwardStderr: false,
-          forwardStdout: false,
-        }),
-    })
-  }),
-)
-
-/** Create a live pi service layer from an injectable pi runner. */
-export function makePiServiceLive(
-  /** The promise-based pi runner to expose as an Effect service. */
-  runPi: (args: RunPiArgs) => Promise<string>,
+/** Create a live codex service layer from an injectable codex runner. */
+export function makeCodexServiceLive(
+  /** The promise-based codex runner to expose as an Effect service. */
+  runCodex: (args: RunCodexArgs) => Promise<string>,
 ) {
   return Layer.succeed(
-    PiServiceTag,
-    PiServiceTag.of({
+    CodexServiceTag,
+    CodexServiceTag.of({
       run: args =>
         Effect.tryPromise({
           catch: error => toError(error),
-          try: () => runPi(args),
+          try: () => runCodex(args),
         }),
     }),
   )
@@ -164,10 +148,10 @@ export type ProcessService = {
   ) => Effect.Effect<string, Error>
 }
 
-/** Pi execution operations used at script boundaries. */
-export type PiService = {
-  /** Run pi against a raw briefing file. */
-  run: (args: RunPiArgs) => Effect.Effect<string, Error>
+/** Codex execution operations used at script boundaries. */
+export type CodexService = {
+  /** Run codex against a raw briefing file. */
+  run: (args: RunCodexArgs) => Effect.Effect<string, Error>
 }
 
 /** Git command operations used at script boundaries. */
@@ -217,9 +201,8 @@ export const ProcessService = Object.assign(ProcessServiceTag, {
   Live: makeProcessServiceLive(),
   LiveFromRunner: makeProcessServiceLive,
 })
-export const PiService = Object.assign(PiServiceTag, {
-  Live: PiServiceLive,
-  LiveFromRunner: makePiServiceLive,
+export const CodexService = Object.assign(CodexServiceTag, {
+  LiveFromRunner: makeCodexServiceLive,
 })
 export const GitService = Object.assign(GitServiceTag, { Live: GitServiceLive })
 export const ClockService = Object.assign(ClockServiceTag, {

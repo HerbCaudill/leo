@@ -45,20 +45,20 @@ export const RawBriefingArticleSchema = Schema.Struct({
   body: Schema.optional(Schema.String),
 })
 
-/** Raw briefing file passed to pi during story selection. */
+/** Raw briefing file passed to codex during story selection. */
 export const RawBriefingSchema = Schema.Struct({
   articles: Schema.Array(RawBriefingArticleSchema),
   date: Schema.String,
 })
 
-/** One story selected by pi for inclusion in the briefing. */
+/** One story selected by codex for inclusion in the briefing. */
 export const BriefingSelectedStorySchema = Schema.Struct({
   headline: Schema.String,
   section: BriefingSectionTitleSchema,
   sourceUrls: Schema.Array(Schema.String),
 })
 
-/** Pi story selection output. */
+/** Codex story selection output. */
 export const BriefingSelectionSchema = Schema.Struct({
   stories: Schema.Array(BriefingSelectedStorySchema),
 })
@@ -71,14 +71,14 @@ export const HydratedBriefingSourceSchema = Schema.Struct({
   url: Schema.String,
 })
 
-/** Hydrated selected story passed to pi during synthesis. */
+/** Hydrated selected story passed to codex during synthesis. */
 export const HydratedBriefingStorySchema = Schema.Struct({
   headline: Schema.String,
   section: BriefingSectionTitleSchema,
   sources: Schema.Array(HydratedBriefingSourceSchema),
 })
 
-/** Hydrated story selection file passed to pi during synthesis. */
+/** Hydrated story selection file passed to codex during synthesis. */
 export const HydratedBriefingSelectionSchema = Schema.Struct({
   date: Schema.String,
   stories: Schema.Array(HydratedBriefingStorySchema),

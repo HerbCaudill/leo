@@ -25,7 +25,7 @@ describe("live runtime wiring", () => {
       },
       log: message => events.push(`log:${message}`),
       rawDirectoryPath: "raw",
-      runPi: async args => `pi:${args.rawBriefingPath}:${args.prompt}`,
+      runCodex: async args => `codex:${args.rawBriefingPath}:${args.prompt}`,
       sourceConfigs: [
         {
           homepageUrl: "https://source.example",
@@ -49,9 +49,9 @@ describe("live runtime wiring", () => {
     expect(await fetchArgs.fetchPageHtml("https://example.com")).toBe(
       "<html>https://example.com</html>",
     )
-    expect(await synthesizeArgs.runPi({ prompt: "Prompt", rawBriefingPath: "raw/file.json" })).toBe(
-      "pi:raw/file.json:Prompt",
-    )
+    expect(
+      await synthesizeArgs.runCodex({ prompt: "Prompt", rawBriefingPath: "raw/file.json" }),
+    ).toBe("codex:raw/file.json:Prompt")
     expect(runtime.listSynthesisDates()).toEqual(["2026-04-19", "2026-04-20"])
     expect(runtime.listSynthesisDates("2026-04-18")).toEqual(["2026-04-18"])
 

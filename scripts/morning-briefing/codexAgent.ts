@@ -26,8 +26,7 @@ export function getCodexExecArgs(
     args.threadSource,
     ...(args.persistent ? [] : ["--ephemeral"]),
     "--json",
-    "--output-schema",
-    args.schemaPath,
+    ...(args.schemaPath ? ["--output-schema", args.schemaPath] : []),
     "--output-last-message",
     args.outputPath,
     "-",
@@ -105,8 +104,8 @@ export type GetCodexExecArgsArgs = {
   model: string
   /** Schema-constrained final output path. */
   outputPath: string
-  /** JSON Schema path for the final response. */
-  schemaPath: string
+  /** Optional JSON Schema path for the final response. */
+  schemaPath?: string
   /** Source label for diagnostics. */
   threadSource: string
 }
