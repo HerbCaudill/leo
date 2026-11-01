@@ -1,4 +1,4 @@
-import { spawn } from "node:child_process"
+import { execFile } from "node:child_process"
 import { appendFileSync, existsSync, mkdirSync, readFileSync, writeFileSync } from "node:fs"
 import { homedir } from "node:os"
 import { join } from "node:path"
@@ -6,7 +6,15 @@ import { join } from "node:path"
 import { runCodexAgent } from "../morning-briefing/codexAgent.ts"
 import { CODEX_COMMAND_PATH } from "../morning-briefing/constants.ts"
 import { acquireMorningBriefingRunLock } from "../morning-briefing/runLock.ts"
-import { findBriefingThread, hasWatchedWork, shouldNotifyHerb } from "./heartbeat.ts"
+import {
+  findBriefingThread,
+  findQuietSessions,
+  hasWatchedWork,
+  sessionKey,
+  shouldNotifyHerb,
+  type SessionThread,
+} from "./heartbeat.ts"
+import { runT3 } from "./runT3.ts"
 
 const LEO_PROJECT_ID = "mcp:4efda691-8e1e-47a1-80e5-dea589320403"
 const TRIAGE_MODEL = "gpt-6-luna"
@@ -16,29 +24,10 @@ const WATCHING_PATH = join(MEMORY_DIRECTORY_PATH, "Watching.md")
 const LOG_DIRECTORY_PATH = join(MEMORY_DIRECTORY_PATH, "log")
 const STATE_DIRECTORY_PATH = join(homedir(), ".local/state/leo")
 const STATE_PATH = join(STATE_DIRECTORY_PATH, "heartbeat.json")
-const T3_COMMAND_PATH = join(homedir(), ".t3/bin/t3.cmd")
+const MAC_LIST_SESSIONS_COMMAND =
+  "/etc/profiles/per-user/herbcaudill/bin/node --no-warnings ~/Code/HerbCaudill/leo/scripts/heartbeat/listSessions.ts"
+const MAX_REVIEWED_SESSION_KEYS = 500
 const AGENT_TIMEOUT_MS = 20 * 60 * 1_000
-
-/** Run t3.cmd through cmd.exe, which Windows requires for batch files. */
-function runT3(
-  /** CLI arguments. */
-  args: string[],
-  /** Optional stdin text. */
-  input?: string,
-): Promise<string> {
-  return new Promise((resolvePromise, reject) => {
-    const child = spawn("cmd.exe", ["/d", "/c", T3_COMMAND_PATH, ...args], { windowsHide: true })
-    let output = ""
-    let errorOutput = ""
-    child.stdout.on("data", chunk => (output += chunk))
-    child.stderr.on("data", chunk => (errorOutput += chunk))
-    child.on("error", reject)
-    child.on("close", code =>
-      code === 0 ? resolvePromise(output) : reject(new Error(`t3 exited ${code}: ${errorOutput}`)),
-    )
-    child.stdin.end(input)
-  })
-}
 
 /** Append an entry to Leo's journal for the day. */
 function writeJournal(date: string, text: string): void {
@@ -49,9 +38,11 @@ function writeJournal(date: string, text: string): void {
 
 /** Read the blockers Herb has already been told about. */
 function readState(): HeartbeatState {
-  return existsSync(STATE_PATH)
-    ? JSON.parse(readFileSync(STATE_PATH, "utf8"))
-    : { notifiedBlockerKeys: [] }
+  return {
+    notifiedBlockerKeys: [],
+    reviewedSessionKeys: [],
+    ...(existsSync(STATE_PATH) ? JSON.parse(readFileSync(STATE_PATH, "utf8")) : {}),
+  }
 }
 
 /** Save the heartbeat's memory between runs. */
@@ -78,6 +69,40 @@ async function runAgent<T>(
     timeoutMs: AGENT_TIMEOUT_MS,
   })
   return JSON.parse(readFileSync(outputPath, "utf8"))
+}
+
+/** Run a command and return its output. */
+function runCommand(command: string, args: string[]): Promise<string> {
+  return new Promise((resolvePromise, reject) => {
+    execFile(command, args, { maxBuffer: 100_000_000, windowsHide: true }, (error, output) =>
+      error ? reject(error) : resolvePromise(output),
+    )
+  })
+}
+
+/** List every thread on both machines. A sleeping Mac is normal, so it just gets skipped. */
+async function listSessions(): Promise<LocatedSession[]> {
+  const list = async (machine: string, command: string, args: string[]) => {
+    try {
+      const threads: SessionThread[] = JSON.parse(await runCommand(command, args))
+      return threads.map(thread => ({ ...thread, machine }))
+    } catch (error) {
+      console.log(`${new Date().toISOString()} skipped ${machine} sessions: ${error}`)
+      return []
+    }
+  }
+  const sessions = await Promise.all([
+    list("mini", process.execPath, ["--no-warnings", join(import.meta.dirname, "listSessions.ts")]),
+    list("mac", "ssh", [
+      "-o",
+      "BatchMode=yes",
+      "-o",
+      "ConnectTimeout=10",
+      "mac",
+      MAC_LIST_SESSIONS_COMMAND,
+    ]),
+  ])
+  return sessions.flat()
 }
 
 /** Tell Herb in today's briefing thread, returning false when there isn't one yet. */
@@ -107,7 +132,24 @@ async function main(): Promise<void> {
       timeZone: "Europe/Madrid",
       hour12: false,
     })
-    const context = `Current local time, the same zone as the journal: ${time.slice(0, 5)}. Today's journal: ${join(LOG_DIRECTORY_PATH, `${date}.md`)}`
+    const quietSessions = findQuietSessions({
+      threads: await listSessions(),
+      now: new Date(),
+      reviewedKeys: state.reviewedSessionKeys,
+    })
+    const sessionList = quietSessions.map(({ machine, threadId, title, status, updatedAt }) => ({
+      machine,
+      threadId,
+      title,
+      status,
+      updatedAt,
+    }))
+    const context = `Current local time, the same zone as the journal: ${time.slice(0, 5)}. Today's journal: ${join(LOG_DIRECTORY_PATH, `${date}.md`)}\n\nQuiet T3 sessions to review: ${JSON.stringify(sessionList)}`
+    // A running session stays out, so that it's reviewed again if its run ends or it stays hung.
+    const reviewedSessionKeys = [
+      ...state.reviewedSessionKeys,
+      ...quietSessions.filter(session => session.status !== "running").map(sessionKey),
+    ].slice(-MAX_REVIEWED_SESSION_KEYS)
     const triage = await runAgent<TriageResult>({
       context,
       model: TRIAGE_MODEL,
@@ -115,7 +157,10 @@ async function main(): Promise<void> {
       promptName: "triage",
     })
     console.log(`${new Date().toISOString()} triage escalate=${triage.escalate}: ${triage.reason}`)
-    if (!triage.escalate) return
+    if (!triage.escalate) {
+      writeState({ ...state, reviewedSessionKeys })
+      return
+    }
 
     const result = await runAgent<HeartbeatResult>({
       context: `${context}\n\nWhy the quick check flagged this: ${triage.reason}`,
@@ -128,17 +173,21 @@ async function main(): Promise<void> {
     // Quiet results are journaled too, so the next quick check knows a slow pace was already looked at.
     writeJournal(date, `${result.outcome}: ${result.summary}`)
     if (result.outcome !== "needs_herb") {
-      writeState({ notifiedBlockerKeys: [] })
+      writeState({ notifiedBlockerKeys: [], reviewedSessionKeys })
       return
     }
 
+    writeState({ ...state, reviewedSessionKeys })
     const blockerKey = result.blockerKey ?? result.summary
     // Before today's briefing exists the blocker stays unrecorded, so a later run reports it.
     if (
       shouldNotifyHerb({ blockerKey, notifiedBlockerKeys: state.notifiedBlockerKeys }) &&
       (await notifyHerb(date, result.summary))
     ) {
-      writeState({ notifiedBlockerKeys: [...state.notifiedBlockerKeys, blockerKey] })
+      writeState({
+        notifiedBlockerKeys: [...state.notifiedBlockerKeys, blockerKey],
+        reviewedSessionKeys,
+      })
     }
   } finally {
     release()
@@ -171,6 +220,12 @@ type BriefingThread = {
 
 type HeartbeatState = {
   notifiedBlockerKeys: string[]
+  reviewedSessionKeys: string[]
+}
+
+type LocatedSession = SessionThread & {
+  /** Machine the session runs on. */
+  machine: string
 }
 
 type HeartbeatResult = {
