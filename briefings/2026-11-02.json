@@ -1,0 +1,198 @@
+{
+  "sections": [
+    {
+      "stories": [
+        {
+          "body": "Ukraine said its air raid alert app sent false warnings about nuclear and chemical threats, street fighting and a Russian missile launch. Its strategic communications center blamed Russia. Hours later, Russia said its own emergency warnings app had been hit by a massive cyberattack that spread false information, without naming a culprit. The incidents followed the end of a local truce in part of Russian-occupied Kherson.",
+          "headline": "Russian and Ukrainian emergency alert apps hit by cyberattacks",
+          "sources": [
+            {
+              "name": "France 24",
+              "url": "https://www.france24.com/en/europe/20261102-ukraine-suspects-nationwide-air-raid-alert-app-has-been-hacked"
+            },
+            {
+              "name": "Al Jazeera",
+              "url": "https://www.aljazeera.com/news/2026/11/2/ukraine-blames-russia-after-air-alert-app-sends-out-false-warnings"
+            }
+          ]
+        },
+        {
+          "body": "Iran's Islamic Revolutionary Guard Corps said two tankers hit mines and caught fire in the Strait of Hormuz. President Donald Trump again urged Iran to make a deal and said the war would end soon.",
+          "headline": "Iran says two tankers are on fire in the Strait of Hormuz",
+          "sources": [
+            {
+              "name": "Al Jazeera",
+              "url": "https://www.aljazeera.com/news/liveblog/2026/11/2/iran-war-live-tankers-hit-in-hormuz-trump-again-says-conflict-to-end-soon"
+            }
+          ]
+        },
+        {
+          "body": "Israel's elections commission chief said the results of last week's deadlocked election would stand even if suspicions of foreign interference were substantiated. Benjamin Netanyahu's Likud party had claimed without evidence that Arab-led parties stole the vote with Qatari funding, an allegation Qatar rejected. Neither Netanyahu's bloc nor the main opposition bloc has a majority; Arab-led parties won a record 19 seats.",
+          "headline": "Israeli officials say election results stand despite Netanyahu's claims",
+          "sources": [
+            {
+              "name": "Al Jazeera",
+              "url": "https://www.aljazeera.com/news/2026/11/2/israeli-officials-say-results-stand-as-netanyahu-claims-election-stolen"
+            }
+          ]
+        },
+        {
+          "body": "The UN peacekeeping mission in disputed Western Sahara ended on Sunday after the Security Council failed to renew its mandate. Morocco, which claims the territory, welcomed the decision, while the Algeria-backed Polisario Front called it unacceptable.",
+          "headline": "UN peacekeeping mission in Western Sahara ends after 35 years",
+          "sources": [
+            {
+              "name": "France 24",
+              "url": "https://www.france24.com/en/africa/20261101-un-s-peacekeeping-mission-in-disputed-western-sahara-ends-after-35-years"
+            }
+          ]
+        }
+      ],
+      "title": "World"
+    },
+    {
+      "stories": [
+        {
+          "body": "Michigan Representative Haley Stevens endorsed Republican Mike Rogers over Democratic nominee Abdul El-Sayed two days before the election, after a bitter dispute with her former primary rival over Israel and an advertisement by an outside group supporting him. El-Sayed said he disagreed with the ad's message. Stevens's reversal drew condemnation from Democratic leaders and prompted several members of her team to resign.",
+          "headline": "Democrat Haley Stevens endorses Republican in Michigan Senate race",
+          "sources": [
+            {
+              "name": "Politico",
+              "url": "https://www.politico.com/news/2026/11/01/haley-stevens-endorses-mike-rogers-michigan-senate-01144698"
+            },
+            {
+              "name": "Al Jazeera",
+              "url": "https://www.aljazeera.com/news/2026/11/1/why-did-democrat-haley-stevens-just-endorse-a-republican-for-us-senate"
+            }
+          ]
+        },
+        {
+          "body": "Liberal groups are spending millions on state supreme court races, including contests in North Carolina and Ohio that could position Democrats to flip those courts in 2028. They are also defending Michigan's liberal majority and contesting an open seat in Montana. The winners could hear challenges to congressional and legislative maps drawn after the midterms and the 2030 census.",
+          "headline": "Democrats invest in state supreme court races with redistricting at stake",
+          "sources": [
+            {
+              "name": "Politico",
+              "url": "https://www.politico.com/news/2026/11/01/state-supreme-court-midterm-elections-01144147"
+            }
+          ]
+        },
+        {
+          "body": "Voters from Ohio to Illinois will decide dozens of local measures involving data centers on Tuesday. Opposition to the large facilities that power artificial intelligence has drawn support across party lines.",
+          "headline": "Data centers become a local issue on ballots across the US",
+          "sources": [
+            {
+              "name": "France 24",
+              "url": "https://www.france24.com/en/data-centres-on-the-ballot-could-the-ai-infrastructure-shape-us-midterms"
+            }
+          ]
+        },
+        {
+          "body": "Shootings in nightlife districts and near university campuses across the United States over Halloween weekend left at least six people dead and dozens wounded. Dallas recorded the highest toll, and police were investigating incidents in several states, with some suspects still at large.",
+          "headline": "Halloween weekend shootings leave at least six dead across the US",
+          "sources": [
+            {
+              "name": "France 24",
+              "url": "https://www.france24.com/en/americas/20261102-halloween-weekend-shootings-across-us-leave-at-least-six-dead-dozens-wounded"
+            }
+          ]
+        }
+      ],
+      "title": "US"
+    },
+    {
+      "stories": [
+        {
+          "body": "Investigators are examining whether railway infrastructure operator Adif used the wrong safety protocol in previous signaling failures on the Madrid–Seville line. In Wednesday's crash near Urda, a controller instructed a stopped Renfe high-speed train to resume normal running after the LZB signaling system failed; it collided with a stationary Iryo train, killing 69 people. The independent accident authority is also examining organizational and procedural factors and the signaling failures that preceded the crash.",
+          "headline": "Urda investigators examine whether Adif used the wrong protocol before",
+          "sources": [
+            {
+              "name": "El País",
+              "url": "https://elpais.com/espana/2026-11-02/la-investigacion-del-siniestro-de-urda-analiza-si-adif-uso-el-protocolo-erroneo-mas-veces.html"
+            },
+            {
+              "name": "El Periódico",
+              "url": "https://www.elperiodico.com/es/economia/20261101/investigacion-aitat-centrara-organizacion-procedimientos-135965794"
+            }
+          ]
+        },
+        {
+          "body": "Forensic teams have identified 66 of the 69 people killed in the Urda train crash, according to the regional high court. Those identified include 54 Spanish nationals and 12 foreign nationals. Three missing-person reports remain active for two Australians and one Japanese citizen, and the families of the remaining victims are expected to travel to Spain for identification procedures.",
+          "headline": "Authorities identify 66 of 69 people killed in Urda train crash",
+          "sources": [
+            {
+              "name": "RTVE",
+              "url": "https://www.rtve.es/noticias/20261102/accidente-urda-identificados-66-69-muertos/17295877.shtml"
+            },
+            {
+              "name": "La Vanguardia",
+              "url": "https://www.lavanguardia.com/vida/20261102/11673562/identificadas-66-69-personas-fallecidas-siniestro-urda.html"
+            }
+          ]
+        },
+        {
+          "body": "Three months after mass migrant arrivals in Ceuta, authorities have cleared beach encampments and continue to return people to Morocco. Nearly 14,000 people have been removed across the border, while about 7,000 remain in reception centers and the local government estimates another 4,000 have not been identified.",
+          "headline": "Ceuta faces aftermath of mass migrant arrivals as removals continue",
+          "sources": [
+            {
+              "name": "El País",
+              "url": "https://elpais.com/espana/2026-11-02/ceuta-tres-meses-despues-entre-el-fin-de-la-esperanza-y-las-redadas-policiales.html"
+            }
+          ]
+        }
+      ],
+      "title": "Spain"
+    },
+    {
+      "stories": [
+        {
+          "body": "Metro service on L2 between La Pau and Gorg is suspended from November 2 until December 3 while crews repair cracks beneath the tracks near Artigues/Sant Adrià. The damage followed a rise in groundwater after heavy rain, although the transit operator says the precise cause is uncertain. A replacement bus will connect the affected stations every four to nine minutes; tram and other metro and bus routes offer alternatives.",
+          "headline": "Barcelona metro L2 closes between La Pau and Gorg until December 3",
+          "sources": [
+            {
+              "name": "betevé",
+              "url": "https://beteve.cat/mobilitat/tall-l2-metro-la-pau-gorg/"
+            },
+            {
+              "name": "El Periódico",
+              "url": "https://www.elperiodico.com/es/barcelona/20261102/metro-linea-2-corte-gorg-la-pau-incidencia-sant-adria-sant-roc-135877516"
+            }
+          ]
+        },
+        {
+          "body": "Barcelona's cruise Terminal C handled its last ship on Sunday and will be demolished before a larger replacement is built. Terminal S is due to close at the end of December, while terminals A and B will eventually be demolished after the new C opens. The port's agreement with the city aims to reduce the number of cruise terminals from seven to five.",
+          "headline": "Barcelona cruise terminal closes as port begins restructuring",
+          "sources": [
+            {
+              "name": "betevé",
+              "url": "https://beteve.cat/economia/ultima-sortida-terminal-c-creuers-port-barcelona/"
+            },
+            {
+              "name": "El Periódico Barcelona",
+              "url": "https://www.elperiodico.com/es/barcelona/20261031/terminal-c-port-barcelona-afronta-inversion-cruceros-135925443"
+            }
+          ]
+        },
+        {
+          "body": "Catalonia's weather service has issued a warning for intense rain along the central and southern coast from Monday evening through Tuesday midday, with more than 20 millimeters possible in 30 minutes. Barcelona is expected to be cloudy and cooler on Monday, with highs of 16–17°C and a greater chance of rain in the evening.",
+          "headline": "Rain warning issued for Catalan coast as temperatures fall",
+          "sources": [
+            {
+              "name": "betevé",
+              "url": "https://beteve.cat/medi-ambient/temps-barcelona-dilluns-2-novembre-nuvols-fresca-abrics/"
+            }
+          ]
+        },
+        {
+          "body": "An independent analysis of official reports found that 423 of 14,736 wild boars recorded through October 29 during the African swine fever outbreak tested positive. Another 12,184 were captured or killed without symptoms as part of efforts to reduce the population and limit transmission. The researcher cautioned that estimates of positivity by detection method rely on case descriptions because official reports do not fully break down the positive results.",
+          "headline": "Analysis details wild boar cull during Collserola swine fever outbreak",
+          "sources": [
+            {
+              "name": "El Periódico",
+              "url": "https://www.elperiodico.com/es/barcelona/20261101/estudio-revela-83-jabalies-contabilizados-peste-porcina-135932076"
+            }
+          ]
+        }
+      ],
+      "title": "Barcelona & Catalunya"
+    }
+  ]
+}
