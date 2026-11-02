@@ -8,10 +8,17 @@ import { CODEX_COMMAND_PATH } from "../morning-briefing/constants.ts"
 import { acquireMorningBriefingRunLock } from "../morning-briefing/runLock.ts"
 import {
   findBriefingThread,
+  findE2eSignals,
   findQuietSessions,
   hasWatchedWork,
+  isE2eInvestigationDue,
+  parseCoverageHistory,
+  readE2eTarget,
   sessionKey,
+  settleE2eResult,
   shouldNotifyHerb,
+  type E2eTarget,
+  type HeartbeatResult,
   type SessionThread,
 } from "./heartbeat.ts"
 import { runT3 } from "./runT3.ts"
@@ -26,6 +33,7 @@ const STATE_DIRECTORY_PATH = join(homedir(), ".local/state/leo")
 const STATE_PATH = join(STATE_DIRECTORY_PATH, "heartbeat.json")
 const MAC_LIST_SESSIONS_COMMAND =
   "/etc/profiles/per-user/herbcaudill/bin/node --no-warnings ~/Code/HerbCaudill/leo/scripts/heartbeat/listSessions.ts"
+const COVERAGE_REPORT_URL = "http://127.0.0.1:8123/"
 const MAX_REVIEWED_SESSION_KEYS = 500
 const AGENT_TIMEOUT_MS = 20 * 60 * 1_000
 
@@ -105,6 +113,17 @@ async function listSessions(): Promise<LocatedSession[]> {
   return sessions.flat()
 }
 
+/** Check e2e's results against its target. An unreadable report is itself a signal, because it hides a stall. */
+async function readE2eSignals(target: E2eTarget): Promise<string[]> {
+  try {
+    const response = await fetch(COVERAGE_REPORT_URL)
+    const history = parseCoverageHistory(await response.text())
+    return findE2eSignals({ history, target, now: new Date() })
+  } catch (error) {
+    return [`The e2e coverage report couldn't be read: ${error}.`]
+  }
+}
+
 /** Tell Herb in today's briefing thread, returning false when there isn't one yet. */
 async function notifyHerb(date: string, summary: string): Promise<boolean> {
   const threads: BriefingThread[] = JSON.parse(
@@ -124,7 +143,8 @@ async function main(): Promise<void> {
   mkdirSync(STATE_DIRECTORY_PATH, { recursive: true })
   const release = acquireMorningBriefingRunLock(join(STATE_DIRECTORY_PATH, "heartbeat.lock"))
   try {
-    if (!hasWatchedWork(readFileSync(WATCHING_PATH, "utf8"))) return
+    const watching = readFileSync(WATCHING_PATH, "utf8")
+    if (!hasWatchedWork(watching)) return
 
     const date = new Date().toLocaleDateString("en-CA", { timeZone: "Europe/Madrid" })
     const state = readState()
@@ -150,34 +170,51 @@ async function main(): Promise<void> {
       ...state.reviewedSessionKeys,
       ...quietSessions.filter(session => session.status !== "running").map(sessionKey),
     ].slice(-MAX_REVIEWED_SESSION_KEYS)
-    const triage = await runAgent<TriageResult>({
-      context,
-      level: TRIAGE_LEVEL,
-      name: "triage",
-      promptName: "triage",
+    const target = readE2eTarget(watching)
+    const allSignals = target ? await readE2eSignals(target) : []
+    const signals = isE2eInvestigationDue({
+      lastInvestigatedAt: state.lastE2eInvestigatedAt,
+      now: new Date(),
     })
+      ? allSignals
+      : []
+    const lastE2eInvestigatedAt = signals.length
+      ? new Date().toISOString()
+      : state.lastE2eInvestigatedAt
+    // A stalled result skips the quick check, so the cheap model can't explain it away.
+    const triage: TriageResult = signals.length
+      ? { escalate: true, reason: signals.join(" ") }
+      : await runAgent<TriageResult>({
+          context,
+          level: TRIAGE_LEVEL,
+          name: "triage",
+          promptName: "triage",
+        })
     console.log(`${new Date().toISOString()} triage escalate=${triage.escalate}: ${triage.reason}`)
     if (!triage.escalate) {
-      writeState({ ...state, reviewedSessionKeys })
+      writeState({ ...state, reviewedSessionKeys, lastE2eInvestigatedAt })
       return
     }
 
-    const result = await runAgent<HeartbeatResult>({
-      context: `${context}\n\nWhy the quick check flagged this: ${triage.reason}`,
-      level: INVESTIGATION_LEVEL,
-      name: "investigation",
-      promptName: "heartbeat",
+    const result = settleE2eResult({
+      result: await runAgent<HeartbeatResult>({
+        context: `${context}\n\nWhy the quick check flagged this: ${triage.reason}`,
+        level: INVESTIGATION_LEVEL,
+        name: "investigation",
+        promptName: "heartbeat",
+      }),
+      signals,
     })
     console.log(`${new Date().toISOString()} ${result.outcome}: ${result.summary}`)
 
     // Quiet results are journaled too, so the next quick check knows a slow pace was already looked at.
     writeJournal(date, `${result.outcome}: ${result.summary}`)
     if (result.outcome !== "needs_herb") {
-      writeState({ notifiedBlockerKeys: [], reviewedSessionKeys })
+      writeState({ notifiedBlockerKeys: [], reviewedSessionKeys, lastE2eInvestigatedAt })
       return
     }
 
-    writeState({ ...state, reviewedSessionKeys })
+    writeState({ ...state, reviewedSessionKeys, lastE2eInvestigatedAt })
     const blockerKey = result.blockerKey ?? result.summary
     // Before today's briefing exists the blocker stays unrecorded, so a later run reports it.
     if (
@@ -187,6 +224,7 @@ async function main(): Promise<void> {
       writeState({
         notifiedBlockerKeys: [...state.notifiedBlockerKeys, blockerKey],
         reviewedSessionKeys,
+        lastE2eInvestigatedAt,
       })
     }
   } finally {
@@ -221,15 +259,10 @@ type BriefingThread = {
 type HeartbeatState = {
   notifiedBlockerKeys: string[]
   reviewedSessionKeys: string[]
+  lastE2eInvestigatedAt?: string
 }
 
 type LocatedSession = SessionThread & {
   /** Machine the session runs on. */
   machine: string
-}
-
-type HeartbeatResult = {
-  outcome: "quiet" | "acted" | "needs_herb"
-  summary: string
-  blockerKey: string | null
 }
