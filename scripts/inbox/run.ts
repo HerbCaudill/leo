@@ -21,6 +21,12 @@ async function main(): Promise<void> {
             archive: join(VAULT_PATH, "documents/X bookmarks.md"),
             journal: join(INBOX_STATE_PATH, "x-bookmarks.json"),
           },
+          blueskyBookmarks: {
+            enabled: process.platform === "win32",
+            source: join(VAULT_PATH, "documents/bluesky-bookmarks/bookmarks.json"),
+            archive: join(VAULT_PATH, "documents/Bluesky bookmarks.md"),
+            journal: join(INBOX_STATE_PATH, "bluesky-bookmarks.json"),
+          },
         },
         null,
         2,

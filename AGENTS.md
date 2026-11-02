@@ -30,7 +30,7 @@ pnpm test             # Vitest
 pnpm format           # oxfmt
 pnpm briefing:news    # Fetch today, then synthesize any missing final briefings
 pnpm briefing:morning # Run and present local news and personal morning briefings
-pnpm inbox:process    # Process reminders and X bookmarks; start research
+pnpm inbox:process    # Process reminders and bookmarks; start research
 ```
 
 ## Repo map
@@ -39,7 +39,7 @@ The repo holds the headless jobs behind Leo. There is no web app.
 
 - [Morning briefing](docs/morning-briefing.md): `scripts/morning-briefing/`, including scan filing and GitHub notifications.
 - [News briefing](docs/news-briefing.md): `scripts/news-briefing/`, writing to `briefings/`.
-- [Inbox processing](docs/inbox.md): `scripts/inbox/`, with [X bookmark intake](docs/x-bookmarks.md).
+- [Inbox processing](docs/inbox.md): `scripts/inbox/`, with [X bookmark](docs/x-bookmarks.md) and [Bluesky bookmark](docs/bluesky-bookmarks.md) intake.
 - [Heartbeat](docs/heartbeat.md): `scripts/heartbeat/`.
 - [Tasks integration](docs/tasks-integration.md): `scripts/tasks-client/`.
 - [Windows setup](docs/windows-briefing.md): the mini owns the scheduled jobs.

@@ -34,8 +34,7 @@ export async function researchQueue(): Promise<void> {
       const record = JSON.parse(readFileSync(join(capturesPath, file), "utf8")) as CaptureRecord
       const resultPath = join(INBOX_STATE_PATH, "research", `${record.capture.id}.json`)
       const donePath = `${resultPath}.done`
-      const noteOnly =
-        record.capture.source?.kind === "x" && record.draft.disposition === "research"
+      const noteOnly = !!record.capture.source && record.draft.disposition === "research"
       if ((!record.target && !noteOnly) || !record.draft.research || existsSync(donePath)) continue
       try {
         if (!noteOnly) assertCaptureSpace(record, createTasksClient().spaceId)

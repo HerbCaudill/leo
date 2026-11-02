@@ -10,10 +10,12 @@ import { targetFromRecord } from "../tasks-client/targetFromRecord.ts"
 import { assertCaptureSpace } from "../tasks-client/assertCaptureSpace.ts"
 import { transferCapture } from "./transferCapture.ts"
 import { classifyCapture } from "./classifyCapture.ts"
+import { processBlueskyBookmarks } from "./processBlueskyBookmarks.ts"
 import { processXBookmarks } from "./processXBookmarks.ts"
+import { runCaptureSources } from "./runCaptureSources.ts"
 import type { CaptureProcessor } from "./types.ts"
 
-/** Process reminders and X bookmarks under one shared lock, including the pre-briefing pass. */
+/** Process reminders, X bookmarks, and Bluesky bookmarks under one shared lock, including the pre-briefing pass. */
 export async function runInboxIntake(): Promise<number> {
   mkdirSync(INBOX_STATE_PATH, { recursive: true, mode: 0o700 })
   let release: (() => void) | undefined
@@ -27,12 +29,22 @@ export async function runInboxIntake(): Promise<number> {
   }
   try {
     if (process.platform !== "win32") return await importReminders()
-    return await processXBookmarks({
-      ...captureProcessor(),
-      statePath: INBOX_STATE_PATH,
-      jsonPath: join(VAULT_PATH, "documents/x-bookmarks/bookmarks.json"),
-      markdownPath: join(VAULT_PATH, "documents/X bookmarks.md"),
-    })
+    return await runCaptureSources([
+      () =>
+        processXBookmarks({
+          ...captureProcessor(),
+          statePath: INBOX_STATE_PATH,
+          jsonPath: join(VAULT_PATH, "documents/x-bookmarks/bookmarks.json"),
+          markdownPath: join(VAULT_PATH, "documents/X bookmarks.md"),
+        }),
+      () =>
+        processBlueskyBookmarks({
+          ...captureProcessor(),
+          statePath: INBOX_STATE_PATH,
+          jsonPath: join(VAULT_PATH, "documents/bluesky-bookmarks/bookmarks.json"),
+          markdownPath: join(VAULT_PATH, "documents/Bluesky bookmarks.md"),
+        }),
+    ])
   } finally {
     release()
   }

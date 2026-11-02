@@ -22,6 +22,8 @@ The mini's hourly `Inbox intake` job is enabled. `Inbox research` runs independe
 
 Windows intake also reads [X bookmarks](x-bookmarks.md) through the existing `xurl --app bookmarks` OAuth login on this machine. The job wrapper includes `~/.local/bin` on PATH, where `xurl.exe` is installed. Do not reauthenticate on the Mac: the X login only works on one machine at a time. The baseline journal excludes the 145 original exports from routing. X errors are reported after the other intake sources have run.
 
+Windows intake also reads [Bluesky bookmarks](bluesky-bookmarks.md) using the app password at `~/.config/bluesky/app-password`.
+
 The mini's interactive `Morning briefing` task runs daily at 07:00. Its acceptance run covered all 16 sources, saved both proposed tasks, published the exact final briefing to the daily note, completed Obsidian Sync, and successfully triggered the mini T3 presentation. The Mac morning LaunchAgent is unloaded and disabled; its source-only hourly job remains active. Do not enable both morning jobs.
 
 The managed Tasks peer runs in Herb's automatically signed-in desktop session; S4U and SSH clients use its authenticated loopback transport. The Windows CLI uses a revision-bound, hash-checked bundle outside the immutable selected release, avoiding elevated SSH failures on pnpm junctions.

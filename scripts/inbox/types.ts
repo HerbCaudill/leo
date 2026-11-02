@@ -7,7 +7,7 @@ export type Capture = {
   /** Original text, without surrounding line breaks. */
   raw: string
   /** Bookmark provenance; absent on older journal records. */
-  source?: { kind: "x"; url: string }
+  source?: { kind: "x" | "bluesky"; url: string }
 }
 
 /** Classification only; external actions are performed by the processor. */
