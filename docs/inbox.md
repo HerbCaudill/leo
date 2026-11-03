@@ -4,6 +4,6 @@
 
 An independently locked worker processes relevant research in persistent Codex sessions with no fixed time limit. Research writes canonical subject notes in Obsidian; deterministic code verifies the note, refreshes the typed task or project, and links the canonical note and appends ordered next steps to its description. Questions and source metadata remain in Obsidian, with task backlinks and private journals used to find them. Failed task updates reuse verified research and reuse the original description request before appending missing steps. Findings and unresolved questions surface in the morning Inbox review. `pnpm inbox:process --dry-run` inspects paths without writes; `--research-worker` drains queued research. Intake logs to `/tmp/inbox-processing.log`; detached research logs to `/tmp/inbox-research.log`.
 
-On Windows, intake reads bookmarks instead of reminders. See [X bookmark intake](x-bookmarks.md) and [Bluesky bookmark intake](bluesky-bookmarks.md).
+On Windows, intake fetches and archives bookmarks instead of reminders. Bookmarks are archive-only: no classification, Tasks capture, or queued research. Old bookmark transfer and research journals remain intact but are not resumed. The morning thread reviews live undecided bookmarks interactively after its Tasks Inbox review. The independent research worker handles only non-bookmark captures. See [X bookmark intake](x-bookmarks.md) and [Bluesky bookmark intake](bluesky-bookmarks.md).
 
 See [Tasks integration](tasks-integration.md) for the CLI binding and durable request journals.

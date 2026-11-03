@@ -15,52 +15,26 @@ vi.mock("../constants.ts", () => ({
 vi.mock("../../morning-briefing/codexAgent.ts", () => ({ runCodexAgent: vi.fn() }))
 vi.mock("../../tasks-client/createTasksClient.ts", () => ({ createTasksClient: fixture.client }))
 
-test("researches a queued bookmark without a Tasks target and retries until its note is verified", async () => {
-  const state = join(fixture.root, "state")
-  const vault = join(fixture.root, "vault")
-  mkdirSync(join(state, "captures"), { recursive: true })
-  mkdirSync(join(state, "research"), { recursive: true })
-  mkdirSync(vault, { recursive: true })
-  writeFileSync(
-    join(state, "captures/x-123.json"),
-    JSON.stringify({
+test.each(["x", "bluesky"])(
+  "preserves in-flight %s journals and research for interactive review",
+  async kind => {
+    const state = join(fixture.root, "state")
+    mkdirSync(join(state, "captures"), { recursive: true })
+    mkdirSync(join(state, "research"), { recursive: true })
+    const capturePath = join(state, "captures", kind + ".json")
+    const resultPath = join(state, "research", kind + ".json.pending")
+    const record = JSON.stringify({
       version: 2,
-      date: "2026-10-25",
-      capture: {
-        id: "x-123",
-        timestamp: "2026-10-25",
-        raw: "Essay https://example.com/essay",
-        source: { kind: "x", url: "https://x.com/i/status/123" },
-      },
-      draft: {
-        disposition: "research",
-        title: "Read essay",
-        research: "Read and summarize the essay",
-        question: "",
-        duplicate: null,
-      },
-    }),
-  )
-  vi.mocked(runCodexAgent).mockImplementation(async args => {
-    writeFileSync(
-      args.outputPath,
-      JSON.stringify({ notePath: "Essay.md", nextSteps: [], question: "" }),
-    )
-  })
-  await expect(researchQueue()).rejects.toThrow("need retry")
-  expect(existsSync(join(state, "research/x-123.json.done"))).toBe(false)
-  writeFileSync(join(vault, "Essay.md"), "Useful summary with the post and essay links.")
-  await researchQueue()
-  expect(readFileSync(join(state, "research/x-123.json"), "utf8")).toContain("Essay.md")
-  expect(existsSync(join(state, "research/x-123.json.done"))).toBe(true)
-  expect(runCodexAgent).toHaveBeenLastCalledWith(
-    expect.objectContaining({
-      persistent: true,
-      timeoutMs: null,
-      prompt: expect.stringContaining("https://x.com/i/status/123"),
-    }),
-  )
-  expect(fixture.client).not.toHaveBeenCalled()
-  await researchQueue()
-  expect(runCodexAgent).toHaveBeenCalledTimes(2)
-})
+      capture: { id: kind, source: { kind, url: "https://example.com/post" } },
+      draft: { disposition: "research", title: "Essay", research: "Read essay" },
+    })
+    writeFileSync(capturePath, record)
+    writeFileSync(resultPath, "In-flight result")
+    await researchQueue()
+    expect(readFileSync(capturePath, "utf8")).toBe(record)
+    expect(readFileSync(resultPath, "utf8")).toBe("In-flight result")
+    expect(existsSync(join(state, "research", kind + ".json.done"))).toBe(false)
+    expect(runCodexAgent).not.toHaveBeenCalled()
+    expect(fixture.client).not.toHaveBeenCalled()
+  },
+)

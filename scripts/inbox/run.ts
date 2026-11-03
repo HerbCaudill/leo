@@ -14,7 +14,7 @@ async function main(): Promise<void> {
       JSON.stringify(
         {
           state: INBOX_STATE_PATH,
-          destination: "Tasks: Inbox",
+          destination: process.platform === "win32" ? "Vault bookmark archives" : "Tasks: Inbox",
           xBookmarks: {
             enabled: process.platform === "win32",
             source: join(VAULT_PATH, "documents/x-bookmarks/bookmarks.json"),

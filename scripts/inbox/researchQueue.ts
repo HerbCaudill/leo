@@ -32,13 +32,14 @@ export async function researchQueue(): Promise<void> {
       .filter(file => file.endsWith(".json"))
       .sort()) {
       const record = JSON.parse(readFileSync(join(capturesPath, file), "utf8")) as CaptureRecord
+      // Preserve old bookmark journals and research artifacts for interactive review.
+      if (record.capture.source) continue
       const resultPath = join(INBOX_STATE_PATH, "research", `${record.capture.id}.json`)
       const donePath = `${resultPath}.done`
-      const noteOnly = !!record.capture.source && record.draft.disposition === "research"
-      if ((!record.target && !noteOnly) || !record.draft.research || existsSync(donePath)) continue
+      if (!record.target || !record.draft.research || existsSync(donePath)) continue
       try {
-        if (!noteOnly) assertCaptureSpace(record, createTasksClient().spaceId)
-        const current = noteOnly ? undefined : await findTask(record)
+        assertCaptureSpace(record, createTasksClient().spaceId)
+        const current = await findTask(record)
         if (current?.status === "done") {
           writeTextAtomically(donePath, "Task already completed.\n")
           continue
@@ -57,21 +58,12 @@ export async function researchQueue(): Promise<void> {
             persistent: true,
             threadSource: `inbox-research:${record.capture.id}`,
             timeoutMs: null,
-            prompt: `${readFileSync(join(import.meta.dirname, noteOnly ? "prompts/research-bookmark.prompt.md" : "prompts/research.prompt.md"), "utf8")}\n\nRun context:\n${JSON.stringify({ capture: record.capture, research: record.draft.research, task: current, taskUrl: record.target?.url, vaultPath: VAULT_PATH })}`,
+            prompt: `${readFileSync(join(import.meta.dirname, "prompts/research.prompt.md"), "utf8")}\n\nRun context:\n${JSON.stringify({ capture: record.capture, research: record.draft.research, task: current, taskUrl: record.target?.url, vaultPath: VAULT_PATH })}`,
           })
           const validated = readResearchResult(pendingPath)
-          if (noteOnly && !validated.notePath)
-            throw new Error("Bookmark research needs a verified note; leaving queued for retry")
           writeTextAtomically(resultPath, JSON.stringify(validated))
         }
         const result = readResearchResult(resultPath)
-        if (noteOnly) {
-          if (!result.notePath)
-            throw new Error("Bookmark research needs a verified note; leaving queued for retry")
-          writeTextAtomically(donePath, `${new Date().toISOString()}\n`)
-          console.log(`[inbox-research] Saved: ${result.notePath}`)
-          continue
-        }
         // Reload after research: the human may have moved, edited, or completed the task.
         const latest = await findTask(record)
         if (latest.status === "done") {

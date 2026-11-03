@@ -2,14 +2,13 @@ import { existsSync, mkdirSync, readFileSync } from "node:fs"
 import { dirname, join } from "node:path"
 import { writeTextAtomically } from "../morning-briefing/atomicWrite.ts"
 import { fetchBlueskyBookmarks } from "./fetchBlueskyBookmarks.ts"
-import { processCapture } from "./processCapture.ts"
-import { blueskyPostUrl, renderBlueskyBookmark } from "./renderBlueskyBookmark.ts"
+import { renderBlueskyBookmark } from "./renderBlueskyBookmark.ts"
 import type { BlueskyBookmark, BlueskyBookmarks } from "./blueskyBookmarkTypes.ts"
 import type { CaptureProcessor } from "./types.ts"
 
-/** Archive bookmarks before routing new posts through the shared capture journal. */
+/** Refresh the accumulating archive for interactive bookmark review. */
 export async function processBlueskyBookmarks(
-  args: CaptureProcessor & {
+  args: Pick<CaptureProcessor, "statePath"> & {
     /** Accumulating JSON archive, also retaining pending bookmark content. */
     jsonPath: string
     /** Human-readable archive in Obsidian. */
@@ -39,7 +38,7 @@ export async function processBlueskyBookmarks(
       baselineIds: current.bookmarks.map(({ item }) => item.uri),
       completedIds: [],
     }
-    writeTextAtomically(journalPath, JSON.stringify(journal, null, 2))
+    if (!existsSync(journalPath)) writeTextAtomically(journalPath, JSON.stringify(journal, null, 2))
     archive = { ...current, bookmarks: merge(current.bookmarks, archive.bookmarks) }
     writeTextAtomically(args.jsonPath, JSON.stringify(archive, null, 2))
   } catch (error) {
@@ -52,28 +51,8 @@ export async function processBlueskyBookmarks(
       ...archive.bookmarks.map(({ item }) => renderBlueskyBookmark(item)),
     ].join("\n\n") + "\n"
   writeTextAtomically(args.markdownPath, markdown)
-  const handled = new Set([...journal.baselineIds, ...journal.completedIds])
-  let processed = 0
-  for (const { item } of archive.bookmarks.filter(({ item }) => !handled.has(item.uri))) {
-    try {
-      await processCapture(
-        {
-          id: captureId(item.uri),
-          timestamp: args.date,
-          raw: renderBlueskyBookmark(item),
-          source: { kind: "bluesky", url: blueskyPostUrl(item.uri) },
-        },
-        { ...args, statePath: join(args.statePath, "captures") },
-      )
-      journal.completedIds.push(item.uri)
-      writeTextAtomically(journalPath, JSON.stringify(journal, null, 2))
-      processed++
-    } catch (error) {
-      failures.push(new Error(`Bluesky bookmark ${item.uri}: ${String(error)}`))
-    }
-  }
   if (failures.length) throw new Error(failures.map(String).join("\n"))
-  return processed
+  return 0
 }
 
 /** Keep the first copy so fresh fields win, retaining bookmarks removed since. */
@@ -84,20 +63,11 @@ function merge(current: BlueskyBookmark[], previous: BlueskyBookmark[]): Bluesky
   return [...entries.values()]
 }
 
-/** Build a filename-safe identity; Windows rejects the colons and slashes in an AT URI. */
-function captureId(
-  /** Post AT URI. */
-  uri: string,
-): string {
-  const [did, , rkey] = uri.replace("at://", "").split("/")
-  return `bsky-${did}-${rkey}`.replace(/[^A-Za-z0-9._-]/g, "-")
-}
-
 /** Source discovery receipt; capture journals retain routing and transfer checkpoints. */
 type BookmarkJournal = {
   /** Journal schema version. */
   version: 1
-  /** Post URIs from the first fetch, excluded from classification. */
+  /** Post URIs from the first fetch, retained from the former routing policy. */
   baselineIds: string[]
   /** Fully archived and routed post URIs. */
   completedIds: string[]

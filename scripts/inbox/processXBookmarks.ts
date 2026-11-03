@@ -3,14 +3,13 @@ import { join } from "node:path"
 import { writeTextAtomically } from "../morning-briefing/atomicWrite.ts"
 import { fetchXBookmarks } from "./fetchXBookmarks.ts"
 import { mergeXBookmarks } from "./mergeXBookmarks.ts"
-import { processCapture } from "./processCapture.ts"
 import { renderXBookmark } from "./renderXBookmark.ts"
 import type { CaptureProcessor } from "./types.ts"
 import type { XBookmarks } from "./xBookmarkTypes.ts"
 
-/** Archive bookmarks before routing new IDs through the shared capture journal. */
+/** Refresh the accumulating archive for interactive bookmark review. */
 export async function processXBookmarks(
-  args: CaptureProcessor & {
+  args: Pick<CaptureProcessor, "statePath"> & {
     /** Existing exported JSON, also retaining pending bookmark content. */
     jsonPath: string
     /** Human-readable archive in Obsidian. */
@@ -36,7 +35,7 @@ export async function processXBookmarks(
   )
     throw new Error("Invalid X bookmarks journal")
   // Save the baseline before replacing the export, so a crash cannot baseline new bookmarks.
-  writeTextAtomically(journalPath, JSON.stringify(journal, null, 2))
+  if (!existsSync(journalPath)) writeTextAtomically(journalPath, JSON.stringify(journal, null, 2))
   const failures: unknown[] = []
   let archive = original
   try {
@@ -52,35 +51,15 @@ export async function processXBookmarks(
       ...archive.data.map(post => renderXBookmark(post, archive)),
     ].join("\n\n") + "\n"
   writeTextAtomically(args.markdownPath, markdown)
-  const handled = new Set([...journal.baselineIds, ...journal.completedIds])
-  let processed = 0
-  for (const post of archive.data.filter(post => !handled.has(post.id))) {
-    try {
-      await processCapture(
-        {
-          id: `x-${post.id}`,
-          timestamp: args.date,
-          raw: renderXBookmark(post, archive),
-          source: { kind: "x", url: `https://x.com/i/status/${post.id}` },
-        },
-        { ...args, statePath: join(args.statePath, "captures") },
-      )
-      journal.completedIds.push(post.id)
-      writeTextAtomically(journalPath, JSON.stringify(journal, null, 2))
-      processed++
-    } catch (error) {
-      failures.push(new Error(`X bookmark ${post.id}: ${String(error)}`))
-    }
-  }
   if (failures.length) throw new Error(failures.map(String).join("\n"))
-  return processed
+  return 0
 }
 
 /** Source discovery receipt; capture journals retain routing and transfer checkpoints. */
 type BookmarkJournal = {
   /** Journal schema version. */
   version: 1
-  /** Original export IDs excluded from classification. */
+  /** Original export IDs retained from the former routing policy. */
   baselineIds: string[]
   /** Fully archived and routed IDs. */
   completedIds: string[]

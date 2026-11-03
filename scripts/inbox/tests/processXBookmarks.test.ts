@@ -1,4 +1,4 @@
-import { mkdtempSync, readFileSync, writeFileSync } from "node:fs"
+import { mkdirSync, mkdtempSync, readFileSync, writeFileSync } from "node:fs"
 import { tmpdir } from "node:os"
 import { join } from "node:path"
 import { expect, test, vi } from "vitest"
@@ -32,111 +32,27 @@ function setup() {
   }
 }
 
-test("baselines only the original export and archives every new bookmark before routing", async () => {
+test("archives new and historical bookmarks for interactive review", async () => {
   const args = setup()
-  const fetch = vi.fn(async () => ({
-    data: [
-      {
-        id: "new",
-        text: "truncated",
-        note_tweet: {
-          text: "Try this tool https://t.co/link",
-          entities: {
-            urls: [{ url: "https://t.co/link", expanded_url: "https://example.com/tool" }],
-          },
-        },
-      },
-    ],
-    includes: {},
-  }))
-  await processXBookmarks({ ...args, fetch })
-  expect(args.classify).toHaveBeenCalledTimes(1)
-  expect(args.classify.mock.calls[0]).toEqual([
-    expect.objectContaining({
-      id: "x-new",
-      raw: expect.stringContaining("https://example.com/tool"),
-      source: { kind: "x", url: "https://x.com/i/status/new" },
-    }),
-  ])
-  expect(readFileSync(args.markdownPath, "utf8")).toContain("Baseline")
-  expect(JSON.parse(readFileSync(args.jsonPath, "utf8")).data).toHaveLength(2)
-  await processXBookmarks({ ...args, fetch })
-  expect(args.transfer).toHaveBeenCalledTimes(1)
-})
+  mkdirSync(join(args.statePath, "captures"), { recursive: true })
+  const journalPath = join(args.statePath, "x-bookmarks.json")
+  const journal = JSON.stringify({ version: 1, baselineIds: [], completedIds: ["handled"] })
+  const capturePath = join(args.statePath, "captures", "pending.json")
+  writeFileSync(journalPath, journal)
+  writeFileSync(capturePath, "Pending transfer checkpoint")
 
-test("retries pending transfers with their persisted classification even if X is unavailable", async () => {
-  const args = setup()
-  args.transfer.mockRejectedValueOnce(new Error("verification failed"))
-  const fetch = async () => ({ data: [{ id: "new", text: "Try tool" }], includes: {} })
-  await expect(processXBookmarks({ ...args, fetch })).rejects.toThrow("verification failed")
-  expect(readFileSync(args.markdownPath, "utf8")).toContain("Try tool")
-  await expect(
-    processXBookmarks({
+  expect(
+    await processXBookmarks({
       ...args,
-      fetch: async () => {
-        throw new Error("X offline")
-      },
+      fetch: async () => ({ data: [{ id: "new", text: "New essay" }], includes: {} }),
     }),
-  ).rejects.toThrow("X offline")
-  expect(args.transfer).toHaveBeenCalledTimes(2)
-  expect(args.classify).toHaveBeenCalledTimes(1)
-  await processXBookmarks({ ...args, fetch })
-  expect(args.transfer).toHaveBeenCalledTimes(2)
-})
-
-test("archives nonactionable bookmarks without creating tasks and continues past failed items", async () => {
-  const args = setup()
-  const classify = vi
-    .fn()
-    .mockRejectedValueOnce(new Error("classifier unavailable"))
-    .mockResolvedValue({
-      title: "A joke",
-      question: "",
-      research: "",
-      duplicate: null,
-      disposition: "archive",
-    })
-  const fetch = async () => ({
-    data: [
-      { id: "first", text: "one" },
-      { id: "second", text: "two" },
-    ],
-    includes: {},
-  })
-  await expect(processXBookmarks({ ...args, classify, fetch })).rejects.toThrow(
-    "classifier unavailable",
-  )
-  await processXBookmarks({ ...args, classify, fetch })
-  expect(classify).toHaveBeenCalledTimes(3)
+  ).toBe(0)
+  expect(readFileSync(args.markdownPath, "utf8")).toContain("New essay")
+  expect(readFileSync(args.markdownPath, "utf8")).toContain("Baseline")
+  expect(readFileSync(journalPath, "utf8")).toBe(journal)
+  expect(readFileSync(capturePath, "utf8")).toBe("Pending transfer checkpoint")
+  expect(args.classify).not.toHaveBeenCalled()
   expect(args.transfer).not.toHaveBeenCalled()
-})
-
-test("recovers an acknowledged task after a lost description reply without reclassifying", async () => {
-  const args = setup()
-  const destination = {
-    id: "task",
-    kind: "task" as const,
-    spaceId: "space",
-    title: "Try tool",
-    url: "https://tasks/?task=task",
-  }
-  const transfer = vi
-    .fn()
-    .mockImplementationOnce(async (_capture, _draft, recovery) => {
-      recovery.checkpoint(destination)
-      throw new Error("description reply lost")
-    })
-    .mockResolvedValue(destination)
-  const fetch = async () => ({ data: [{ id: "new", text: "Try tool" }], includes: {} })
-  await expect(processXBookmarks({ ...args, transfer, fetch })).rejects.toThrow(
-    "description reply lost",
-  )
-  await processXBookmarks({ ...args, transfer, fetch })
-  expect(transfer.mock.calls[1][2]).toMatchObject({
-    candidate: destination,
-    insertionAttempted: true,
-  })
-  expect(args.classify).toHaveBeenCalledTimes(1)
 })
 
 test("keeps quoted posts, media, and Article metadata in the note", async () => {
@@ -173,31 +89,6 @@ test("keeps quoted posts, media, and Article metadata in the note", async () => 
   expect(markdown).toContain("Author Name")
   expect(markdown).toContain("https://example.com/photo")
   expect(markdown).toContain("A diagram")
-})
-
-test("queues long reads in the shared research journal without creating a reading task", async () => {
-  const args = setup()
-  await processXBookmarks({
-    ...args,
-    classify: async () => ({
-      disposition: "research",
-      title: "Read essay",
-      research: "Read https://example.com/essay and summarize",
-      question: "",
-      duplicate: null,
-    }),
-    fetch: async () => ({
-      data: [{ id: "essay", text: "Essay https://example.com/essay" }],
-      includes: {},
-    }),
-  })
-  const record = JSON.parse(readFileSync(join(args.statePath, "captures/x-essay.json"), "utf8"))
-  expect(record.draft).toMatchObject({
-    disposition: "research",
-    research: expect.stringContaining("https://example.com/essay"),
-  })
-  expect(record.target).toBeUndefined()
-  expect(args.transfer).not.toHaveBeenCalled()
 })
 
 test("does not route newly fetched content until the JSON cache is durable", async () => {

@@ -1,4 +1,4 @@
-import { existsSync, mkdtempSync, readFileSync } from "node:fs"
+import { mkdirSync, mkdtempSync, readFileSync, writeFileSync } from "node:fs"
 import { tmpdir } from "node:os"
 import { join } from "node:path"
 import { expect, test, vi } from "vitest"
@@ -39,25 +39,23 @@ const fetched =
   (...bookmarks: BlueskyBookmark[]) =>
   async () => ({ bookmarks })
 
-test("baselines the first fetch, then routes only bookmarks added later", async () => {
+test("archives new bookmarks alongside historical ones for interactive review", async () => {
   const args = setup()
-  await processBlueskyBookmarks({ ...args, fetch: fetched(bookmark("old")) })
-  expect(args.classify).not.toHaveBeenCalled()
-  expect(readFileSync(args.markdownPath, "utf8")).toContain("Post old")
+  mkdirSync(join(args.statePath, "captures"), { recursive: true })
+  const journalPath = join(args.statePath, "bluesky-bookmarks.json")
+  const journal = JSON.stringify({ version: 1, baselineIds: [], completedIds: ["handled"] })
+  const capturePath = join(args.statePath, "captures", "pending.json")
+  writeFileSync(journalPath, journal)
+  writeFileSync(capturePath, "Pending transfer checkpoint")
 
-  await processBlueskyBookmarks({ ...args, fetch: fetched(bookmark("new"), bookmark("old")) })
-  expect(args.classify).toHaveBeenCalledTimes(1)
-  expect(args.classify.mock.calls[0]).toEqual([
-    expect.objectContaining({
-      // Windows filenames cannot contain the colons and slashes in an AT URI.
-      id: "bsky-did-plc-a-new",
-      source: {
-        kind: "bluesky",
-        url: "https://bsky.app/profile/did:plc:a/post/new",
-      },
-    }),
-  ])
-  expect(existsSync(join(args.statePath, "captures/bsky-did-plc-a-new.json"))).toBe(true)
+  await processBlueskyBookmarks({ ...args, fetch: fetched(bookmark("old")) })
+  expect(await processBlueskyBookmarks({ ...args, fetch: fetched(bookmark("new")) })).toBe(0)
+  expect(readFileSync(args.markdownPath, "utf8")).toContain("Post old")
+  expect(readFileSync(args.markdownPath, "utf8")).toContain("Post new")
+  expect(readFileSync(journalPath, "utf8")).toBe(journal)
+  expect(readFileSync(capturePath, "utf8")).toBe("Pending transfer checkpoint")
+  expect(args.classify).not.toHaveBeenCalled()
+  expect(args.transfer).not.toHaveBeenCalled()
 })
 
 test("does not baseline anything when the first fetch fails", async () => {
@@ -73,31 +71,6 @@ test("does not baseline anything when the first fetch fails", async () => {
   await processBlueskyBookmarks({ ...args, fetch: fetched(bookmark("first")) })
   expect(args.classify).not.toHaveBeenCalled()
   expect(JSON.parse(readFileSync(args.jsonPath, "utf8")).bookmarks).toHaveLength(1)
-})
-
-test("retains removed bookmarks and retries cached work when a fetch fails", async () => {
-  const args = setup()
-  await processBlueskyBookmarks({ ...args, fetch: fetched(bookmark("old")) })
-  args.classify.mockRejectedValueOnce(new Error("classifier unavailable"))
-  await expect(
-    processBlueskyBookmarks({ ...args, fetch: fetched(bookmark("new")) }),
-  ).rejects.toThrow("classifier unavailable")
-  const markdown = readFileSync(args.markdownPath, "utf8")
-  expect(markdown).toContain("Post old")
-  expect(markdown).toContain("Post new")
-
-  await expect(
-    processBlueskyBookmarks({
-      ...args,
-      fetch: async () => {
-        throw new Error("Bluesky offline")
-      },
-    }),
-  ).rejects.toThrow("Bluesky offline")
-  expect(args.classify).toHaveBeenCalledTimes(2)
-
-  await processBlueskyBookmarks({ ...args, fetch: fetched() })
-  expect(args.classify).toHaveBeenCalledTimes(2)
 })
 
 test("keeps full links, images, video, and quoted posts for the classifier and archive", async () => {
@@ -153,7 +126,4 @@ test("keeps full links, images, video, and quoted posts for the classifier and a
     "https://cdn.test/video.m3u8",
   ])
     expect(markdown).toContain(expected)
-  expect(args.classify.mock.calls[0]).toEqual([
-    expect.objectContaining({ raw: expect.stringContaining("https://example.com/essay") }),
-  ])
 })
