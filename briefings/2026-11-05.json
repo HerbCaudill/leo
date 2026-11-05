@@ -1,0 +1,228 @@
+{
+  "sections": [
+    {
+      "stories": [
+        {
+          "body": "President Isaac Herzog has begun consultations on forming a government after neither Benjamin Netanyahu's bloc nor rival Gadi Eisenkot's bloc won a parliamentary majority. Arab-led parties won a record 19 seats and could play a decisive role, though most Jewish parties had pledged not to govern with them. Election officials said they found no evidence that irregularities affected the result, despite unsubstantiated fraud claims from Netanyahu's camp.",
+          "headline": "Israel's president begins coalition talks after election deadlock",
+          "sources": [
+            {
+              "name": "BBC News",
+              "url": "https://www.bbc.com/news/articles/c6z98z5z91ppo"
+            },
+            {
+              "name": "Al Jazeera",
+              "url": "https://www.aljazeera.com/news/2026/11/5/israels-herzog-accepts-vote-results-opens-talks-on-forming-a-government"
+            }
+          ]
+        },
+        {
+          "body": "Hong Kong pro-democracy activist Joshua Wong has been sentenced to 10 years in prison after pleading guilty to foreign collusion for seeking sanctions against Hong Kong and China. Wong, who has been imprisoned since 2020, is already serving a sentence for his role in an unofficial primary election; the new sentence will run concurrently with the remainder of that term. Amnesty International said the case shows how the national security law is used to punish dissent.",
+          "headline": "Hong Kong activist Joshua Wong sentenced to 10 years in prison",
+          "sources": [
+            {
+              "name": "France 24",
+              "url": "https://www.france24.com/en/asia-pacific/20261105-joshua-wong-hong-kong-10-years-jail-foreign-collusion"
+            },
+            {
+              "name": "The Guardian",
+              "url": "https://www.theguardian.com/world/2026/nov/05/hong-kong-joshua-wong-sentenced-national-security-case"
+            }
+          ]
+        },
+        {
+          "body": "Ukrainian authorities say 40 people were killed in Monday's Russian attack on a school being used as an aid centre in Komyshuvakha, and more than 30 people may remain under the rubble. Ukraine says a follow-up strike hit an underground shelter filled with people; police officers and rescuers were among the dead. The UN human rights mission in Ukraine said the bombing likely violated international law, while officials said Russian drones were hampering rescue work.",
+          "headline": "Ukraine raises death toll from Russian strike in Zaporizhzhia region to 40",
+          "sources": [
+            {
+              "name": "Al Jazeera",
+              "url": "https://www.aljazeera.com/news/2026/11/4/ukraine-raises-death-toll-from-russian-strike-on-zaporizhia-to-40-people"
+            },
+            {
+              "name": "The Guardian",
+              "url": "https://www.theguardian.com/world/live/2026/nov/04/eu-ukraine-russia-france-germany-us-nato-europe-latest-news"
+            }
+          ]
+        },
+        {
+          "body": "South Korea plans to expand its anti-piracy unit's operations to waters near Duqm, Oman, about 650 kilometres from the Strait of Hormuz, and deploy a maritime patrol aircraft and additional personnel. Seoul says the mission will protect shipping and economic interests, remain non-combat, and operate independently of allied forces. The expansion requires approval from the president, cabinet and parliament.",
+          "headline": "South Korea plans maritime mission closer to the Strait of Hormuz",
+          "sources": [
+            {
+              "name": "France 24",
+              "url": "https://www.france24.com/en/asia-pacific/20261105-south-korea-military-mission-strait-of-hormuz"
+            },
+            {
+              "name": "The Guardian",
+              "url": "https://www.theguardian.com/world/2026/nov/05/south-korea-to-expand-anti-piracy-unit-strait-of-hormuz"
+            }
+          ]
+        },
+        {
+          "body": "Syria and Saudi Arabia have signed a defence cooperation agreement and six concessional loan agreements worth $403 million during President Ahmed al-Sharaa's visit to Riyadh. The defence terms were not disclosed. The loans will support projects including healthcare, housing, civil defence, electricity and drinking water, while the countries also agreed to cooperate on industry, agriculture and environmental protection.",
+          "headline": "Syria and Saudi Arabia sign defence deal and agree $403 million in loans",
+          "sources": [
+            {
+              "name": "Al Jazeera",
+              "url": "https://www.aljazeera.com/news/2026/11/5/syria-saudi-arabia-sign-defence-cooperation-deal-agree-403m-in-loans"
+            }
+          ]
+        }
+      ],
+      "title": "World"
+    },
+    {
+      "stories": [
+        {
+          "body": "Vice-President JD Vance said the Iran war was the main reason Republicans lost control of Congress, making a striking public break with President Donald Trump over a signature policy. Trump acknowledged that the war had played a major role in the defeat but said he would make the same decision again. Vance called for ending the war, focusing on living costs, putting America first and changing the US relationship with Israel.",
+          "headline": "Vance blames Iran war for Republican midterm losses",
+          "sources": [
+            {
+              "name": "BBC News",
+              "url": "https://www.bbc.com/news/articles/crz98zqkz7z0o"
+            },
+            {
+              "name": "El Periódico",
+              "url": "https://www.elperiodico.com/es/internacional/20261104/jd-vance-culpa-guerra-iran-derrota-republicana-midterms-136090364"
+            }
+          ]
+        },
+        {
+          "body": "Preliminary midterm returns show heavily Latino areas moving sharply toward Democrats, reversing much of the ground Republicans gained in recent elections. Several predominantly Latino Texas counties swung more than 25 points from 2024, while Miami-Dade County shifted nearly 20 points. Political observers cited economic frustration and opposition to aggressive immigration enforcement, though some warned that the results do not imply lasting loyalty to either party.",
+          "headline": "Latino voters swing toward Democrats across battleground states",
+          "sources": [
+            {
+              "name": "Politico",
+              "url": "https://www.politico.com/news/2026/11/04/this-is-an-earthquake-latino-voters-rush-back-to-democrats-01149510"
+            }
+          ]
+        },
+        {
+          "body": "With control of both chambers of Congress, Democrats will gain committee leadership and expanded powers to investigate the Trump administration. Potential targets include the Trump family's business interests and cryptocurrency ties, the government's handling of the Jeffrey Epstein case, and the Pentagon's management of the Iran war. How Democrats use their oversight powers could shape the political fallout from the midterms.",
+          "headline": "Democrats prepare investigations into Trump administration",
+          "sources": [
+            {
+              "name": "France 24",
+              "url": "https://www.france24.com/en/americas/20261104-democrats-warn-trump-camp-lawyer-up-anger-over-corruption-drives-midterms-wipeout-gop"
+            },
+            {
+              "name": "La Vanguardia",
+              "url": "https://www.lavanguardia.com/internacional/20261104/11675717/trump-lupa-congreso-victoria-democrata-abre-puerta-bateria-investigaciones.html"
+            }
+          ]
+        }
+      ],
+      "title": "US"
+    },
+    {
+      "stories": [
+        {
+          "body": "Adif president Luis Pedro Marco de la Peña has resigned after meeting Carlos Cuerpo, who has taken temporary responsibility for transport following minister Óscar Puente's resignation. The departures come a week after the Urda rail crash, which killed 69 people and injured dozens. Cuerpo faces the task of restoring confidence in the rail system and replacing Adif's leadership.",
+          "headline": "Adif president resigns after Urda crash as Carlos Cuerpo takes charge of transport",
+          "sources": [
+            {
+              "name": "El País",
+              "url": "https://elpais.com/espana/2026-11-04/el-presidente-de-adif-se-reune-con-cuerpo-para-explicar-el-suceso-de-urda-y-poner-el-cargo-a-disposicion.html"
+            },
+            {
+              "name": "RTVE",
+              "url": "https://www.rtve.es/noticias/20261104/presidente-adif-presenta-renuncia/17300382.shtml"
+            }
+          ]
+        },
+        {
+          "body": "Spanish investigators have requested support from the European Union Agency for Railways for their investigation into the Urda crash. European Transport Commissioner Apóstolos Tzitzikostas said the agency would provide the necessary technical assistance, while Spanish investigators retain full authority and direction over the inquiry.",
+          "headline": "Spain seeks European technical assistance for Urda crash investigation",
+          "sources": [
+            {
+              "name": "El País",
+              "url": "https://elpais.com/economia/2026-11-04/espana-pide-ayuda-a-bruselas-para-llevar-a-cabo-la-investigacion-del-accidente-de-urda.html"
+            }
+          ]
+        },
+        {
+          "body": "Amnesty International says it has documented 50 alleged assaults on migrants in Ceuta since the mass arrival from Morocco in July, including 18 after Spain's defence ministry announced an investigation into earlier allegations. The group says most incidents involved soldiers, with some involving police or Guardia Civil officers, and that its latest visit documented abuses affecting 13 minors. Amnesty says it is unaware of any individual soldiers being investigated or removed from duty.",
+          "headline": "Amnesty reports further alleged assaults on migrants in Ceuta",
+          "sources": [
+            {
+              "name": "El País",
+              "url": "https://elpais.com/espana/2026-11-04/amnistia-internacional-denuncia-nuevas-presuntas-agresiones-de-militares-a-migrantes-en-ceuta.html"
+            },
+            {
+              "name": "RTVE",
+              "url": "https://www.rtve.es/noticias/20261105/amnistia-internacional-supuestas-agresiones-militares-migrantes-ceuta-entrada/17299489.shtml"
+            }
+          ]
+        },
+        {
+          "body": "The train drivers' union Semaf has called strikes for November 10 and 12, seeking implementation of February agreements to strengthen network maintenance and staffing at public rail companies and the safety agency. Carlos Cuerpo, who has taken over transport responsibilities after Óscar Puente's resignation, said he would meet rail unions to discuss the stoppages. The dispute follows the fatal Urda crash and other serious rail accidents this year.",
+          "headline": "Rail drivers plan strikes on November 10 and 12 over safety and staffing",
+          "sources": [
+            {
+              "name": "El País",
+              "url": "https://elpais.com/espana/2026-11-04/una-crisis-ferroviaria-y-aplacar-a-un-sector-constructor-de-unas-los-desafios-de-cuerpo-tras-la-era-puente.html"
+            },
+            {
+              "name": "El Periódico",
+              "url": "https://www.elperiodico.com/es/economia/20261104/carlos-cuerpo-manana-reunire-sindicatos-136097647"
+            }
+          ]
+        }
+      ],
+      "title": "Spain"
+    },
+    {
+      "stories": [
+        {
+          "body": "A planning commission representing the Generalitat and Barcelona city council has approved a change that gives the city tools to regulate seasonal and room rentals. The council must now adopt further planning measures or ordinances to impose specific restrictions, which could apply by district, neighbourhood or building. Officials say the change is intended to protect homes for permanent residents.",
+          "headline": "Barcelona gets final approval to regulate seasonal and room rentals",
+          "sources": [
+            {
+              "name": "El Periódico Barcelona",
+              "url": "https://www.elperiodico.com/es/barcelona/20261104/barcelona-recibe-luz-verde-definitiva-regular-alquileres-temporada-habitaciones-136078505"
+            }
+          ]
+        },
+        {
+          "body": "Human rights group Irídia says the Mossos d'Esquadra's new pepper spray protocol is too broad and should be revised before officers use it. The rules generally discourage use in enclosed spaces and against passive resistance but allow exceptions based on circumstances and risk assessments; they also call for warnings when possible. Irídia argues that the exceptions could permit disproportionate use at peaceful protests and that the protocol sets no minimum spraying distance.",
+          "headline": "Rights group challenges new Mossos pepper spray rules",
+          "sources": [
+            {
+              "name": "betevé",
+              "url": "https://beteve.cat/societat/iridia-exigeix-revisi-nou-protocol-gas-pebre/"
+            },
+            {
+              "name": "3Cat",
+              "url": "https://www.3cat.cat/3catinfo/els-mossos-fan-public-el-nou-protocol-dus-del-gas-pebre-quan-poden-utilitzar-lo-i-quan-no/noticia/3437924/"
+            }
+          ]
+        },
+        {
+          "body": "Barcelona has opened applications for a €20 culture voucher, but the city says email delivery problems are preventing some Gmail users from applying. The voucher can be spent on eligible live performances, Catalan-language cinema and books, with 55,000 vouchers available in the first round. The programme has three periods, and users may receive up to €60 in total if they spend each previous allocation and funds remain available.",
+          "headline": "Barcelona's €20 culture voucher opens amid Gmail delivery problems",
+          "sources": [
+            {
+              "name": "betevé",
+              "url": "https://beteve.cat/cultura/incidencia-correus-gmail-usuaris-bonus-cultura-20-euros/"
+            },
+            {
+              "name": "Tot Barcelona",
+              "url": "https://www.totbarcelona.cat/cultura-i-oci/barcelona-ofereix-ajuts-20-euros-ponsum-cultural-catala-751437/"
+            }
+          ]
+        },
+        {
+          "body": "SOS Costa Brava says authorities are not adequately enforcing the ban on anchoring over protected seagrass beds. In its report on a spring and summer campaign, the group cited boats anchored over mapped Posidonia at Golfet in Palafrugell and said calls to emergency services and police brought no effective response. It also reported repeated damage to protective buoys and called for stronger patrols and more low-impact daytime moorings.",
+          "headline": "Costa Brava group warns of weak enforcement against anchoring on seagrass",
+          "sources": [
+            {
+              "name": "Diari de Girona",
+              "url": "https://www.diaridegirona.cat/baix-emporda/2026/11/04/sos-costa-brava-denuncia-manca-136066772.html"
+            }
+          ]
+        }
+      ],
+      "title": "Barcelona & Catalunya"
+    }
+  ]
+}
