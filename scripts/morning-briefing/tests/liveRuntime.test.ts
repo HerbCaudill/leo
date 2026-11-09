@@ -28,6 +28,12 @@ vi.mock("../readLocalMessages.ts", () => ({ readLocalMessages: vi.fn().mockResol
 vi.mock("../finalizeBriefing.ts", () => ({
   finalizeMorningBriefing: vi.fn((markdown: string) => markdown),
 }))
+vi.mock("../reviewBriefingSessions.ts", () => ({
+  createLiveSessionReviewDependencies: vi.fn(() => ({})),
+  reviewBriefingSessions: vi
+    .fn()
+    .mockResolvedValue("## Herb's updates from recent briefing sessions\n"),
+}))
 vi.mock("../t3Presentation.ts", () => ({ presentMorningBriefingInT3: vi.fn() }))
 vi.mock("../obsidian.ts", () => ({ syncMorningBriefingToObsidian: vi.fn() }))
 vi.mock("../dailyNote.ts", async importOriginal => ({
@@ -90,6 +96,17 @@ test("rewrites the briefing when Obsidian Sync replaces the daily note with an o
   expect(JSON.parse(readFileSync(paths.manifestPath, "utf8"))).toMatchObject({
     stages: { "obsidian-sync": { status: "complete" } },
   })
+})
+
+test("adds the recent briefing session review to the carryover artifact", async () => {
+  const args = createRunArgs()
+
+  await runLiveMorningBriefing(args)
+
+  const paths = getMorningBriefingRunPaths(args)
+  const carryover = readFileSync(paths.carryoverPath, "utf8")
+  expect(carryover).toMatch(/^# Carryover checklist/)
+  expect(carryover).toContain("## Herb's updates from recent briefing sessions")
 })
 
 test("still fails when the daily note cannot be saved", async () => {

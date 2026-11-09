@@ -14,6 +14,10 @@ import {
   MORNING_BRIEFING_STATE_DIRECTORY_PATH,
 } from "./constants.ts"
 import { publishDailyBriefingToNote } from "./dailyNote.ts"
+import {
+  createLiveSessionReviewDependencies,
+  reviewBriefingSessions,
+} from "./reviewBriefingSessions.ts"
 import { readLocalMessages } from "./readLocalMessages.ts"
 import { gatherMorningBriefingLane } from "./gatherMorningBriefingLane.ts"
 import { createInboxTasks } from "./createInboxTasks.ts"
@@ -105,6 +109,21 @@ export async function runLiveMorningBriefing(
             date: args.date,
           })
           writeTextAtomically(paths.carryoverPath, carryover)
+        })
+        // Herb often resolves items while discussing a briefing, so add what he said in recent sessions.
+        await runStage("session-review", [paths.sessionReviewDirectoryPath], async () => {
+          const sessionReview = await reviewBriefingSessions({
+            date: args.date,
+            ...createLiveSessionReviewDependencies({
+              codexCommand,
+              cwd,
+              directoryPath: paths.sessionReviewDirectoryPath,
+              environment,
+              level: MORNING_BRIEFING_LEVEL,
+            }),
+          })
+          const carryover = readFileSync(paths.carryoverPath, "utf8")
+          writeTextAtomically(paths.carryoverPath, `${carryover.trimEnd()}\n\n${sessionReview}`)
         })
         // Read native messaging apps from their databases; their UI is unreachable while the screen is locked.
         await runStage("local-messages", [paths.localMessagesPath], async () => {

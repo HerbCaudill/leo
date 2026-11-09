@@ -20,6 +20,7 @@ export function getMorningBriefingRunPaths(
     newTasksPath: join(root, "new-tasks.json"),
     root,
     runId,
+    sessionReviewDirectoryPath: join(root, "session-review"),
     synthesisDirectoryPath: join(root, "synthesis"),
   }
 }
@@ -43,6 +44,8 @@ export type MorningBriefingRunPaths = {
   root: string
   /** Filesystem-safe timestamp. */
   runId: string
+  /** Transcripts and summaries of recent briefing sessions. */
+  sessionReviewDirectoryPath: string
   /** Directory containing synthesis output and events. */
   synthesisDirectoryPath: string
 }

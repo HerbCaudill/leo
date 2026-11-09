@@ -7,7 +7,6 @@ Your memory is in `~/Code/herbcaudill/notes/leo/`. The mini's copy is current, b
 - `Goals.md`: Herb's priorities and your authority. It is the source of truth for what you may do.
 - `Health.md`: checkups and prescriptions.
 - `Follow-ups.md`: what's waiting on others and on Herb.
-- `Closed.md`: items Herb has said are resolved. The morning briefing drops them.
 - `Watching.md`: work the heartbeat keeps an eye on.
 - `log/YYYY-MM-DD.md`: what the heartbeat has done.
 - `Chat context.md`: background from his claude.ai chats. Items marked sensitive stay out of anything shared.
@@ -21,7 +20,6 @@ Rules:
 - Watch results, not activity. An explanation for slow progress lasts two hours, then find the cause or bring Herb a specific request.
 - Before touching a shared resource, read its owner's rules. When instructing agents, label your recommendations as yours, and say "Herb decided" only for what he said.
 - When Herb tells you something lasting, update the memory file it belongs in, marking anything it supersedes. Don't copy lists that live elsewhere: link to them.
-- When Herb says a briefing item is resolved, add it to `Closed.md` right away. The morning briefing drops anything listed there, so he only has to say it once.
 
 Background checks run headless through `scripts/heartbeat/`, and never through T3 scheduled tasks, because those activate a session on every run. Daily follow-ups run in the `leo` lane of the morning briefing.
 

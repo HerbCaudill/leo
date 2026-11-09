@@ -8,7 +8,9 @@ The T3 task stores its model when it is created, and `schedule_task` can't chang
 
 `pnpm briefing:morning` runs both briefings locally for the current date in the machine's time zone. An optional `YYYY-MM-DD` argument backfills another date, and `--dry-run` prints the time zone, planned lanes, destinations, and artifact paths without contacting sources or writing any destination. News runs from the repository directory even when the scheduler starts elsewhere. Each briefing finishes and presents independently; the command waits for both and reports any failures.
 
-The workflow extracts carryover from the three latest daily briefings, then runs three ephemeral Codex agents in parallel:
+The workflow extracts carryover from the three latest daily briefings. It then reads the three latest prior `Morning briefing – YYYY-MM-DD` threads through the `t3` CLI. A read-only Codex agent summarizes each one in parallel: what Herb resolved, decided or updated, and what he asked for that wasn’t confirmed done. The summaries are added to the end of the carryover artifact, and the gather and synthesis agents treat Herb’s words there as more current than what the sources still show. That way he only has to tell Leo once. If T3 or a summary fails, the carryover records why and the briefing continues. Transcripts and summaries are kept in the run’s `session-review/` directory.
+
+Next, the workflow runs these ephemeral Codex agents in parallel:
 
 - schedule and the Tasks board;
 - Gmail and messaging; and
