@@ -1,0 +1,226 @@
+{
+  "sections": [
+    {
+      "stories": [
+        {
+          "body": "Nvidia’s board has opened an independent investigation into reports that CEO Jensen Huang was targeted by a foreign intelligence operation. The New York Times reported that US officials believed a Chinese businesswoman with whom Huang had a close relationship was passing commercial information to Beijing. The board said it had no reason to believe US national security or Nvidia secrets were compromised. Huang will remain CEO and has pledged to cooperate.",
+          "headline": "Nvidia board investigates reported intelligence operation targeting Jensen Huang",
+          "sources": [
+            {
+              "name": "France 24",
+              "url": "https://www.france24.com/en/technology/20261108-nvidia-jensen-huang-chinese-intelligence-probe"
+            },
+            {
+              "name": "The Guardian",
+              "url": "https://www.theguardian.com/us-news/2026/nov/08/nvidia-jensen-huang-investigation"
+            }
+          ]
+        },
+        {
+          "body": "A drone attack on the Khor Mor gas field in northern Iraq’s Kurdish region caused a fire and interrupted gas supplies to power plants, leaving more than 70% of the region without electricity, officials said. The strike removed an estimated 2,500 to 2,800 megawatts from the grid. Authorities reported no casualties in an initial assessment and ordered an investigation; responsibility for the attack was unclear.",
+          "headline": "Drone attack shuts down Iraq’s Khor Mor gas field",
+          "sources": [
+            {
+              "name": "Al Jazeera",
+              "url": "https://www.aljazeera.com/news/2026/11/9/drone-attack-suspends-production-at-iraqs-khor-mor-gasfield"
+            }
+          ]
+        },
+        {
+          "body": "A train traveling from Giza to Fayoum struck the rear of a stationary Cairo-to-Aswan train near al-Ayyat, south of Cairo, killing at least seven people and injuring 125, according to officials. Several carriages derailed, and services between Giza and Upper Egypt were suspended while crews cleared the wreckage. President Abdel Fattah al-Sisi ordered an investigation.",
+          "headline": "At least seven killed in Egypt train collision",
+          "sources": [
+            {
+              "name": "BBC News",
+              "url": "https://www.bbc.com/news/articles/cwvgr20mmmevo"
+            },
+            {
+              "name": "The Guardian",
+              "url": "https://www.theguardian.com/world/2026/nov/08/egypt-two-trains-deadly-collision"
+            }
+          ]
+        },
+        {
+          "body": "Pope Leo XIV urged Argentina to ensure economic growth benefits everyone during a visit with President Javier Milei, whose austerity measures have divided the country. Leo called for concern for poor people, pensioners and people with disabilities, and urged political leaders to listen and use words carefully. Argentina is the second stop on his 12-day Latin American tour.",
+          "headline": "Pope Leo calls for an economy that benefits everyone on Argentina visit",
+          "sources": [
+            {
+              "name": "The Guardian",
+              "url": "https://www.theguardian.com/world/2026/nov/09/pope-leo-argentina-visit-speech-javier-milei-austerity"
+            },
+            {
+              "name": "France 24",
+              "url": "https://www.france24.com/en/americas/20261108-pope-leo-argentina-visit-milei"
+            }
+          ]
+        },
+        {
+          "body": "Polish prosecutors have opened a terrorism investigation after a gunman killed six people and injured 17 in Kraków’s main square on Saturday. Officials said the 24-year-old suspect held radical nationalist views and was fascinated by far-right ideologies. Police also found the bodies of his parents and sister at the family home; the suspect was wounded in a police exchange and remains in hospital.",
+          "headline": "Poland opens terrorism investigation into Kraków shooting",
+          "sources": [
+            {
+              "name": "The Guardian",
+              "url": "https://www.theguardian.com/world/2026/nov/08/krakow-shooting-poland-terrorism-investigation"
+            },
+            {
+              "name": "France 24",
+              "url": "https://www.france24.com/en/poland-in-shock-after-6-killed-in-krakow-far-right-shooting"
+            }
+          ]
+        }
+      ],
+      "title": "World"
+    },
+    {
+      "stories": [
+        {
+          "body": "Democrats flipped more than 500 state legislative seats and took control of at least a dozen chambers in the midterms, creating new governing trifectas in states including Michigan, Arizona, Pennsylvania and Wisconsin. They also won chambers in Texas, Georgia and North Carolina. The gains give Democrats more power over state policy and redistricting, though their new majorities face voter frustration over costs and government performance.",
+          "headline": "Democratic gains reshape power in state legislatures",
+          "sources": [
+            {
+              "name": "Politico",
+              "url": "https://www.politico.com/news/2026/11/08/democratic-thrashing-redraws-the-map-of-state-power-01154607"
+            }
+          ]
+        },
+        {
+          "body": "President Donald Trump said in a 60 Minutes interview that his immigration crackdown was too tough on some people with jobs whose violation was entering the country illegally, and that deportations hurt Republicans in the midterms. He said he would welcome working with Democrats on immigration but offered no details. The Department of Homeland Security said immigration enforcement was not slowing down.",
+          "headline": "Trump says immigration crackdown was too tough",
+          "sources": [
+            {
+              "name": "BBC News",
+              "url": "https://www.bbc.com/news/articles/cmg476w7wnl2o"
+            }
+          ]
+        },
+        {
+          "body": "Voters opposed data centers in all but one of more than 40 local ballot measures in the midterm elections, according to France 24. The results add to political pressure on the AI infrastructure boom as Democrats prepare to take control of Congress and incoming governors in Texas and Georgia call for moratoriums.",
+          "headline": "US voters reject data centers in local ballot measures",
+          "sources": [
+            {
+              "name": "France 24",
+              "url": "https://www.france24.com/en/tv-shows/tech-24/20261108-us-voters-reject-ai-data-centres-could-the-backlash-spread-to-france"
+            }
+          ]
+        }
+      ],
+      "title": "US"
+    },
+    {
+      "stories": [
+        {
+          "body": "A 40dB poll for El País and SER projects that the PP, Vox and UPN together would win more than 190 of Congress’s 350 seats in the November 29 election. It puts the PSOE within two percentage points of the PP, inside the poll’s margin of error. A separate Sigma Dos poll for El Mundo gives the PP and Vox a combined 199 seats and a wider PP lead over the PSOE.",
+          "headline": "Right-wing bloc holds poll lead as PSOE closes gap with PP",
+          "sources": [
+            {
+              "name": "El País",
+              "url": "https://elpais.com/espana/elecciones-generales/2026-11-09/el-bloque-de-la-derecha-mantiene-su-ventaja-pero-el-psoe-se-acerca-al-pp.html"
+            },
+            {
+              "name": "El Mundo",
+              "url": "https://www.elmundo.es/espana/encuestas/2026/11/08/6af066bee85eceae5a8b4598.html"
+            }
+          ]
+        },
+        {
+          "body": "The driver of the Iryo train struck in the October 28 Urda crash told her company she had tried three or four times to reach Adif’s Atocha control center without an answer before her train stopped, according to reporting based on its black box. Control staff later contacted her, and she reported that the train was still stopped minutes before an AVE struck it. The collision killed 69 people; the investigation remains under judicial secrecy.",
+          "headline": "Urda train driver reportedly tried repeatedly to reach control center",
+          "sources": [
+            {
+              "name": "El Periódico",
+              "url": "https://www.elperiodico.com/es/sucesos/20261108/accidente-urda-caja-negra-iryo-ave-maquinista-tren-136220948"
+            },
+            {
+              "name": "3Cat",
+              "url": "https://www.3cat.cat/3catinfo/accident-durda-la-maquinista-de-liryo-hauria-trucat-almenys-3-cops-a-atocha-sense-resposta/noticia/3438568/"
+            }
+          ]
+        },
+        {
+          "body": "At a campaign event in Bilbao, Prime Minister Pedro Sánchez promised to seek constitutional protections for pension increases and abortion if his party wins a broad progressive majority in the November 29 election. He also pledged annual increases in the minimum wage as the PSOE resumed campaigning following the Urda rail disaster.",
+          "headline": "Sánchez promises constitutional protections for pensions and abortion",
+          "sources": [
+            {
+              "name": "El Mundo",
+              "url": "https://www.elmundo.es/pais-vasco/2026/11/08/6af05b28e85eceb9318b457d.html?intcmp=masnoticiasportada"
+            }
+          ]
+        },
+        {
+          "body": "Years of delays at Spain’s National Court have led to reduced prison terms sought or imposed in corruption cases involving former PP officials, El País reports. Prosecutors say the mitigating factor for undue delays is being applied almost systematically in large cases and have called for measures to speed up proceedings.",
+          "headline": "Court delays reduce penalties sought in corruption cases",
+          "sources": [
+            {
+              "name": "El País",
+              "url": "https://elpais.com/espana/2026-11-08/las-ranas-de-aguirre-y-otros-acusados-de-corrupcion-del-pp-se-benefician-del-colapso-de-la-audiencia-nacional.html"
+            }
+          ]
+        }
+      ],
+      "title": "Spain"
+    },
+    {
+      "stories": [
+        {
+          "body": "Rodalies services will be disrupted for three consecutive days as Renfe drivers strike on Tuesday and Thursday and a general strike takes place on Wednesday. Tuesday’s minimum service is 66% at peak times and 33% otherwise; Wednesday’s is 25% during specified peak periods, with no service guaranteed outside them. Thursday’s minimums vary by time, and Renfe advises passengers to check schedules before traveling.",
+          "headline": "Rodalies sets minimum services for November 10–12 strikes",
+          "sources": [
+            {
+              "name": "3Cat",
+              "url": "https://www.3cat.cat/3catinfo/rodalies-funcionara-amb-serveis-minims-dentre-el-25-i-el-66-durant-les-vagues-daquesta-setmana/noticia/3438569/"
+            },
+            {
+              "name": "betevé",
+              "url": "https://beteve.cat/economia/setmana-vagues-portes-inici-campanya-electoral/"
+            }
+          ]
+        },
+        {
+          "body": "The tenants’ union is challenging Barcelona city council over its handling of renovations at Consell de Cent 538, where a municipal inspection concluded that eight of 28 apartments should be reserved as protected housing under the city’s 30% rule. The union says the owner, Vandor, carried out renovations through procedures for minor works. Vandor disputes that the work qualifies as a major renovation, and the union plans two further cases involving other buildings.",
+          "headline": "Barcelona tenants’ union takes city to court over affordable housing rule",
+          "sources": [
+            {
+              "name": "Tot Barcelona",
+              "url": "https://www.totbarcelona.cat/habitatge/el-sindicat-de-llogateres-porta-lajuntament-als-tribunals-per-incomplir-el-30-dhabitatge-protegit-752380/"
+            }
+          ]
+        },
+        {
+          "body": "Residents of Torre Baró say landslide damage and a hole at the edge of a road remain unresolved a month after heavy rain struck Barcelona’s hillside neighborhoods. They fear further collapses and say the road damage has restricted bus service. Residents are asking the city council to act more quickly.",
+          "headline": "Torre Baró residents say flood damage remains unrepaired",
+          "sources": [
+            {
+              "name": "betevé",
+              "url": "https://beteve.cat/societat/torre-baro-despres-aiguats-facil-torni-caure/"
+            }
+          ]
+        },
+        {
+          "body": "Barcelona has initially approved an €8.4 million project to renovate public space between Juan de Mena, Pare Mariana and Passeig de la Vall d’Hebron. The plan adds gentler accessible routes, play areas, lighting and greenery, while removing 35 car and 31 motorcycle parking spaces. Work is scheduled to begin in spring 2027 and continue through the end of 2028.",
+          "headline": "Barcelona gives initial approval to Vall d’Hebron public-space renovation",
+          "sources": [
+            {
+              "name": "betevé",
+              "url": "https://beteve.cat/societat/reurbanitzacio-illa-juan-mena-vall-hebron/"
+            },
+            {
+              "name": "El Periódico Barcelona",
+              "url": "https://www.elperiodico.com/es/barcelona/20261108/ayuntamiento-barcelona-juan-de-mena-isla-136220272"
+            }
+          ]
+        },
+        {
+          "body": "Llibreria Rodés, founded in 1920 and based on Carrer dels Banys Nous for the past three decades, is closing its Gothic Quarter premises. Owner David Rodés cited rising rent and the transformation of the neighborhood by tourism. He hopes to transfer the bookshop, which specializes in science books and also sells antiquarian items, but says finding a successor will be difficult.",
+          "headline": "Century-old Gothic Quarter bookshop closes, citing tourism pressure",
+          "sources": [
+            {
+              "name": "Tot Barcelona",
+              "url": "https://www.totbarcelona.cat/societat/tanca-llibreria-rodes-negoci-centenari-del-barri-gotic-la-turistitzacio-posat-fora-del-mercat-752354/"
+            }
+          ]
+        }
+      ],
+      "title": "Barcelona & Catalunya"
+    }
+  ]
+}
