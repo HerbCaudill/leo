@@ -24,8 +24,8 @@ import {
 import { runT3 } from "./runT3.ts"
 
 const LEO_PROJECT_ID = "mcp:4efda691-8e1e-47a1-80e5-dea589320403"
-const TRIAGE_LEVEL = 15
-const INVESTIGATION_LEVEL = 75
+const TRIAGE_ROLE = "bulk"
+const INVESTIGATION_ROLE = "author"
 const MEMORY_DIRECTORY_PATH = join(homedir(), "Code/herbcaudill/notes/leo")
 const WATCHING_PATH = join(MEMORY_DIRECTORY_PATH, "Watching.md")
 const LOG_DIRECTORY_PATH = join(MEMORY_DIRECTORY_PATH, "log")
@@ -69,7 +69,7 @@ async function runAgent<T>(
     cwd: MEMORY_DIRECTORY_PATH,
     environment: process.env,
     eventsPath: join(STATE_DIRECTORY_PATH, `last-${args.name}-events.jsonl`),
-    level: args.level,
+    role: args.role,
     outputPath,
     prompt: `${readFileSync(join(import.meta.dirname, `${args.promptName}.prompt.md`), "utf8")}\n\n${args.context}\n`,
     schemaPath: join(import.meta.dirname, `${args.promptName}.schema.json`),
@@ -186,7 +186,7 @@ async function main(): Promise<void> {
       ? { escalate: true, reason: signals.join(" ") }
       : await runAgent<TriageResult>({
           context,
-          level: TRIAGE_LEVEL,
+          role: TRIAGE_ROLE,
           name: "triage",
           promptName: "triage",
         })
@@ -199,7 +199,7 @@ async function main(): Promise<void> {
     const result = settleE2eResult({
       result: await runAgent<HeartbeatResult>({
         context: `${context}\n\nWhy the quick check flagged this: ${triage.reason}`,
-        level: INVESTIGATION_LEVEL,
+        role: INVESTIGATION_ROLE,
         name: "investigation",
         promptName: "heartbeat",
       }),
@@ -237,8 +237,8 @@ await main()
 type RunAgentArgs = {
   /** Run-specific text appended to the prompt. */
   context: string
-  /** Required intelligence level from 0 to 100. */
-  level: number
+  /** Model role from the roles table in the global AGENTS.md; it must use Codex. */
+  role: string
   /** Name used for artifact files and diagnostics. */
   name: string
   /** Base name of the prompt and schema files. */

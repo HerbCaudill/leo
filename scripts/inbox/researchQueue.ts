@@ -5,7 +5,7 @@ import { runCodexAgent } from "../morning-briefing/codexAgent.ts"
 import {
   BRIEFINGS_REPOSITORY_PATH,
   CODEX_COMMAND_PATH,
-  MORNING_BRIEFING_LEVEL,
+  MORNING_BRIEFING_ROLE,
 } from "../morning-briefing/constants.ts"
 import { acquireMorningBriefingRunLock } from "../morning-briefing/runLock.ts"
 import { INBOX_STATE_PATH, VAULT_PATH } from "./constants.ts"
@@ -52,7 +52,7 @@ export async function researchQueue(): Promise<void> {
             cwd: BRIEFINGS_REPOSITORY_PATH,
             environment: { ...process.env, CODEX_INTERNAL_ORIGINATOR_OVERRIDE: "Codex Desktop" },
             eventsPath: `${resultPath}.events.jsonl`,
-            level: MORNING_BRIEFING_LEVEL,
+            role: MORNING_BRIEFING_ROLE,
             outputPath: pendingPath,
             schemaPath: join(import.meta.dirname, "schemas/research.schema.json"),
             persistent: true,

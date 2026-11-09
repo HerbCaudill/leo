@@ -65,7 +65,7 @@ describe("getCodexExecArgs", () => {
           NODE_OPTIONS: `--import=data:text/javascript,${encodeURIComponent("setInterval(() => {}, 1000); await new Promise(() => {})")}`,
         },
         eventsPath,
-        level: 75,
+        role: "author",
         resolveVariant: () => ({ effort: "high", model: "gpt-6.1-sol" }),
         outputPath: join(directoryPath, "result.json"),
         prompt: "Test",

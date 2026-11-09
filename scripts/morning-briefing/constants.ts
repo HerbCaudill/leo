@@ -38,8 +38,8 @@ export const NEWS_T3_WEBHOOK_URL_PATH = join(
   ".config/morning-briefing/news-t3-webhook-url",
 )
 
-/** Intelligence level for source gathering and final synthesis. */
-export const MORNING_BRIEFING_LEVEL = 75
+/** Model role for source gathering and final synthesis. These agents rely on Codex features, so the role must use Codex. */
+export const MORNING_BRIEFING_ROLE = "author"
 
 /** Independent source groups gathered in parallel. */
 export const MORNING_BRIEFING_LANES = [

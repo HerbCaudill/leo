@@ -71,7 +71,7 @@ export function createLiveSessionReviewDependencies(
         cwd: args.cwd,
         environment: args.environment,
         eventsPath: join(args.directoryPath, `${date}.events.jsonl`),
-        level: args.level,
+        role: args.role,
         outputPath,
         prompt: `${readMorningBriefingPrompt("session-review.prompt.md")}\n\n## Transcript of the ${date} session\n\n${transcript}`,
         sandbox: "read-only",
@@ -157,6 +157,6 @@ type CreateLiveSessionReviewDependenciesArgs = {
   directoryPath: string
   /** Environment inherited by Codex. */
   environment: NodeJS.ProcessEnv
-  /** Required intelligence level from 0 to 100. */
-  level: number
+  /** Model role from the roles table in the global AGENTS.md. */
+  role: string
 }

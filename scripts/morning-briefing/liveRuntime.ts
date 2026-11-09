@@ -10,7 +10,7 @@ import {
   CODEX_COMMAND_PATH,
   DAILY_NOTES_DIRECTORY_PATH,
   MORNING_BRIEFING_LANES,
-  MORNING_BRIEFING_LEVEL,
+  MORNING_BRIEFING_ROLE,
   MORNING_BRIEFING_STATE_DIRECTORY_PATH,
 } from "./constants.ts"
 import { publishDailyBriefingToNote } from "./dailyNote.ts"
@@ -96,7 +96,7 @@ export async function runLiveMorningBriefing(
             gatherDirectoryPath: paths.gatherDirectoryPath,
             lane,
             localMessagesPath: lane.key === "communications" ? paths.localMessagesPath : undefined,
-            level: MORNING_BRIEFING_LEVEL,
+            role: MORNING_BRIEFING_ROLE,
             schemaPath: gatherSchemaPath,
             timeZone: args.timeZone,
           }),
@@ -119,7 +119,7 @@ export async function runLiveMorningBriefing(
               cwd,
               directoryPath: paths.sessionReviewDirectoryPath,
               environment,
-              level: MORNING_BRIEFING_LEVEL,
+              role: MORNING_BRIEFING_ROLE,
             }),
           })
           const carryover = readFileSync(paths.carryoverPath, "utf8")
@@ -172,7 +172,7 @@ export async function runLiveMorningBriefing(
             environment,
             gatherResults,
             mergedPath: paths.mergedPath,
-            level: MORNING_BRIEFING_LEVEL,
+            role: MORNING_BRIEFING_ROLE,
             schemaPath: synthesisSchemaPath,
             synthesisDirectoryPath: paths.synthesisDirectoryPath,
             timeZone: args.timeZone,

@@ -45,7 +45,7 @@ export async function runCodexAgent(
   mkdirSync(dirname(args.outputPath), { recursive: true })
   mkdirSync(dirname(args.eventsPath), { recursive: true })
 
-  const variant = (args.resolveVariant ?? resolveCodexVariant)(args.level)
+  const variant = (args.resolveVariant ?? resolveCodexVariant)(args.role)
   const child = spawn(args.codexCommand, getCodexExecArgs({ ...args, ...variant }), {
     env: args.environment,
     stdio: ["pipe", "pipe", "pipe"],
@@ -124,10 +124,10 @@ export type RunCodexAgentArgs = Omit<GetCodexExecArgsArgs, "effort" | "model"> &
   eventsPath: string
   /** Environment inherited by the agent process. */
   environment: NodeJS.ProcessEnv
-  /** Required intelligence from 0 to 100. */
-  level: number
-  /** Override how a level becomes a model and effort. */
-  resolveVariant?: (level: number) => CodexVariant
+  /** Model role from the roles table in the global AGENTS.md; it must use Codex. */
+  role: string
+  /** Override how a role becomes a model and effort. */
+  resolveVariant?: (role: string) => CodexVariant
   /** Prompt read from a standalone prompt file with run context appended. */
   prompt: string
   /** Optional timeout override; null lets research finish without a fixed time limit. */

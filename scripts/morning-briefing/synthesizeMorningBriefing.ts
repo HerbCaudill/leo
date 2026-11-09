@@ -51,7 +51,7 @@ ${readMorningBriefingContext()}
         cwd: args.cwd,
         environment: args.environment,
         eventsPath,
-        level: args.level,
+        role: args.role,
         outputPath,
         prompt,
         schemaPath: args.schemaPath,
@@ -84,8 +84,8 @@ type SynthesizeMorningBriefingArgs = {
   gatherResults: MorningBriefingGatherResult[]
   /** Combined gather artifact path. */
   mergedPath: string
-  /** Required intelligence level from 0 to 100. */
-  level: number
+  /** Model role from the roles table in the global AGENTS.md. */
+  role: string
   /** Synthesis output JSON Schema path. */
   schemaPath: string
   /** Directory for synthesis attempts and event logs. */
