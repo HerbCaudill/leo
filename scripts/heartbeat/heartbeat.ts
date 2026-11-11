@@ -6,14 +6,32 @@ export function hasWatchedWork(
   return /^## /m.test(markdown)
 }
 
-/** Find the newest morning briefing thread for a date, which is where Herb is told about blockers. */
-export function findBriefingThread<T extends BriefingThread>(
-  /** Candidate threads and the local date. */
-  args: FindBriefingThreadArgs<T>,
-): T | undefined {
-  return args.threads
-    .filter(thread => thread.title === `Morning briefing – ${args.date}`)
-    .sort((a, b) => b.createdAt.localeCompare(a.createdAt))[0]
+/** Decide where Herb sees a question: in the thread that owns the decision, or a new one when none does. */
+export function planHerbAsk(
+  /** The investigation result that needs Herb. */
+  result: HeartbeatResult,
+): HerbAsk {
+  const question = result.question ?? result.summary
+  if (result.ownerThreadId && result.ownerMachine)
+    return {
+      kind: "owner",
+      machine: result.ownerMachine,
+      threadId: result.ownerThreadId,
+      message: `Leo here, from the background heartbeat. Herb's input is needed on something this thread owns:
+
+${question}
+
+Finish any step already in progress. Then ask Herb yourself, in plain words: what you need from him, his options, and what happens once he answers. Use your question tool if you have one; otherwise end your turn with the question. Don't settle this thread, and hold the blocked part until he replies.`,
+    }
+  return {
+    kind: "new",
+    title: result.title ?? result.blockerKey ?? "Leo needs you",
+    message: `You are Leo, Herb's chief of staff. The background heartbeat found something only Herb can decide, and no existing thread owns it:
+
+${question}
+
+Ask Herb about it in plain words, with links to anything he needs, then wait for his answer. Use your question tool if you have one; otherwise end your turn with the question.`,
+  }
 }
 
 /** Report each blocker once, so a repeated blocker stays quiet. */
@@ -121,6 +139,7 @@ export function settleE2eResult(
 ): HeartbeatResult {
   if (args.result.outcome !== "quiet" || !args.signals.length) return args.result
   return {
+    ...args.result,
     outcome: "needs_herb",
     summary: `${args.signals.join(" ")} ${args.result.summary}`,
     blockerKey: "e2e-no-progress",
@@ -169,21 +188,25 @@ export type FindQuietSessionsArgs<T extends SessionThread> = {
   reviewedKeys: string[]
 }
 
-export type BriefingThread = {
-  /** T3 thread ID. */
-  threadId: string
-  /** Thread title. */
-  title: string
-  /** ISO creation time. */
-  createdAt: string
-}
-
-export type FindBriefingThreadArgs<T extends BriefingThread> = {
-  /** Candidate threads. */
-  threads: T[]
-  /** Local date as YYYY-MM-DD. */
-  date: string
-}
+export type HerbAsk =
+  | {
+      /** Ask in an existing thread. */
+      kind: "owner"
+      /** Machine the thread runs on. */
+      machine: "mini" | "mac"
+      /** T3 thread ID. */
+      threadId: string
+      /** Message telling the owner to ask Herb. */
+      message: string
+    }
+  | {
+      /** Start a thread to ask. */
+      kind: "new"
+      /** Title Herb sees in the sidebar. */
+      title: string
+      /** Opening message for the new thread. */
+      message: string
+    }
 
 export type ShouldNotifyHerbArgs = {
   /** Stable name for the current blocker. */
@@ -229,6 +252,14 @@ export type HeartbeatResult = {
   summary: string
   /** Stable name for a blocker, if there is one. */
   blockerKey: string | null
+  /** What Herb needs to decide or do, written for him. */
+  question: string | null
+  /** Sidebar title for a new thread, when no thread owns the decision. */
+  title: string | null
+  /** Thread that owns the decision, where Herb should answer. */
+  ownerThreadId: string | null
+  /** Machine the owning thread runs on. */
+  ownerMachine: "mini" | "mac" | null
 }
 
 export type SettleE2eResultArgs = {

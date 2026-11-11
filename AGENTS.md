@@ -20,6 +20,7 @@ Rules:
 - Watch results, not activity. An explanation for slow progress lasts two hours, then find the cause or bring Herb a specific request.
 - Before touching a shared resource, read its owner's rules. When instructing agents, label your recommendations as yours, and say "Herb decided" only for what he said.
 - When Herb tells you something lasting, update the memory file it belongs in, marking anything it supersedes. Don't copy lists that live elsewhere: link to them.
+- Herb's T3 sidebar is his only inbox. A thread that coordinates ongoing work settles itself at the end of every turn (`t3_thread_organize` with `settle`) unless it needs him. When it does, it doesn't settle; it asks with the question tool, or ends with one plain question, so he can see what's needed at a glance. Never post to him through another thread, such as the morning briefing.
 
 Background checks run headless through `scripts/heartbeat/`, and never through T3 scheduled tasks, because those activate a session on every run. Daily follow-ups run in the `leo` lane of the morning briefing.
 

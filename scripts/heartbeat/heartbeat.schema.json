@@ -1,10 +1,22 @@
 {
   "type": "object",
   "additionalProperties": false,
-  "required": ["outcome", "summary", "blockerKey"],
+  "required": [
+    "outcome",
+    "summary",
+    "blockerKey",
+    "question",
+    "title",
+    "ownerThreadId",
+    "ownerMachine"
+  ],
   "properties": {
     "outcome": { "type": "string", "enum": ["quiet", "acted", "needs_herb"] },
     "summary": { "type": "string" },
-    "blockerKey": { "type": ["string", "null"] }
+    "blockerKey": { "type": ["string", "null"] },
+    "question": { "type": ["string", "null"] },
+    "title": { "type": ["string", "null"] },
+    "ownerThreadId": { "type": ["string", "null"] },
+    "ownerMachine": { "type": ["string", "null"], "enum": ["mini", "mac", null] }
   }
 }

@@ -1,12 +1,12 @@
 import { describe, expect, it } from "vitest"
 
 import {
-  findBriefingThread,
   findE2eSignals,
   findQuietSessions,
   hasWatchedWork,
   isE2eInvestigationDue,
   parseCoverageHistory,
+  planHerbAsk,
   readE2eTarget,
   sessionKey,
   settleE2eResult,
@@ -26,28 +26,27 @@ describe("hasWatchedWork", () => {
   })
 })
 
-describe("findBriefingThread", () => {
-  const threads = [
-    { threadId: "news", title: "News briefing – 2026-10-31", createdAt: "2026-10-31T07:10:00Z" },
-    { threadId: "old", title: "Morning briefing – 2026-10-30", createdAt: "2026-10-30T07:10:00Z" },
-    {
-      threadId: "first",
-      title: "Morning briefing – 2026-10-31",
-      createdAt: "2026-10-31T07:05:00Z",
-    },
-    {
-      threadId: "rerun",
-      title: "Morning briefing – 2026-10-31",
-      createdAt: "2026-10-31T08:00:00Z",
-    },
-  ]
+describe("planHerbAsk", () => {
+  const result = {
+    outcome: "needs_herb" as const,
+    summary: "Coordinator paused; lanes idle.",
+    blockerKey: "coordinator-hold",
+    question: "The parity coordinator has been paused since 08:30. Resume it?",
+    title: "Resume parity coordination?",
+    ownerThreadId: null,
+    ownerMachine: null,
+  }
 
-  it("picks the newest morning briefing for the date", () => {
-    expect(findBriefingThread({ threads, date: "2026-10-31" })?.threadId).toBe("rerun")
+  it("asks Herb in the thread that owns the decision", () => {
+    const ask = planHerbAsk({ ...result, ownerThreadId: "parity", ownerMachine: "mac" })
+    expect(ask).toMatchObject({ kind: "owner", machine: "mac", threadId: "parity" })
+    expect(ask.message).toContain(result.question)
   })
 
-  it("returns nothing when the date has no briefing", () => {
-    expect(findBriefingThread({ threads, date: "2026-11-01" })).toBeUndefined()
+  it("starts a thread for a decision no thread owns", () => {
+    const ask = planHerbAsk(result)
+    expect(ask).toMatchObject({ kind: "new", title: "Resume parity coordination?" })
+    expect(ask.message).toContain(result.question)
   })
 })
 
@@ -204,13 +203,22 @@ describe("isE2eInvestigationDue", () => {
 })
 
 describe("settleE2eResult", () => {
+  const noAsk = {
+    blockerKey: null,
+    question: null,
+    title: null,
+    ownerThreadId: null,
+    ownerMachine: null,
+  }
+
   it("turns a quiet result into a blocker for Herb while results are stalled", () => {
     expect(
       settleE2eResult({
-        result: { outcome: "quiet", summary: "Memory is holding checks.", blockerKey: null },
+        result: { ...noAsk, outcome: "quiet", summary: "Memory is holding checks." },
         signals: ["routeCheckPassing hasn't moved in 4 hours (still 150)."],
       }),
     ).toEqual({
+      ...noAsk,
       outcome: "needs_herb",
       summary: "routeCheckPassing hasn't moved in 4 hours (still 150). Memory is holding checks.",
       blockerKey: "e2e-no-progress",
@@ -218,9 +226,9 @@ describe("settleE2eResult", () => {
   })
 
   it("leaves other results alone", () => {
-    const acted = { outcome: "acted" as const, summary: "Refilled.", blockerKey: null }
+    const acted = { ...noAsk, outcome: "acted" as const, summary: "Refilled." }
     expect(settleE2eResult({ result: acted, signals: ["stalled"] })).toEqual(acted)
-    const quiet = { outcome: "quiet" as const, summary: "Fine.", blockerKey: null }
+    const quiet = { ...noAsk, outcome: "quiet" as const, summary: "Fine." }
     expect(settleE2eResult({ result: quiet, signals: [] })).toEqual(quiet)
   })
 })

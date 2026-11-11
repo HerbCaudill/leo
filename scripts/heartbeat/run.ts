@@ -7,12 +7,12 @@ import { runCodexAgent } from "../morning-briefing/codexAgent.ts"
 import { CODEX_COMMAND_PATH } from "../morning-briefing/constants.ts"
 import { acquireMorningBriefingRunLock } from "../morning-briefing/runLock.ts"
 import {
-  findBriefingThread,
   findE2eSignals,
   findQuietSessions,
   hasWatchedWork,
   isE2eInvestigationDue,
   parseCoverageHistory,
+  planHerbAsk,
   readE2eTarget,
   sessionKey,
   settleE2eResult,
@@ -80,11 +80,15 @@ async function runAgent<T>(
 }
 
 /** Run a command and return its output. */
-function runCommand(command: string, args: string[]): Promise<string> {
+function runCommand(command: string, args: string[], input?: string): Promise<string> {
   return new Promise((resolvePromise, reject) => {
-    execFile(command, args, { maxBuffer: 100_000_000, windowsHide: true }, (error, output) =>
-      error ? reject(error) : resolvePromise(output),
+    const child = execFile(
+      command,
+      args,
+      { maxBuffer: 100_000_000, windowsHide: true },
+      (error, output) => (error ? reject(error) : resolvePromise(output)),
     )
+    child.stdin?.end(input)
   })
 }
 
@@ -124,18 +128,30 @@ async function readE2eSignals(target: E2eTarget): Promise<string[]> {
   }
 }
 
-/** Tell Herb in today's briefing thread, returning false when there isn't one yet. */
-async function notifyHerb(date: string, summary: string): Promise<boolean> {
-  const threads: BriefingThread[] = JSON.parse(
-    await runT3(["thread", "list", "--project", LEO_PROJECT_ID, "--json"]),
-  )
-  const thread = findBriefingThread({ threads, date })
-  if (!thread) return false
-  await runT3(
-    ["thread", "send", thread.threadId, "-", "--json"],
-    `Leo's heartbeat needs Herb. Repeat this to him as written, and take no other action:\n\n${summary}`,
-  )
-  return true
+/** Put the question in Herb's sidebar: the owning thread asks it, or a new thread does. */
+async function askHerb(result: HeartbeatResult): Promise<void> {
+  const ask = planHerbAsk(result)
+  if (ask.kind === "new") {
+    await runT3(
+      ["thread", "start", LEO_PROJECT_ID, "-", "--title", ask.title, "--json"],
+      ask.message,
+    )
+  } else if (ask.machine === "mini") {
+    await runT3(["thread", "send", ask.threadId, "-", "--json"], ask.message)
+  } else {
+    await runCommand(
+      "ssh",
+      [
+        "-o",
+        "BatchMode=yes",
+        "-o",
+        "ConnectTimeout=10",
+        "mac",
+        `~/.t3/bin/t3 thread send ${ask.threadId} - --json --log-level error`,
+      ],
+      ask.message,
+    )
+  }
 }
 
 /** Run one heartbeat. Only a result that needs Herb touches a T3 session. */
@@ -216,11 +232,9 @@ async function main(): Promise<void> {
 
     writeState({ ...state, reviewedSessionKeys, lastE2eInvestigatedAt })
     const blockerKey = result.blockerKey ?? result.summary
-    // Before today's briefing exists the blocker stays unrecorded, so a later run reports it.
-    if (
-      shouldNotifyHerb({ blockerKey, notifiedBlockerKeys: state.notifiedBlockerKeys }) &&
-      (await notifyHerb(date, result.summary))
-    ) {
+    // A failed delivery throws before the blocker is recorded, so a later run asks again.
+    if (shouldNotifyHerb({ blockerKey, notifiedBlockerKeys: state.notifiedBlockerKeys })) {
+      await askHerb(result)
       writeState({
         notifiedBlockerKeys: [...state.notifiedBlockerKeys, blockerKey],
         reviewedSessionKeys,
@@ -248,12 +262,6 @@ type RunAgentArgs = {
 type TriageResult = {
   escalate: boolean
   reason: string
-}
-
-type BriefingThread = {
-  threadId: string
-  title: string
-  createdAt: string
 }
 
 type HeartbeatState = {
