@@ -9,6 +9,7 @@ import type { CodexVariant } from "./resolveCodexVariant.ts"
 
 const AGENT_TIMEOUT_MS = 45 * 60 * 1_000
 const FORCE_KILL_DELAY_MS = 5_000
+const STDIO_DRAIN_MS = 2_000
 
 /** Build the non-interactive Codex arguments shared by gather and synthesis agents. */
 export function getCodexExecArgs(
@@ -58,7 +59,9 @@ export async function runCodexAgent(
   child.stdin.end(args.prompt)
 
   await new Promise<void>((resolve, reject) => {
+    let settled = false
     let timedOut = false
+    let drainTimeout: NodeJS.Timeout | undefined
     const timeout =
       args.timeoutMs === null
         ? undefined
@@ -69,12 +72,31 @@ export async function runCodexAgent(
           }, args.timeoutMs ?? AGENT_TIMEOUT_MS)
 
     child.on("error", error => {
+      if (settled) return
+      settled = true
       clearTimeout(timeout)
+      clearTimeout(drainTimeout)
       writeTextAtomically(args.eventsPath, Buffer.concat(eventChunks).toString("utf8"))
       reject(error)
     })
-    child.on("close", (code, signal) => {
+
+    // A background process the agent started can inherit its stdout and keep the pipe open after
+    // the agent exits, so "close" may never come. Give the output a moment to drain, then stop
+    // waiting for it.
+    child.on("exit", (code, signal) => {
+      drainTimeout = setTimeout(() => {
+        child.stdout.destroy()
+        child.stderr.destroy()
+        finish(code, signal)
+      }, STDIO_DRAIN_MS)
+    })
+    child.on("close", (code, signal) => finish(code, signal))
+
+    function finish(code: number | null, signal: NodeJS.Signals | null) {
+      if (settled) return
+      settled = true
       clearTimeout(timeout)
+      clearTimeout(drainTimeout)
       writeTextAtomically(args.eventsPath, Buffer.concat(eventChunks).toString("utf8"))
       if (timedOut) {
         reject(new Error(`Codex timed out after ${args.timeoutMs ?? AGENT_TIMEOUT_MS}ms`))
@@ -94,7 +116,7 @@ export async function runCodexAgent(
             : `Codex ${exitDescription}`,
         ),
       )
-    })
+    }
   })
 }
 
