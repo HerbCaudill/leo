@@ -1,0 +1,274 @@
+{
+  "sections": [
+    {
+      "stories": [
+        {
+          "body": "Jensen Huang has stepped down as Nvidia’s president, CEO and board member following reports of affairs with a suspected Chinese intelligence operative and a company executive. The company named finance chief Colette Kress interim CEO and Harvey C. Jones board chair. Nvidia’s market value fell below $4 trillion as the allegations triggered investigations by the FBI, Congress and the company, alongside a shareholder lawsuit. The national security concerns involve Huang’s reported relationship with a former executive at Megaspeed, a regional business partner investigated over Chinese access to restricted Nvidia chips. Huang has agreed to testify before Congress. Kress, who joined Nvidia in 2013, will retain her finance role while leading the company into Tuesday’s quarterly earnings report.",
+          "headline": "Jensen Huang resigns as Nvidia CEO amid espionage and affair allegations",
+          "sources": [
+            {
+              "name": "France 24",
+              "url": "https://www.france24.com/en/tv-shows/business/20261112-jensen-huang-resigns-as-nvidia-ceo-after-mounting-scandals"
+            },
+            {
+              "name": "Al Jazeera",
+              "url": "https://www.aljazeera.com/news/2026/11/12/ai-titan-jensen-huang-out-as-nvidia-ceo"
+            },
+            {
+              "name": "La Vanguardia",
+              "url": "https://www.lavanguardia.com/economia/20261112/11682658/colette-kress-consejera-delegada-nvidia-jensen-huang.html"
+            }
+          ]
+        },
+        {
+          "body": "A worldwide Microsoft outage disrupted Outlook, Microsoft 365, Teams and Copilot from Thursday into Friday, with more than 100,000 problem reports and disruption reported across 74 countries and territories. Microsoft said unexpectedly unavailable servers had strained its remaining infrastructure; initial recovery efforts, including rolling back updates and limiting traffic, failed to produce a lasting recovery as some restored servers became unresponsive again. Exchange email services were particularly affected, while Teams messaging and meetings remained largely functional. Microsoft said it had no indication of malicious or cyber activity. The disruption also affected Microsoft connectors used by OpenAI and Anthropic, illustrating how failures in the company’s infrastructure can spread to other services.",
+          "headline": "Microsoft struggles to restore services after global Outlook and Teams outage",
+          "sources": [
+            {
+              "name": "France 24",
+              "url": "https://www.france24.com/en/technology/20261113-major-microsoft-outlook-outage-disrupts-services-in-74-countries"
+            },
+            {
+              "name": "The Guardian",
+              "url": "https://www.theguardian.com/technology/2026/nov/13/microsoft-outage-outlook-teams-word-excel-reports"
+            },
+            {
+              "name": "BBC News",
+              "url": "https://www.bbc.com/news/articles/c5gm3g9ldz8xo"
+            }
+          ]
+        },
+        {
+          "body": "US envoys Jared Kushner and Steve Witkoff said European representatives would join the next round of Russia-Ukraine peace talks, a move welcomed by Volodymyr Zelensky after meetings in Moscow and Dublin. Russia and Ukraine also agreed to a prisoner exchange that Kushner said would return thousands of people, although no precise numbers or timetable were announced. Substantial obstacles remain: Vladimir Putin insisted on full control of four Ukrainian regions claimed by Moscow and warned that foreign troops deployed to Ukraine would be targeted. European governments have yet to settle who should represent them. Separately, Zelensky reported increasing restrictions on Ukraine’s access to the military-grade Starshield satellite service, hampering efforts to intercept Russian drones.",
+          "headline": "Europe to join Ukraine peace talks as Putin maintains territorial demands",
+          "sources": [
+            {
+              "name": "France 24",
+              "url": "https://www.france24.com/en/europe/20261113-live-zelensky-and-kushner-confirm-that-europe-will-join-next-round-of-russia-ukraine-talks"
+            },
+            {
+              "name": "BBC News",
+              "url": "https://www.bbc.com/news/articles/ckn80j9jv3jxo"
+            },
+            {
+              "name": "The Guardian",
+              "url": "https://www.theguardian.com/world/2026/nov/12/vladimir-putin-russia-target-foreign-troops-ukraine-elon-musk-starlink"
+            }
+          ]
+        },
+        {
+          "body": "Iran’s Islamic Revolutionary Guard Corps said it targeted a US early-warning radar in Bahrain in retaliation for an alleged attack on a telecommunications tower in southern Iran. Iranian state-linked media claimed the radar was destroyed, but the report carried no immediate confirmation from Washington or Bahrain. The IRGC described the operation as a warning against further attacks and threatened a broader response if they continued. Bahrain hosts the US Navy’s Fifth Fleet headquarters, which was damaged earlier in the war. The claim comes amid renewed preparations for possible strikes on Iran, while Trump said Gulf allies had urged him to hold off on further attacks.",
+          "headline": "Iran claims strike on US radar installation in Bahrain",
+          "sources": [
+            {
+              "name": "Al Jazeera",
+              "url": "https://www.aljazeera.com/news/2026/11/13/iran-says-it-struck-us-radar-site-in-bahrain"
+            },
+            {
+              "name": "Al Jazeera",
+              "url": "https://www.aljazeera.com/news/liveblog/2026/11/13/iran-war-live-riyadh-china-discuss-houthis-as-group-claims-aramco-attacks"
+            }
+          ]
+        },
+        {
+          "body": "Haitian security forces regained control of the country’s main stadium on Thursday after gangs had occupied it for two years. Salvadoran troops took over security at the site following the operation. The recovery comes as El Salvador deploys 2,000 soldiers to Haiti, following an ambush that left four Salvadoran troops missing.",
+          "headline": "Haitian security forces retake national stadium after two years of gang control",
+          "sources": [
+            {
+              "name": "France 24",
+              "url": "https://www.france24.com/en/americas/20261113-haitian-police-retake-national-stadium-from-gangs-after-two-years"
+            }
+          ]
+        }
+      ],
+      "title": "World"
+    },
+    {
+      "stories": [
+        {
+          "body": "Maryland Senator Chris Van Hollen announced a bid to lead Senate Democrats when the party takes the majority in January following its midterm victories. He argued that delivering on voters’ demands to address economic unfairness and political corruption requires new leadership. Chuck Schumer welcomed discussion but said he had the votes to remain leader, citing a Democratic result of 55 seats and counting. Michigan Senator-elect Abdul El-Sayed endorsed Van Hollen. The contest comes as prospective 2028 presidential candidates debate the lessons of the election, with several arguing that voters rewarded candidates focused on costs and practical results across the party’s ideological divisions.",
+          "headline": "Chris Van Hollen challenges Schumer to lead Senate Democrats",
+          "sources": [
+            {
+              "name": "Al Jazeera",
+              "url": "https://www.aljazeera.com/news/2026/11/13/chris-van-hollen-to-run-for-us-senate-majority-leader"
+            },
+            {
+              "name": "Politico",
+              "url": "https://www.politico.com/news/2026/11/12/2028-dems-dont-label-me-01161787"
+            }
+          ]
+        },
+        {
+          "body": "US home sales are experiencing their worst slump since the aftermath of the Great Recession, according to The Washington Post. Mortgage rates have pushed up the typical monthly payment for buyers, adding to the strain on the housing market.",
+          "headline": "US home sales sink into deepest slump since the post-recession years",
+          "sources": [
+            {
+              "name": "The Washington Post",
+              "url": "https://www.washingtonpost.com/business/2026/11/12/housing-market-worst-slump-since-aftermath-great-recession/"
+            }
+          ]
+        },
+        {
+          "body": "Three men exonerated after spending time on death row have urged Florida Governor-elect Byron Donalds to halt executions when he takes office, warning of the risk of executing innocent people. Their appeal comes as Florida is poised to break its execution record for a second consecutive year.",
+          "headline": "Exonerated prisoners urge Florida’s governor-elect to halt executions",
+          "sources": [
+            {
+              "name": "The Washington Post",
+              "url": "https://www.washingtonpost.com/nation/2026/11/12/former-florida-death-row-inmates-appeal-governor-elect-halt-executions/"
+            }
+          ]
+        },
+        {
+          "body": "A bipartisan bill moving through Congress would make it easier for students with disabilities to qualify for college accommodations without undergoing additional testing. The proposal aims to reduce paperwork and smooth the transition into higher education.",
+          "headline": "Bipartisan bill seeks easier access to college disability accommodations",
+          "sources": [
+            {
+              "name": "The Washington Post",
+              "url": "https://www.washingtonpost.com/education/2026/11/12/college-students-with-disabilities-may-soon-face-less-red-tape/"
+            }
+          ]
+        }
+      ],
+      "title": "US"
+    },
+    {
+      "stories": [
+        {
+          "body": "Congress’s Permanent Deputation approved the government’s main housing decree by 35 votes to 34, a day after a nationwide housing strike. The package extends eviction protections for vulnerable households without alternative accommodation through 2030 and lets eligible tenants whose contracts expire by the end of 2028 request annual extensions for up to two years. It also restricts rent increases through 2027, regulates seasonal and room rentals, and introduces interest-free loans of up to €50,000 for first-home purchases, subject to resale restrictions. A separate decree requiring compensation of up to a year’s rent when landlords declined automatic renewal was rejected after the Basque Nationalist Party opposed it. The PP has pledged to repeal the measures if it wins power in the November 29 election.",
+          "headline": "Parliament approves tenant protections but rejects separate automatic-renewal decree",
+          "sources": [
+            {
+              "name": "3Cat",
+              "url": "https://www.3cat.cat/3catinfo/els-decrets-dhabitatge-tornen-a-passar-avui-pel-sedas-del-congres/noticia/3439267/"
+            },
+            {
+              "name": "Diari de Girona",
+              "url": "https://www.diaridegirona.cat/espanya-internacional/2026/11/12/totes-mesures-habitatge-nou-decret-135087785.html"
+            },
+            {
+              "name": "Al Jazeera",
+              "url": "https://www.aljazeera.com/news/2026/11/12/spain-approves-housing-reforms-after-nationwide-strike-over-costs"
+            }
+          ]
+        },
+        {
+          "body": "Campaigning for Spain’s November 29 general election began at midnight on Friday, with Pedro Sánchez launching in Seville and Alberto Núñez Feijóo in Badalona. Sánchez defended the newly approved housing protections and called for progressive mobilisation; Feijóo promised a change of government and an audit of alleged misuse of public money. A CIS poll put PSOE first with 33.3% and 134–143 seats, ahead of the PP’s 25.5% and 98–106 seats, with Vox on 57–65. Neither PSOE with Frente Amplio nor PP with Vox would reach the 176-seat majority on those estimates. The CIS result differs from other polls suggesting a clear right-wing majority. Housing remains the leading public concern, cited among the top three problems by nearly 56% of respondents.",
+          "headline": "Spain’s election campaign opens with housing central and polls divided",
+          "sources": [
+            {
+              "name": "RTVE",
+              "url": "https://www.rtve.es/noticias/20261112/diario-campana-29n/17309131.shtml"
+            },
+            {
+              "name": "El Periódico",
+              "url": "https://www.elperiodico.com/es/politica/20261112/encuesta-cis-elecciones-generales-2026-espana-29n-136363079"
+            },
+            {
+              "name": "El País",
+              "url": "https://elpais.com/economia/vivienda/2026-11-13/construir-o-regular-mas-el-debate-de-la-vivienda-entra-en-la-urna-del-29-n.html"
+            }
+          ]
+        },
+        {
+          "body": "European prosecutors sent Guardia Civil investigators to Spain’s Equality Ministry and Court of Auditors to obtain documents concerning suspected fraud involving EU funds used for electronic monitoring devices in domestic-abuse cases. The investigation began last year and concerns procurement intended to enforce restraining orders and sentences. La Vanguardia identifies a November 2023 contract awarded to Vodafone worth €42.6 million, including €4.6 million in European funding. Separately documented technical and data-migration failures have included missing location records, frozen coordinates and absent proximity alerts; prosecutors previously warned that missing evidence had prevented some breaches from being proved in court. Equality Minister Ana Redondo promised full cooperation and said she believed the money had been used correctly. No finding of fraud was announced.",
+          "headline": "European prosecutors investigate suspected fraud in domestic-abuse monitoring contracts",
+          "sources": [
+            {
+              "name": "La Vanguardia",
+              "url": "https://www.lavanguardia.com/vida/20261112/11682362/fiscalia-europea-lanza-operacion-fraude-pulseras-telematicas.html"
+            },
+            {
+              "name": "3Cat",
+              "url": "https://www.3cat.cat/3catinfo/la-fiscalia-europea-investiga-igualtat-per-possible-frau-en-la-compra-de-polseres-telematiques/noticia/3439381/"
+            },
+            {
+              "name": "El Mundo",
+              "url": "https://www.elmundo.es/espana/2026/11/12/6af59511e85ecef6528b457a.html"
+            }
+          ]
+        },
+        {
+          "body": "Interior Minister Fernando Grande-Marlaska ordered an investigation into police actions during Wednesday’s general strike and instructed the National Police to stop using tear gas at demonstrations. Unions organising the strike announced legal action over what they called disproportionate force, including the use of chemical sprays and rubber bullets. Police and the Guardia Civil recorded 1,144 incidents and made 47 arrests during the day. Several left-wing parties, including government ally Frente Amplio, called for Marlaska’s resignation, while police unions rejected both the equipment restriction and the investigation. The government said his position was not in question.",
+          "headline": "Marlaska orders inquiry into strike policing as allies demand his resignation",
+          "sources": [
+            {
+              "name": "El País",
+              "url": "https://elpais.com/espana/2026-11-12/marlaska-ordena-una-investigacion-sobre-las-cargas-policiales-en-las-manifestaciones-y-pide-que-no-se-use-gas-lacrimogeno.html"
+            },
+            {
+              "name": "3Cat",
+              "url": "https://www.3cat.cat/3catinfo/marlaska-investigara-les-carregues-policials-durant-la-vaga-i-lesquerra-en-demana-la-dimissio/noticia/3439357/"
+            }
+          ]
+        }
+      ],
+      "title": "Spain"
+    },
+    {
+      "stories": [
+        {
+          "body": "The Consorci de la Zona Franca approved plans to acquire the Centre de la Vila shopping centre, Moda Shopping and other waterfront premises for about €97 million, in an agreement with Barcelona City Council. The properties include spaces occupied by nightclubs such as Shoko and Opium. The consortium will own the buildings, with the council helping determine future uses through consultation with residents. Plans include reviving declining commercial spaces, adding public and cultural facilities, and reducing the area’s emphasis on nightlife. A related agreement provides land-use rights for 1,603 protected homes in La Marina del Prat Vermell and the former Sant Andreu barracks.",
+          "headline": "Barcelona backs €97 million public acquisition of waterfront properties",
+          "sources": [
+            {
+              "name": "El Periódico Barcelona",
+              "url": "https://www.elperiodico.com/es/barcelona/20261112/barcelona-czfb-acuerdan-compra-centre-136364217"
+            },
+            {
+              "name": "3Cat",
+              "url": "https://www.3cat.cat/3catinfo/revitalitzacio-de-la-vila-olimpica-barcelona-compra-discoteques-del-front-maritim-i-2-centres-comercials/noticia/3439356/"
+            },
+            {
+              "name": "Tot Barcelona",
+              "url": "https://www.totbarcelona.cat/economia/consorci-zona-franca-comprara-centre-comercial-vila-olimpica-p-753286/"
+            }
+          ]
+        },
+        {
+          "body": "The Generalitat increased the second round of its neighbourhood renewal programme from an initial €200 million to €355 million, supporting 33 projects across 34 municipalities. Municipal contributions will bring total investment to €582 million, with improvements expected to reach about 248,000 residents. The projects cover deteriorating housing and streets, public facilities, social programmes and climate resilience. Palafrugell is among three successful municipalities in the Girona region: its roughly €25 million plan for Mas Mascort will receive about €15 million from the Generalitat. The neighbourhood’s 32 proposed measures include a new sports hall, street improvements, green spaces, housing upgrades and community programmes.",
+          "headline": "Catalunya awards €355 million for neighbourhood renewal, including Palafrugell",
+          "sources": [
+            {
+              "name": "El Periódico Barcelona",
+              "url": "https://www.elperiodico.com/es/politica/20261112/govern-movilizara-355-millones-euros-dignificar-barrios-34-municipios-catalanes-136362860"
+            },
+            {
+              "name": "3Cat",
+              "url": "https://www.3cat.cat/3catinfo/pla-de-barris-els-34-municipis-beneficiaris-dels-355-milions-i-a-que-es-destinen-els-diners/noticia/3439307/"
+            },
+            {
+              "name": "Diari de Girona",
+              "url": "https://www.diaridegirona.cat/baix-emporda/2026/11/12/pla-barris-palafrugell-afronta-amb-ganes-repte-mes-gran-136374815.html"
+            }
+          ]
+        },
+        {
+          "body": "Barcelona was selected to host WorldPride 2030 after defeating Bangkok with 84% of the vote among InterPride members. Organisers propose a month of events from June 28 to July 28, combining parades and celebrations with conferences, workshops and meetings for international LGBTQ+ organisations. Pride Barcelona says the programme will emphasise human rights and support for activists facing persecution, with the aim of strengthening their work beyond the event itself. The bid has the backing of Barcelona City Council, the Generalitat and Spain’s government.",
+          "headline": "Barcelona wins bid to host WorldPride 2030",
+          "sources": [
+            {
+              "name": "El Periódico Barcelona",
+              "url": "https://www.elperiodico.com/es/barcelona/20261112/worldpride-2030-barcelona-sede-orgullo-mundial-136371805"
+            },
+            {
+              "name": "3Cat",
+              "url": "https://www.3cat.cat/3catinfo/barcelona-acollira-el-worldpride-2030-una-de-les-festes-de-lorgull-mes-importants-a-escala-mundial/noticia/3439469/"
+            }
+          ]
+        },
+        {
+          "body": "Hospital Sant Joan de Déu says a remote-care model combining glucose monitoring, automated insulin delivery and daily clinical data review has reduced outpatient visits for children with diabetes by more than 60%. Around 55% of patients now attend only once or twice a year. The hospital also reports that admissions for diabetic ketoacidosis fell from 12 in 2019 to two in 2025, while the number of patients meeting recommended glucose-control targets tripled. More than 250 patients now have access to automated insulin delivery. The system flags patients needing attention for nursing triage and was developed with European regional funding and support from Catalan health agencies.",
+          "headline": "Sant Joan de Déu reports sharp reductions in diabetes visits and admissions",
+          "sources": [
+            {
+              "name": "betevé",
+              "url": "https://beteve.cat/societat/hospital-sant-joan-de-deu-aconsegueix-reduir-visites-infants-amb-diabetis/"
+            }
+          ]
+        }
+      ],
+      "title": "Barcelona & Catalunya"
+    }
+  ]
+}
