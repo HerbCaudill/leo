@@ -1,0 +1,258 @@
+{
+  "sections": [
+    {
+      "stories": [
+        {
+          "body": "President Volodymyr Zelensky says US negotiators raised the possibility of Ukraine joining NATO in exchange for withdrawing its remaining forces from Donbas. Washington has not confirmed the proposal; a US official said multiple ideas remain under discussion and any agreement would require both sides’ consent. Zelensky said a concrete offer with security guarantees, no limits on Ukraine’s military and reconstruction funding could go to a referendum. Russia continues to demand territorial concessions and Ukrainian neutrality, while some NATO members remain wary of admitting Ukraine. Emmanuel Macron warned that restricting aid would push Kyiv toward an unjust peace and risk another war.",
+          "headline": "Zelensky says US floated NATO membership in exchange for withdrawal from Donbas",
+          "sources": [
+            {
+              "name": "BBC News",
+              "url": "https://www.bbc.com/news/articles/cwvg2l312ylqo"
+            },
+            {
+              "name": "France 24",
+              "url": "https://www.france24.com/en/europe/20261114-us-negotiators-suggest-ukraine-cedes-territory-in-exchange-for-nato-membership"
+            },
+            {
+              "name": "France 24",
+              "url": "https://www.france24.com/en/europe/20261114-macron-says-limiting-ukraine-aid-would-pave-way-to-another-war"
+            }
+          ]
+        },
+        {
+          "body": "Iran’s Revolutionary Guards claimed a strike on a US radar installation in Bahrain, according to an Al Jazeera live update that provided no independent confirmation or damage assessment. Separately, the Saudi-led coalition said it intercepted two ballistic missiles aimed at Riyadh and two drones over the capital and southern Saudi Arabia, blaming Yemen’s Houthis. Fighting has intensified in Yemen’s Marib and al-Jawf regions, with both sides reporting attacks. The International Organization for Migration says more than 340,000 people have been displaced since August. The US Embassy in Riyadh urged heightened vigilance and particular caution when using Saudi airports.",
+          "headline": "Iran claims strike on US radar in Bahrain as Saudi coalition reports interceptions",
+          "sources": [
+            {
+              "name": "Al Jazeera",
+              "url": "https://www.aljazeera.com/news/liveblog/2026/11/15/iran-war-live-israel-vows-gaza-offensive-policy-despite-caretaker-status?update=5153572"
+            },
+            {
+              "name": "Al Jazeera",
+              "url": "https://www.aljazeera.com/news/2026/11/15/saudi-led-coalition-intercepts-two-missiles-two-drones-in-riyadh"
+            }
+          ]
+        },
+        {
+          "body": "Hungarian investigators say they recovered $19.5 million in cash from forests, farm buildings, warehouses, homes and secluded safes during an investigation into former national development minister Miklós Seszták. He is accused of accepting bribes in a scheme involving inflated prices for secondhand buses bought by the state transport company and denies wrongdoing. The money has been deposited in the state treasury. The searches form part of Prime Minister Péter Magyar’s campaign to investigate alleged corruption under Viktor Orbán, whom he defeated in April. Orbán has described investigations targeting his circle as political persecution.",
+          "headline": "Hungary seizes $19.5 million in hidden cash in former minister’s corruption inquiry",
+          "sources": [
+            {
+              "name": "The Guardian",
+              "url": "https://www.theguardian.com/world/2026/nov/13/hungary-seizes-195m-in-cash-found-buried-in-forests-amid-graft-inquiry"
+            },
+            {
+              "name": "BBC News",
+              "url": "https://www.bbc.com/news/articles/ckjwj03w4w0qo"
+            },
+            {
+              "name": "La Vanguardia",
+              "url": "https://www.lavanguardia.com/internacional/20261114/11684171/hallan-hungria-17-6-millones-euros-escondidos-exministro-orban.html"
+            }
+          ]
+        },
+        {
+          "body": "Microsoft says Outlook, Teams and Copilot were fully restored early Saturday after a network capacity upgrade triggered a global outage lasting roughly a day. The disruption affected users in more than 70 countries, including government agencies, hospitals, courts and businesses. Problems began Thursday, with recovery under way by Friday afternoon in the UK. Microsoft said the incident was not caused by a cyberattack or an AI agent. The breadth of the disruption highlighted how heavily public services and businesses depend on a small number of technology providers.",
+          "headline": "Microsoft says services restored after global outage linked to network upgrade",
+          "sources": [
+            {
+              "name": "BBC News",
+              "url": "https://www.bbc.com/news/articles/c6rrg51rkz09o"
+            },
+            {
+              "name": "France 24",
+              "url": "https://www.france24.com/en/microsoft-s-widespread-outages-caused-global-chaos-including-in-the-healthcasre-industry"
+            }
+          ]
+        },
+        {
+          "body": "SpaceX caught a Starship upper-stage spacecraft with launch-tower arms in Texas on Saturday, its first such recovery after a flight from space. The spacecraft returned about 22 hours after launch, having completed 14 orbits and deployed 26 Starlink satellites. The mission fell short of a planned double recovery: its booster failed to return to the tower after its engines stopped firing too soon and was destroyed following a diversion over water. Engineers are investigating that failure. SpaceX said the spacecraft’s heat shield appeared to perform well, marking progress toward reusability for a vehicle NASA plans to use for lunar landings.",
+          "headline": "SpaceX catches Starship spacecraft returning from orbit for the first time",
+          "sources": [
+            {
+              "name": "France 24",
+              "url": "https://www.france24.com/en/spacex-starship-set-for-return-to-earth-after-failed-booster-catch"
+            },
+            {
+              "name": "Al Jazeera",
+              "url": "https://www.aljazeera.com/news/2026/11/15/spacexs-starship-captured-by-launchpad-arms-in-dramatic-first"
+            }
+          ]
+        }
+      ],
+      "title": "World"
+    },
+    {
+      "stories": [
+        {
+          "body": "Transportation Secretary Sean Duffy says a router being worked on during a switch from copper wiring to fiber flooded other air traffic control systems, prompting Friday’s nationwide ground stop. Departures from the continental US were halted for more than four hours, and disruption continued Saturday with more than 3,500 cancellations and 2,000 delays. Officials reported no evidence of a cyberattack or AI involvement and are investigating whether faulty equipment or contractor error caused the failure. The Washington Post reports that the FAA had received years of warnings about repair risks. The agency expects schedules to recover by the end of the weekend.",
+          "headline": "Router failure during communications upgrade caused nationwide flight ground stop",
+          "sources": [
+            {
+              "name": "The Washington Post",
+              "url": "https://www.washingtonpost.com/transportation/2026/11/14/faa-was-warned-years-about-repair-risks-leading-nationwide-ground-stop/"
+            },
+            {
+              "name": "The Washington Post",
+              "url": "https://www.washingtonpost.com/transportation/2026/11/14/ground-stop-aftermath-sees-thousands-flights-canceled-delayed-saturday/"
+            },
+            {
+              "name": "BBC News",
+              "url": "https://www.bbc.com/news/articles/c6wy9lynq4qno"
+            }
+          ]
+        },
+        {
+          "body": "Former state lawmaker Jonathan Kreiss-Tomkins defeated three Republican candidates to win Alaska’s open governorship, flipping the seat held by term-limited Republican Mike Dunleavy. At 37, he will become the youngest governor in state history and the first Democrat elected to the office in more than two decades. National groups spent millions on the four-candidate race. Democrats benefited from a divided Republican field that remained fractured despite President Donald Trump’s endorsement of Bernadette Wilson.",
+          "headline": "Democrat Jonathan Kreiss-Tomkins wins Alaska governorship",
+          "sources": [
+            {
+              "name": "Politico",
+              "url": "https://www.politico.com/news/2026/11/14/jonathan-kreiss-tomkins-wins-alaska-governor-01166573"
+            }
+          ]
+        },
+        {
+          "body": "Maryland Senator Chris Van Hollen has launched a website and plans appearances on Sunday television programs as he campaigns to replace Chuck Schumer as Senate Democratic leader. The moves bring his leadership bid into public view; the supplied report does not detail his support among fellow senators or a timetable for a leadership vote.",
+          "headline": "Chris Van Hollen takes campaign to replace Schumer public",
+          "sources": [
+            {
+              "name": "The Washington Post",
+              "url": "https://www.washingtonpost.com/politics/2026/11/14/chris-van-hollen-revs-up-his-public-campaign-replace-chuck-schumer/"
+            }
+          ]
+        },
+        {
+          "body": "The FBI is investigating a powerful bomb found at an ethanol plant in Peoria, Illinois. Dozens of people within a mile of the facility were evacuated, and law enforcement officers were still conducting an extensive search of the building hours later. The supplied report gives no details about a suspect, motive or how the device was discovered.",
+          "headline": "FBI investigates bomb found at Illinois ethanol plant",
+          "sources": [
+            {
+              "name": "The Washington Post",
+              "url": "https://www.washingtonpost.com/nation/2026/11/14/bomb-found-illinois-ethanol-plant-thousands-evacuated-fbi-investigates/"
+            }
+          ]
+        }
+      ],
+      "title": "US"
+    },
+    {
+      "stories": [
+        {
+          "body": "Two weeks before Spain’s November 29 election, daily polling by 40dB. for El País and Cadena SER points to a strong combined result for the right, even as the contest between PP and PSOE for the largest vote share tightens. PSOE could retain support close to its 2023 level by gaining voters from parties to its left while losing others to the right. It could also finish first if PP loses enough support to Vox, without reversing the broader advantage for the right. Alberto Núñez Feijóo is campaigning as a prospective prime minister, while Pedro Sánchez is urging left-wing voters to mobilize.",
+          "headline": "Right retains polling advantage as PP and PSOE battle for first place",
+          "sources": [
+            {
+              "name": "El País",
+              "url": "https://elpais.com/espana/elecciones-generales/2026-11-15/el-psoe-gana-por-la-izquierda-lo-que-pierde-por-la-derecha-segun-el-tercer-tracking-de-la-campana.html"
+            },
+            {
+              "name": "El País",
+              "url": "https://elpais.com/espana/elecciones-generales/2026-11-15/psoe-y-pp-recrudecen-la-pelea-por-el-primer-puesto-en-la-recta-final-hacia-el-29-n.html"
+            }
+          ]
+        },
+        {
+          "body": "Reporting on the police investigation into Núcleo Nacional describes a planned effort to recruit young people, including minors, through social media, carefully managed imagery and street confrontations. Police arrested 14 senior members this week in a case involving alleged incitement to hatred and unlawful association. WhatsApp messages examined by El País show leaders of the Asturias youth group White Boys seeking direction from an older Núcleo Nacional figure. Investigators quoted by El Mundo distinguish speculative talk of an uprising from what they describe as a concrete risk of escalating street violence and radicalization.",
+          "headline": "Investigation exposes Núcleo Nacional’s recruitment of young far-right activists",
+          "sources": [
+            {
+              "name": "El País",
+              "url": "https://elpais.com/espana/2026-11-15/la-estrategia-de-nucleo-nacional-reclutar-jovenes-agitar-la-calle-y-quedarse-en-la-sombra.html"
+            },
+            {
+              "name": "El Mundo",
+              "url": "https://www.elmundo.es/espana/2026/11/14/6af75bd2fdddffb36c8b45ad.html"
+            }
+          ]
+        },
+        {
+          "body": "More than 15,000 migrants have reached the Canary Islands by boat since mid-October, including about 6,000 in November, according to El País. The surge has pushed the archipelago into an extraordinary migration emergency. Reporting links the renewed Atlantic crossings to economic hardship in Senegal, difficulties facing fishing communities, favorable winds and reduced controls. Recent arrivals at La Restinga on El Hierro included people from Senegal, Guinea and Gambia who reported spending five or six days at sea. El Mundo’s account contains conflicting passenger totals, so its headline figure cannot be reconciled with the boat-by-boat breakdown.",
+          "headline": "Canary Islands face renewed migration emergency as boat arrivals rise",
+          "sources": [
+            {
+              "name": "El País",
+              "url": "https://elpais.com/espana/2026-11-15/mensajes-al-bajar-del-cayuco-mama-soy-modou-cogi-un-barco-llegue-a-espana.html"
+            },
+            {
+              "name": "El Mundo",
+              "url": "https://www.elmundo.es/espana/2026/11/14/6af82fc5e9cf4ab47b8b457c.html?intcmp=masnoticiasportada"
+            }
+          ]
+        }
+      ],
+      "title": "Spain"
+    },
+    {
+      "stories": [
+        {
+          "body": "A 24-hour rail strike on Tuesday, November 17, will affect Rodalies, Renfe’s national services and other operators, as well as infrastructure manager Adif. Catalunya has set minimum Rodalies services at 66% during peak hours and 33% during the rest of the day. National minimums guarantee 72% of high-speed and long-distance trains and an average of 65% of medium-distance services. Unions are demanding more staff, technical improvements and stronger safety measures following fatal rail accidents. Renfe advises checking individual schedules before traveling. Another strike is planned for Monday, November 23.",
+          "headline": "Tuesday rail strike will cut Rodalies and national train services",
+          "sources": [
+            {
+              "name": "3Cat",
+              "url": "https://www.3cat.cat/3catinfo/fixats-els-serveis-minims-de-la-vaga-de-dimarts-que-afecta-rodalies-i-tot-el-sector-ferroviari/noticia/3439826/"
+            },
+            {
+              "name": "betevé",
+              "url": "https://beteve.cat/mobilitat/serveis-minims-vaga-rodalies-17-novembre/"
+            }
+          ]
+        },
+        {
+          "body": "The Mercat de l’Abaceria closed its temporary site on Passeig de Sant Joan on Saturday and is due to reopen at its renovated historic home on Travessera de Gràcia on Tuesday, November 17. Traders begin moving equipment Sunday and perishable stock Monday, although some say they may need longer to open. Their association expects all stalls to be operating by Saturday, November 21. The rebuilt market will house 30 indoor stalls, six exterior businesses, a supermarket and a new public square. The relocation ends nearly eight years in a temporary structure after renovation delays involving asbestos, the pandemic and archaeological discoveries.",
+          "headline": "Abaceria market prepares to reopen in Gràcia after eight years in temporary premises",
+          "sources": [
+            {
+              "name": "betevé",
+              "url": "https://beteve.cat/societat/darrer-dia-mercat-abaceria-carpa-provisional/"
+            },
+            {
+              "name": "3Cat Barcelona",
+              "url": "https://www.3cat.cat/3catinfo/el-mercat-de-labaceria-torna-a-la-seu-historica-de-gracia-el-17-de-novembre-despres-de-vuit-anys/noticia/3439658/"
+            }
+          ]
+        },
+        {
+          "body": "This is the last weekend to see Sijena’s secular mural paintings at MNAC before dismantling begins Tuesday, November 17, under a court-ordered return to Aragón. The eight panels are expected to arrive at the monastery on December 2. Museum specialists consider these flat panels transportable, unlike the separate chapter-house frescoes, which were badly damaged by fire in 1936. Their transfer remains stalled: MNAC says moving them would cause irreversible damage, while Aragón accuses the museum of obstructing the judgment. The court has maintained the deadline before May 2027 and rejected requests for additional expert assessments.",
+          "headline": "MNAC prepares Sijena paintings for return while dispute over other frescoes continues",
+          "sources": [
+            {
+              "name": "El Periódico",
+              "url": "https://www.elperiodico.com/ocio-y-cultura/pinturas-profanas-sijena-mnac-136420757-rm/index.html"
+            },
+            {
+              "name": "El Periódico",
+              "url": "https://www.elperiodico.com/es/ocio-y-cultura/20261114/traslado-pinturas-sala-capitular-sijena-136409362"
+            },
+            {
+              "name": "3Cat",
+              "url": "https://www.3cat.cat/3catinfo/linici-de-ladeu-de-les-pintures-profanes-de-sixena-al-mnac/noticia/3439659/"
+            }
+          ]
+        },
+        {
+          "body": "The Banc dels Aliments expects donations to Catalunya’s Gran Recapte food drive to fall below last year’s level, although its initial assessment remains provisional. The charity attributes the decline to financial pressure on households and says contributions carry particular value under those conditions. Around 15,000 volunteers supported collections at 2,100 supermarkets and markets. Financial donations remain open until November 29 and will help buy nutritious foods such as meat, fish and eggs. The campaign also highlights food insecurity among working households; Idescat figures for 2025 put 24.8% of Catalunya’s population at risk of poverty or social exclusion.",
+          "headline": "Gran Recapte expects lower food donations as living costs squeeze households",
+          "sources": [
+            {
+              "name": "betevé",
+              "url": "https://beteve.cat/societat/baixen-donacions-gran-recapte-2026-balanc-provisional/"
+            }
+          ]
+        },
+        {
+          "body": "Barcelona City Council has opened a tender worth up to €402,284 for two years of monitoring social media and digital news for false or misleading claims about the city and municipal activity. The contractor must provide continuous automated monitoring in Catalan and Spanish, detecting relevant mentions within 15 minutes across platforms including Instagram, TikTok, X, Facebook, Bluesky and Threads. The service will assess claims against official public information and advise the council on responses, including requests for corrections. The contract follows Mayor Jaume Collboni’s announcement of an anti-disinformation unit last year and could be extended through 2030.",
+          "headline": "Barcelona tenders €402,000 service to monitor online disinformation",
+          "sources": [
+            {
+              "name": "El Periódico Barcelona",
+              "url": "https://www.elperiodico.com/es/barcelona/20261114/barcelona-bulos-fake-news-redes-sociales-medios-136406113"
+            }
+          ]
+        }
+      ],
+      "title": "Barcelona & Catalunya"
+    }
+  ]
+}
