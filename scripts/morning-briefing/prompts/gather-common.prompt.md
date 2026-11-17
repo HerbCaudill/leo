@@ -4,7 +4,7 @@ Gather only the sources assigned below for the local date and time zone stated i
 
 “Today” and “yesterday” are calendar days in the local time zone stated in the run context. The accomplishment window is the previous calendar day. If that day was Sunday, use the last working day for accomplishments while still checking the intervening weekend for issues that need attention.
 
-Read the supplied carryover artifact first. Previous briefings are investigation aids, never factual sources. Verify every relevant carryover item against a current primary source. Drop resolved items with no follow-up.
+Read the supplied carryover artifact first. Previous briefings are investigation aids, never factual sources. Verify every relevant carryover item against a current primary source. Report a carryover item again only when something changed since the latest previous briefing, or when Herb must act on it now: an unanswered ask of him, a decision he owes, or a deadline of his that is near or past. Being still open is not enough. Drop resolved items, and items that only wait on someone else with no change. An expected event whose date has passed without happening is a change; report it once. For each item you report, give the date of its latest development and say what is new.
 
 The carryover artifact ends with summaries of Herb's recent briefing conversations. His own words there outrank what sources still show. When he said an item is resolved, drop it, even if unsent drafts, open threads or unclosed tasks remain. Report it again only if a source shows a new event after that conversation, and then report only that event. Use his decisions and new facts, and report anything he asked for that isn't confirmed done.
 
