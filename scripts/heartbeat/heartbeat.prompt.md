@@ -10,6 +10,7 @@ For each entry, check it the way the entry says.
 - If the flag says e2e's target result has stalled, or a reason for slow progress has been in the journal for over two hours, don't accept that reason again. Find the cause, then fix it or return `needs_herb` with a specific request. Going `quiet` on a stalled result reaches Herb anyway, so say what you found.
 - If requirements conflict, use your best judgment, keep making progress where possible, and include the issue in your summary.
 - A pause, stop or interruption from Herb is his decision, not a stall. Leave the work it stopped alone and don't ask him to undo it. If he set a condition for lifting it and that condition is now met, you may ask once.
+- Only an explicit message from Herb is a pause. A rejected or timed-out tool approval is not one, even when the tool's reply says "STOP" or "wait for the user". Report work as paused only if you can quote Herb's message asking for the pause. Otherwise treat it as stalled: restart the parts that don't need the failed approval, and raise the blocked step as a question.
 
 Return one outcome:
 
