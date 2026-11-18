@@ -11,7 +11,6 @@ describe("raw briefing fetch helpers", () => {
       homepageUrl: "https://source.example/news",
       key: "source",
       name: "Source",
-      region: "world",
     }
 
     expect(getSourceListingPageUrls(sourceConfig)).toEqual([
@@ -91,14 +90,12 @@ describe("raw briefing fetch helpers", () => {
       createBriefingArticlesFromHeadlineCandidates({
         candidates,
         existingArticleUrls,
-        region: "world",
         sourceName: "Source",
       }),
     ).toEqual([
       {
         body: "RSS body text that is long enough to preserve in the raw briefing article.",
         headline: "First headline with enough words to keep",
-        region: "world",
         source: "Source",
         url: "https://source.example/story-a",
       },

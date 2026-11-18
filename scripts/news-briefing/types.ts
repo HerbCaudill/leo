@@ -1,12 +1,9 @@
-export type NewsRegion = "world" | "us" | "spain" | "barcelona" | "extras"
-
 export type NewsSourceConfig = {
   fallbackUrls?: string[]
   homepageUrl: string
   key: string
   name: string
   preferFallbackUrls?: boolean
-  region: NewsRegion
 }
 
 export type HeadlineCandidate = {
@@ -59,7 +56,6 @@ export type BriefingCandidateArticle = {
   date?: string
   headline: string
   source: string
-  region: NewsRegion
   url: string
 }
 

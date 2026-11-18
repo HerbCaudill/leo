@@ -37,7 +37,6 @@ export async function buildRawBriefing(
     const articles = createBriefingArticlesFromHeadlineCandidates({
       candidates: headlineCandidates,
       existingArticleUrls: new Set([...recentSourceUrls, ...articlesByUrl.keys()]),
-      region: sourceConfig.region,
       sourceName: sourceConfig.name,
     })
 

@@ -13,7 +13,6 @@ describe("hydrateSelectedStories", () => {
           {
             body: "RSS body text that is long enough to preserve during selected story hydration.",
             headline: "RSS story",
-            region: "world",
             source: "RSS Source",
             url: "https://rss.example/story",
           },
@@ -53,7 +52,6 @@ describe("hydrateSelectedStories", () => {
     let maxActiveFetches = 0
     const articles = Array.from({ length: ARTICLE_FETCH_CONCURRENCY + 2 }, (_, index) => ({
       headline: `Selected story ${index}`,
-      region: "world" as const,
       source: "Source",
       url: `https://source.example/story-${index}`,
     }))
@@ -131,13 +129,11 @@ const rawBriefing: RawBriefing = {
   articles: [
     {
       headline: "Israel and Lebanon agree to implement ceasefire",
-      region: "world",
       source: "BBC News",
       url: "https://bbc.example/ceasefire",
     },
     {
       headline: "Celebrity birthday story",
-      region: "world",
       source: "BBC News",
       url: "https://bbc.example/celebrity",
     },

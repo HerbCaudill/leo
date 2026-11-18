@@ -23,13 +23,11 @@ describe("buildRawBriefing", () => {
         homepageUrl: "https://source-one.example/news",
         key: "source-one",
         name: "Source One",
-        region: "world",
       },
       {
         homepageUrl: "https://source-two.example/news",
         key: "source-two",
         name: "Source Two",
-        region: "world",
       },
     ]
 
@@ -71,7 +69,6 @@ describe("buildRawBriefing", () => {
     expect(rawBriefing.articles).toHaveLength(3)
     expect(rawBriefing.articles[0]).toEqual({
       headline: "Story A headline with enough words to keep",
-      region: "world",
       source: "Source One",
       url: "https://source-one.example/story-a",
     })
@@ -114,13 +111,11 @@ describe("buildRawBriefing", () => {
           homepageUrl: "https://broken-source.example/news",
           key: "broken-source",
           name: "Broken Source",
-          region: "world",
         },
         {
           homepageUrl: "https://working-source.example/news",
           key: "working-source",
           name: "Working Source",
-          region: "world",
         },
       ],
     })
@@ -173,7 +168,6 @@ describe("buildRawBriefing", () => {
           homepageUrl: "https://blocked-source.example/news",
           key: "blocked-source",
           name: "Blocked Source",
-          region: "world",
         },
       ],
     })
@@ -185,7 +179,6 @@ describe("buildRawBriefing", () => {
     expect(rawBriefing.articles[0]).toEqual({
       body: "RSS description body that is comfortably longer than forty characters and should be kept.",
       headline: "Fallback RSS headline with enough words to keep",
-      region: "world",
       source: "Blocked Source",
       url: "https://blocked-source.example/story-from-rss",
     })
@@ -252,7 +245,6 @@ describe("buildRawBriefing", () => {
           key: "source",
           name: "Source",
           preferFallbackUrls: true,
-          region: "world",
         },
       ],
     })
@@ -261,7 +253,6 @@ describe("buildRawBriefing", () => {
       {
         date: "2026-07-12",
         headline: "Fresh item headline with enough words to keep",
-        region: "world",
         source: "Source",
         url: "https://source.example/fresh-item",
       },
@@ -302,7 +293,6 @@ describe("buildRawBriefing", () => {
           key: "source",
           name: "Source",
           preferFallbackUrls: true,
-          region: "world",
         },
       ],
     })
@@ -312,7 +302,6 @@ describe("buildRawBriefing", () => {
       {
         body: "Preferred feed body that is comfortably longer than forty characters and should be kept.",
         headline: "Preferred feed headline with enough words to keep",
-        region: "world",
         source: "Source",
         url: "https://source.example/feed-story",
       },

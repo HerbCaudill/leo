@@ -9,7 +9,6 @@ describe("fetchSuccessfulArticle", () => {
     const article: RawBriefingArticle = {
       body: "Existing body",
       headline: "Headline",
-      region: "world",
       source: "Source",
       url: "https://example.com/story",
     }
@@ -76,7 +75,6 @@ describe("fetchSuccessfulArticle", () => {
 
 const baseArticle: RawBriefingArticle = {
   headline: "Headline",
-  region: "world",
   source: "Source",
   url: "https://example.com/story",
 }

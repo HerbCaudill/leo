@@ -17,7 +17,6 @@ describe("news briefing schemas", () => {
       key: "example",
       name: "Example News",
       preferFallbackUrls: true,
-      region: "world",
     })
 
     const rawBriefing = Schema.decodeUnknownSync(RawBriefingSchema)({
@@ -25,7 +24,6 @@ describe("news briefing schemas", () => {
         {
           body: "A useful article body.",
           headline: "Major world story",
-          region: "world",
           source: "Example News",
           url: "https://example.com/story",
         },
@@ -75,8 +73,7 @@ describe("news briefing schemas", () => {
         },
       ],
     })
-
-    expect(sourceConfig.region).toBe("world")
+    expect(sourceConfig.name).toBe("Example News")
     expect(rawBriefing.articles[0]?.body).toBe("A useful article body.")
     expect(selection.stories[0]?.section).toBe("World")
     expect(hydratedSelection.date).toBe("2026-06-04")

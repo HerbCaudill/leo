@@ -6,7 +6,7 @@
 
 `pnpm briefing:news` clears any generated files for the requested date, crawls the configured source homepages, extracts headline candidates locally, keeps the first 30 per source in page order, deduplicates by article URL, and writes compact metadata to `briefings/raw/YYYY-MM-DD.json` without fetching article pages.
 
-Each candidate file stores one entry per unique article URL. Every article record includes `url`, `headline`, `source`, and `region`.
+Each candidate file stores one entry per unique article URL. Every article record includes `url`, `headline`, and `source`. Source regions are not included; the selection LLM assigns sections from each story’s subject and geographic relevance.
 
 ## Synthesis
 

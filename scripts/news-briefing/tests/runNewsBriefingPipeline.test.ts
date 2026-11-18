@@ -101,7 +101,6 @@ describe("runNewsBriefingPipeline", () => {
         articles: [
           {
             headline: "Story",
-            region: "world",
             source: "Source",
             url: "https://source.example/story",
           },

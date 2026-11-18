@@ -1,8 +1,5 @@
 import { Schema } from "effect"
 
-/** Regions used to group candidate source feeds. */
-export const NewsRegionSchema = Schema.Literal("world", "us", "spain", "barcelona", "extras")
-
 /** Public section names accepted from agent selection and final briefing output. */
 export const BriefingSectionTitleSchema = Schema.Literal(
   "World",
@@ -18,7 +15,6 @@ export const NewsSourceConfigSchema = Schema.Struct({
   key: Schema.String,
   name: Schema.String,
   preferFallbackUrls: Schema.optional(Schema.Boolean),
-  region: NewsRegionSchema,
 })
 
 /** Headline extracted from a source listing page before it is normalized into raw briefing data. */
@@ -34,7 +30,6 @@ export const HeadlineCandidateSchema = Schema.Struct({
 export const BriefingCandidateArticleSchema = Schema.Struct({
   date: Schema.optional(Schema.String),
   headline: Schema.String,
-  region: NewsRegionSchema,
   source: Schema.String,
   url: Schema.String,
 })

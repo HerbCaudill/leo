@@ -1,4 +1,4 @@
-import type { BriefingCandidateArticle, HeadlineCandidate, NewsRegion } from "./types.ts"
+import type { BriefingCandidateArticle, HeadlineCandidate } from "./types.ts"
 
 /** Convert headline candidates to briefing articles while skipping duplicates and empty URLs. */
 export function createBriefingArticlesFromHeadlineCandidates(
@@ -17,7 +17,6 @@ export function createBriefingArticlesFromHeadlineCandidates(
         ...(candidate.body ? { body: candidate.body } : {}),
         ...(candidate.date ? { date: candidate.date } : {}),
         headline: candidate.headline,
-        region: args.region,
         source: args.sourceName,
         url: candidate.url,
       },
@@ -30,8 +29,6 @@ export type CreateBriefingArticlesFromHeadlineCandidatesArgs = {
   candidates: HeadlineCandidate[]
   /** URLs already included in the briefing. */
   existingArticleUrls: Set<string>
-  /** The region to assign to each article. */
-  region: NewsRegion
   /** The source name to assign to each article. */
   sourceName: string
 }

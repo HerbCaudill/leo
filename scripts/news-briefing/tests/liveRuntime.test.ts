@@ -31,7 +31,6 @@ describe("live runtime wiring", () => {
           homepageUrl: "https://source.example",
           key: "source",
           name: "Source",
-          region: "world",
         },
       ],
       synthesizeBriefing: async args => {

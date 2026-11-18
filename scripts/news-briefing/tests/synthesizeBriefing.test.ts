@@ -100,7 +100,6 @@ describe("synthesizeBriefing", () => {
         articles: [
           {
             headline: "Selected story",
-            region: "world",
             source: "Source",
             url: "https://source.example/selected",
           },
@@ -212,13 +211,11 @@ describe("synthesizeBriefing", () => {
           articles: [
             {
               headline: "Selected story",
-              region: "world",
               source: "Source",
               url: "https://source.example/selected",
             },
             {
               headline: "Omitted story",
-              region: "world",
               source: "Source",
               url: "https://source.example/omitted",
             },

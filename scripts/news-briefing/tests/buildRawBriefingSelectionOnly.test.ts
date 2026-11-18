@@ -25,7 +25,6 @@ describe("buildRawBriefing selection-only fetch", () => {
           homepageUrl: "https://source.example/news",
           key: "source",
           name: "Source",
-          region: "world",
         },
       ],
     })
@@ -34,7 +33,6 @@ describe("buildRawBriefing selection-only fetch", () => {
     expect(rawBriefing.articles).toEqual([
       {
         headline: "Story A headline with enough words to keep",
-        region: "world",
         source: "Source",
         url: "https://source.example/story-a",
       },
