@@ -51,7 +51,7 @@ function validateBriefing(markdown: string, headings: readonly string[]): string
       throw new Error(`The final briefing must contain one coverage entry for ${source}`)
   }
 
-  if (!markdown.includes("```text\n✅ *Yesterday*\n") || !markdown.includes("\n🎯 *Today*\n"))
+  if (!/```text\n✅ [^\n]+\n/.test(markdown) || !markdown.includes("\n🎯 Today\n"))
     throw new Error("The final briefing must contain the copy-ready standup block")
 
   return `${markdown.trimEnd()}\n`

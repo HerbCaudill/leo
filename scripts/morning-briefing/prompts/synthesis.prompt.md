@@ -47,17 +47,31 @@ Under Yesterday, write up to six factual bullets from all sources, including rel
 
 In `newTasks`, return only actions that need Herb and are not already captured or completed in the complete Tasks data. Compare tasks across the board by status, completion time, title, descriptions, links, project membership, and provenance. Do not add a task merely because a previous task is absent from an incomplete list; check recently completed tasks to determine whether it was resolved. Include unanswered asks, pending RSVPs, review requests, discussion asks, GitHub items the work lane lists under Needs Herb, and scanned documents that require action (payments, fines, deadlines, appointments) only when no adequate task exists. Use a short action-oriented `title`. Put source context, deadline, and primary-source URLs in `notes`; use an empty string only when no context is useful. Do not update or replace stale or ambiguous existing tasks. Return an empty array when everything actionable is already captured. Never add tasks for work that open Claude Code, Codex, or T3 Code sessions are already handling, such as reruns, verification, follow-up fixes, or checkout cleanup in a repository with recent agent activity; Herb tracks that work in T3 Code.
 
-Under Proposed standup, end the synthesized Markdown with a copy-ready fenced `text` block using literal emoji, your recent plainspoken Slack style, and this shape:
+Under Proposed standup, end the synthesized Markdown with a copy-ready fenced `text` block that Herb can post to the DevResults `#standup` channel as is. His teammates read it to know, at a glance, what he is working on and any significant milestones. It is not a work log. Use literal emoji and this shape:
 
 ```text
-✅ *Yesterday*
-- {project}: {task}, {task}
+✅ Yesterday
+- {Workstream}: {what moved, as a theme}
 
-🎯 *Today*
-- {project}: {task}, {task}
+🎯 Today
+- {Workstream}: {focus}
 
-⚠️ *Blockers*
-- {project}: {blocker}
+⚠️ Blockers
+- {Workstream}: {what it waits on}
 ```
 
-Keep Yesterday and Today to three to five bullets total. Omit personal errands and routine administration. Include the Blockers section only when a real blocker exists.
+Include only DevResults work: the product, DevResults Next, clients, sales, and company matters the team should know about. Never include personal projects, such as the games app or Sortides, or Herb's personal setup and tooling, such as Leo, the briefings, dotfiles, Tasks, the mini or agent workflows. Also leave out personal errands, family, and private company matters such as financing.
+
+Report only Herb's own part. That is work he did himself or had his agents do, and what he will do himself today. Leave out work that teammates own, such as a deal, contract or client task someone else is handling, even when the briefing reports it, Herb is copied on it, or it appears in his open issues. When Herb has a part in a shared effort, describe only that part, at his level. Do not turn the preparation steps teammates own into his plan for the day.
+
+Write one bullet per workstream, and merge everything done on it into that bullet. Name the workstream the way the team knows it, such as DevResults Next, Design refresh or a client's name. Summarize the work in plain words, optionally followed by a short list of the areas it touched. Leave out PR and commit numbers, test and scenario counts, file and component names, and the mechanics of the agents doing the work, such as lanes, replays, recordings, permits, coordinators and claims. Name significant milestones: something shipped, deployed or published, ready for a teammate's review, or a phase finished. Name the teammate when the work answers them or waits on them.
+
+For a long-running effort with a measurable end, such as parity verification or the visual review, give progress as a rounded percentage when the gathered data states one or gives the counts it follows from. Never estimate a figure.
+
+Under Today, give one bullet per workstream Herb will focus on, drawn from work in progress and today's calendar. Long-running efforts that are still under way carry into Today. A short, honest note on pace or approach is welcome, such as trying to speed something up. Include client calls and external meetings, but not routine internal meetings. Do not list individual tasks or logistics, such as meeting times, who is around when, or the steps of a plan.
+
+Keep the whole post to five bullets or fewer; three is typical. Keep each bullet to one short sentence, about 20 words at most; name the theme rather than listing everything under it. Write in Herb's voice: first person without the pronoun, short, plain and conversational. Add a link only when a bullet announces something teammates can now open, such as a newly published site.
+
+Include Blockers only when Herb's own work waits on a teammate, a client or a decision outside his control, and say who or what. Agent, tooling and machine problems are not blockers. Never write "None."
+
+On Mondays, label the first section `Friday`, or `Friday & weekend` when weekend work is included, instead of `Yesterday`.

@@ -31,11 +31,11 @@ None.
 ### Proposed standup
 
 \`\`\`text
-✅ *Yesterday*
-- Briefings: worked
+✅ Yesterday
+- DevResults Next: worked
 
-🎯 *Today*
-- Briefings: continue
+🎯 Today
+- DevResults Next: continue
 \`\`\`
 `
 

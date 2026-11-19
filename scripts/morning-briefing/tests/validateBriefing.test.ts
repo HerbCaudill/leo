@@ -32,11 +32,11 @@ None.
 ### Proposed standup
 
 \`\`\`text
-✅ *Yesterday*
-- Briefings: worked
+✅ Yesterday
+- DevResults Next: worked
 
-🎯 *Today*
-- Briefings: continue
+🎯 Today
+- DevResults Next: continue
 \`\`\`
 
 ### New tasks
@@ -62,13 +62,18 @@ describe("validateFinalBriefingMarkdown", () => {
     ).toThrow("missing ### Sources")
   })
 
+  test("accepts a standup whose first section names a different period", () => {
+    const mondayBriefing = validBriefing.replace("✅ Yesterday", "✅ Friday & weekend")
+    expect(validateFinalBriefingMarkdown(mondayBriefing)).toBe(mondayBriefing)
+  })
+
   test("rejects missing source coverage and an incomplete standup block", () => {
     expect(() => validateFinalBriefingMarkdown(validBriefing.replace("- [x] Gmail\n", ""))).toThrow(
       "coverage entry for Gmail",
     )
-    expect(() =>
-      validateFinalBriefingMarkdown(validBriefing.replace("🎯 *Today*", "Today")),
-    ).toThrow("copy-ready standup block")
+    expect(() => validateFinalBriefingMarkdown(validBriefing.replace("🎯 Today", "Today"))).toThrow(
+      "copy-ready standup block",
+    )
   })
 
   test("requires New tasks to be the final section", () => {
