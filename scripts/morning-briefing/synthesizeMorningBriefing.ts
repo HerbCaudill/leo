@@ -6,6 +6,7 @@ import { decodeSynthesisResult } from "./decodeAgentOutput.ts"
 import { readMorningBriefingContext } from "./readMorningBriefingContext.ts"
 import { readMorningBriefingPrompt } from "./readPromptFile.ts"
 import type { MorningBriefingGatherResult, MorningBriefingSynthesisResult } from "./types.ts"
+import { isWeekendDate } from "./date.ts"
 import { validateSynthesizedBriefingMarkdown } from "./validateBriefing.ts"
 
 const MAX_AGENT_ATTEMPTS = 2
@@ -35,6 +36,7 @@ ${readMorningBriefingContext()}
 ## Run context
 
 - Local date: ${args.date}
+- Proposed standup: ${isWeekendDate(args.date) ? "omit (weekend)" : "include"}
 - Local time zone: ${args.timeZone}
 - Carryover artifact: ${args.carryoverPath}
 - Merged gather artifact: ${args.mergedPath}
@@ -58,7 +60,10 @@ ${readMorningBriefingContext()}
         threadSource: "morning-briefing-synthesis",
       })
       const result = decodeSynthesisResult(outputPath)
-      return { ...result, markdown: validateSynthesizedBriefingMarkdown(result.markdown) }
+      return {
+        ...result,
+        markdown: validateSynthesizedBriefingMarkdown(result.markdown, args.date),
+      }
     } catch (error) {
       lastError = error instanceof Error ? error : new Error(String(error))
     }

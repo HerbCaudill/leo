@@ -1,15 +1,19 @@
 import {
   MORNING_BRIEFING_LANES,
   REQUIRED_BRIEFING_HEADINGS,
+  STANDUP_HEADING,
   SYNTHESIZED_BRIEFING_HEADINGS,
 } from "./constants.ts"
+import { isWeekendDate } from "./date.ts"
 
 /** Validate the canonical final briefing before either publication step. */
 export function validateFinalBriefingMarkdown(
   /** Candidate briefing Markdown. */
   markdown: string,
+  /** Briefing date as YYYY-MM-DD; weekend briefings have no proposed standup. */
+  date: string,
 ): string {
-  const normalized = validateBriefing(markdown, REQUIRED_BRIEFING_HEADINGS)
+  const normalized = validateBriefing(markdown, REQUIRED_BRIEFING_HEADINGS, date)
   const newTasksIndex = normalized.indexOf("\n### New tasks\n")
   if (/^### /m.test(normalized.slice(newTasksIndex + "\n### New tasks\n".length)))
     throw new Error("New tasks must be the final section")
@@ -20,17 +24,21 @@ export function validateFinalBriefingMarkdown(
 export function validateSynthesizedBriefingMarkdown(
   /** Candidate briefing Markdown without New tasks. */
   markdown: string,
+  /** Briefing date as YYYY-MM-DD; weekend briefings have no proposed standup. */
+  date: string,
 ): string {
-  return validateBriefing(markdown, SYNTHESIZED_BRIEFING_HEADINGS)
+  return validateBriefing(markdown, SYNTHESIZED_BRIEFING_HEADINGS, date)
 }
 
 /** Validate shared briefing structure and source coverage. */
-function validateBriefing(markdown: string, headings: readonly string[]): string {
+function validateBriefing(markdown: string, headings: readonly string[], date: string): string {
   if (!markdown.startsWith("## Daily briefing\n"))
     throw new Error("The final briefing must begin with `## Daily briefing`")
 
+  const weekend = isWeekendDate(date)
   let previousIndex = -1
   for (const heading of headings) {
+    if (weekend && heading === STANDUP_HEADING) continue
     const headingIndex = markdown.indexOf(`\n${heading}\n`)
     if (headingIndex < 0) throw new Error(`The final briefing is missing ${heading}`)
     if (headingIndex <= previousIndex)
@@ -51,7 +59,10 @@ function validateBriefing(markdown: string, headings: readonly string[]): string
       throw new Error(`The final briefing must contain one coverage entry for ${source}`)
   }
 
-  if (!/```text\n✅ [^\n]+\n/.test(markdown) || !markdown.includes("\n🎯 Today\n"))
+  if (weekend) {
+    if (markdown.includes(`\n${STANDUP_HEADING}\n`))
+      throw new Error("The final briefing must have no proposed standup on weekends")
+  } else if (!/```text\n✅ [^\n]+\n/.test(markdown) || !markdown.includes("\n🎯 Today\n"))
     throw new Error("The final briefing must contain the copy-ready standup block")
 
   return `${markdown.trimEnd()}\n`

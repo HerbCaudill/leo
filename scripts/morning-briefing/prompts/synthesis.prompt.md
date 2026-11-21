@@ -9,7 +9,9 @@ Return only JSON matching the supplied schema, with a `markdown` string and a `n
 3. `### Other calendars`
 4. `### Open issues`
 5. `### Yesterday`
-6. `### Proposed standup`
+6. `### Proposed standup`, except on weekends
+
+When the run context says to omit the proposed standup, leave out that heading and its block entirely.
 
 Under Sources, include every source below in this exact order. Use `- [x] Source` for `covered`, including a successful query with no relevant items. Use `- [ ] Source (reason)` for `incomplete`, using its compact diagnosed cause and recovery action.
 

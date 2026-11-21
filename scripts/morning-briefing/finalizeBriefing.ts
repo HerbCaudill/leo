@@ -5,6 +5,8 @@ import { validateFinalBriefingMarkdown } from "./validateBriefing.ts"
 export function finalizeMorningBriefing(
   /** Validated synthesis Markdown. */
   markdown: string,
+  /** Briefing date as YYYY-MM-DD. */
+  date: string,
   /** Task creation outcome. */
   tasks: MorningBriefingTaskOutcome,
 ): string {
@@ -20,6 +22,7 @@ export function finalizeMorningBriefing(
     )
   return validateFinalBriefingMarkdown(
     `${markdown.trimEnd()}\n\n### New tasks\n\n${parts.join("\n\n")}\n`,
+    date,
   )
 }
 

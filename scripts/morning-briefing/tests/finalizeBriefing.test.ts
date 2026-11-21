@@ -42,7 +42,7 @@ None.
 describe("finalizeMorningBriefing", () => {
   test("finishes the briefing with links to tasks that were actually created", () => {
     expect(
-      finalizeMorningBriefing(synthesizedBriefing, {
+      finalizeMorningBriefing(synthesizedBriefing, "2026-11-20", {
         created: [
           {
             notes: "Source context",
@@ -60,8 +60,9 @@ describe("finalizeMorningBriefing", () => {
   })
 
   test("states when no new tasks were needed", () => {
-    expect(finalizeMorningBriefing(synthesizedBriefing, { created: [], deferred: [] }))
-      .toBe(`${synthesizedBriefing}
+    expect(
+      finalizeMorningBriefing(synthesizedBriefing, "2026-11-20", { created: [], deferred: [] }),
+    ).toBe(`${synthesizedBriefing}
 ### New tasks
 
 - None.
@@ -70,7 +71,7 @@ describe("finalizeMorningBriefing", () => {
 
   test("lists tasks that could not be created and why", () => {
     expect(
-      finalizeMorningBriefing(synthesizedBriefing, {
+      finalizeMorningBriefing(synthesizedBriefing, "2026-11-20", {
         created: [{ notes: "", title: "Reply to Ann", url: "https://tasks/?task=a" }],
         deferred: [{ notes: "", title: "Cancel [Friday]" }],
         error: "Tasks reply lost; inspect request r1",

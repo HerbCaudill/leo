@@ -86,6 +86,9 @@ export const MORNING_BRIEFING_LANES = [
   },
 ] as const
 
+/** Heading of the copy-ready standup section, which weekend briefings leave out. */
+export const STANDUP_HEADING = "### Proposed standup"
+
 /** Required section headings in the final briefing, in display order. */
 export const REQUIRED_BRIEFING_HEADINGS = [
   "### Sources",
@@ -93,7 +96,7 @@ export const REQUIRED_BRIEFING_HEADINGS = [
   "### Other calendars",
   "### Open issues",
   "### Yesterday",
-  "### Proposed standup",
+  STANDUP_HEADING,
   "### New tasks",
 ] as const
 

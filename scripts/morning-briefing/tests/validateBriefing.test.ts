@@ -44,35 +44,56 @@ None.
 - None.
 `
 
+const weekendBriefing = validBriefing.replace(
+  /### Proposed standup\n\n```text\n[\s\S]*?```\n\n/,
+  "",
+)
+
+const friday = "2026-11-20"
+const saturday = "2026-11-21"
+const sunday = "2026-11-22"
+
 describe("validateFinalBriefingMarkdown", () => {
   test("normalizes a complete briefing to one trailing newline", () => {
-    expect(validateFinalBriefingMarkdown(`${validBriefing}\n`)).toBe(validBriefing)
+    expect(validateFinalBriefingMarkdown(`${validBriefing}\n`, friday)).toBe(validBriefing)
   })
 
   test("rejects missing or reordered sections", () => {
     expect(() =>
-      validateFinalBriefingMarkdown(validBriefing.replace("### Sources", "### Missing")),
+      validateFinalBriefingMarkdown(validBriefing.replace("### Sources", "### Missing"), friday),
     ).toThrow("missing ### Sources")
     expect(() =>
       validateFinalBriefingMarkdown(
         validBriefing
           .replace("### Calendar", "### Temporary")
           .replace("### Sources", "### Calendar"),
+        friday,
       ),
     ).toThrow("missing ### Sources")
   })
 
   test("accepts a standup whose first section names a different period", () => {
     const mondayBriefing = validBriefing.replace("✅ Yesterday", "✅ Friday & weekend")
-    expect(validateFinalBriefingMarkdown(mondayBriefing)).toBe(mondayBriefing)
+    expect(validateFinalBriefingMarkdown(mondayBriefing, "2026-11-23")).toBe(mondayBriefing)
   })
 
   test("rejects missing source coverage and an incomplete standup block", () => {
-    expect(() => validateFinalBriefingMarkdown(validBriefing.replace("- [x] Gmail\n", ""))).toThrow(
-      "coverage entry for Gmail",
+    expect(() =>
+      validateFinalBriefingMarkdown(validBriefing.replace("- [x] Gmail\n", ""), friday),
+    ).toThrow("coverage entry for Gmail")
+    expect(() =>
+      validateFinalBriefingMarkdown(validBriefing.replace("🎯 Today", "Today"), friday),
+    ).toThrow("copy-ready standup block")
+  })
+
+  test("leaves out the proposed standup on weekends", () => {
+    expect(validateFinalBriefingMarkdown(weekendBriefing, saturday)).toBe(weekendBriefing)
+    expect(validateFinalBriefingMarkdown(weekendBriefing, sunday)).toBe(weekendBriefing)
+    expect(() => validateFinalBriefingMarkdown(validBriefing, saturday)).toThrow(
+      "no proposed standup on weekends",
     )
-    expect(() => validateFinalBriefingMarkdown(validBriefing.replace("🎯 Today", "Today"))).toThrow(
-      "copy-ready standup block",
+    expect(() => validateFinalBriefingMarkdown(weekendBriefing, friday)).toThrow(
+      "missing ### Proposed standup",
     )
   })
 
@@ -80,6 +101,7 @@ describe("validateFinalBriefingMarkdown", () => {
     expect(() =>
       validateFinalBriefingMarkdown(
         validBriefing.replace("### New tasks", "### New tasks\n\n- None.\n\n### Afterward"),
+        friday,
       ),
     ).toThrow("final section")
   })

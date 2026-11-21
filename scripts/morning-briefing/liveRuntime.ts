@@ -81,7 +81,7 @@ export async function runLiveMorningBriefing(
         }),
       finalize: (briefing, tasks) =>
         runStage("finalize", [paths.finalPath], async () => {
-          const finalBriefing = finalizeMorningBriefing(briefing, tasks)
+          const finalBriefing = finalizeMorningBriefing(briefing, args.date, tasks)
           writeTextAtomically(paths.finalPath, finalBriefing)
           return finalBriefing
         }),

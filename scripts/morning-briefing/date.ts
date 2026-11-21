@@ -18,6 +18,15 @@ export function formatLocalDate(
   }).format(date)
 }
 
+/** Whether a YYYY-MM-DD calendar date falls on a Saturday or Sunday. */
+export function isWeekendDate(
+  /** Calendar date as YYYY-MM-DD. */
+  date: string,
+): boolean {
+  const day = new Date(`${date}T12:00:00Z`).getUTCDay()
+  return day === 0 || day === 6
+}
+
 /** Build a filesystem-safe timestamp for a run directory. */
 export function formatRunId(
   /** Instant to format. */
