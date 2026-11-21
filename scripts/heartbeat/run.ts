@@ -11,12 +11,14 @@ import {
   findQuietSessions,
   hasWatchedWork,
   isE2eInvestigationDue,
+  observeE2eValue,
   parseCoverageHistory,
   planHerbAsk,
   readE2eTarget,
   sessionKey,
   settleE2eResult,
   shouldNotifyHerb,
+  type E2eObservation,
   type E2eTarget,
   type HeartbeatResult,
   type SessionThread,
@@ -118,13 +120,22 @@ async function listSessions(): Promise<LocatedSession[]> {
 }
 
 /** Check e2e's results against its target. An unreadable report is itself a signal, because it hides a stall. */
-async function readE2eSignals(target: E2eTarget): Promise<string[]> {
+async function readE2eSignals(
+  target: E2eTarget,
+  previous: E2eObservation | undefined,
+): Promise<{ signals: string[]; observation?: E2eObservation }> {
   try {
     const response = await fetch(COVERAGE_REPORT_URL)
     const history = parseCoverageHistory(await response.text())
-    return findE2eSignals({ history, target, now: new Date() })
+    const now = new Date()
+    const observation = observeE2eValue({ history, metric: target.metric, previous, now })
+    const lastChangeSeenAt = observation && new Date(observation.seenAt)
+    return { signals: findE2eSignals({ history, target, now, lastChangeSeenAt }), observation }
   } catch (error) {
-    return [`The e2e coverage report couldn't be read: ${error}.`]
+    return {
+      signals: [`The e2e coverage report couldn't be read: ${error}.`],
+      observation: previous,
+    }
   }
 }
 
@@ -187,7 +198,9 @@ async function main(): Promise<void> {
       ...quietSessions.filter(session => session.status !== "running").map(sessionKey),
     ].slice(-MAX_REVIEWED_SESSION_KEYS)
     const target = readE2eTarget(watching)
-    const allSignals = target ? await readE2eSignals(target) : []
+    const { signals: allSignals, observation: e2eObservation } = target
+      ? await readE2eSignals(target, state.e2eObservation)
+      : { signals: [] }
     const signals = isE2eInvestigationDue({
       lastInvestigatedAt: state.lastE2eInvestigatedAt,
       now: new Date(),
@@ -208,7 +221,7 @@ async function main(): Promise<void> {
         })
     console.log(`${new Date().toISOString()} triage escalate=${triage.escalate}: ${triage.reason}`)
     if (!triage.escalate) {
-      writeState({ ...state, reviewedSessionKeys, lastE2eInvestigatedAt })
+      writeState({ ...state, reviewedSessionKeys, lastE2eInvestigatedAt, e2eObservation })
       return
     }
 
@@ -226,11 +239,16 @@ async function main(): Promise<void> {
     // Quiet results are journaled too, so the next quick check knows a slow pace was already looked at.
     writeJournal(date, `${result.outcome}: ${result.summary}`)
     if (result.outcome !== "needs_herb") {
-      writeState({ notifiedBlockerKeys: [], reviewedSessionKeys, lastE2eInvestigatedAt })
+      writeState({
+        notifiedBlockerKeys: [],
+        reviewedSessionKeys,
+        lastE2eInvestigatedAt,
+        e2eObservation,
+      })
       return
     }
 
-    writeState({ ...state, reviewedSessionKeys, lastE2eInvestigatedAt })
+    writeState({ ...state, reviewedSessionKeys, lastE2eInvestigatedAt, e2eObservation })
     const blockerKey = result.blockerKey ?? result.summary
     // A failed delivery throws before the blocker is recorded, so a later run asks again.
     if (shouldNotifyHerb({ blockerKey, notifiedBlockerKeys: state.notifiedBlockerKeys })) {
@@ -239,6 +257,7 @@ async function main(): Promise<void> {
         notifiedBlockerKeys: [...state.notifiedBlockerKeys, blockerKey],
         reviewedSessionKeys,
         lastE2eInvestigatedAt,
+        e2eObservation,
       })
     }
   } finally {
@@ -268,6 +287,8 @@ type HeartbeatState = {
   notifiedBlockerKeys: string[]
   reviewedSessionKeys: string[]
   lastE2eInvestigatedAt?: string
+  /** When the heartbeat first saw the current e2e count. */
+  e2eObservation?: E2eObservation
 }
 
 type LocatedSession = SessionThread & {

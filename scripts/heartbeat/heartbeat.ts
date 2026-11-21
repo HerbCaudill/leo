@@ -93,16 +93,17 @@ export function findE2eSignals(
   args: FindE2eSignalsArgs,
 ): string[] {
   const { metric, since } = args.target
-  const samples = args.history.flatMap(({ hour, claims }) => {
-    const value = claims?.[metric]
-    return value === undefined ? [] : [{ hour, value }]
-  })
+  const samples = readSamples(args.history, metric)
   const latest = samples.at(-1)
   if (!latest) return []
 
   const signals: string[] = []
   const lastChange = samples.findLast((sample, index) => sample.value !== samples[index - 1]?.value)
-  const clockStart = Math.max(hourToTime(lastChange?.hour ?? latest.hour), since.getTime())
+  const clockStart = Math.max(
+    hourToTime(lastChange?.hour ?? latest.hour),
+    since.getTime(),
+    args.lastChangeSeenAt?.getTime() ?? 0,
+  )
   const stalledHours = Math.floor((args.now.getTime() - clockStart) / HOUR_MS)
   if (stalledHours >= STALL_HOURS)
     signals.push(`${metric} hasn't moved in ${stalledHours} hours (still ${latest.value}).`)
@@ -121,6 +122,17 @@ export function findE2eSignals(
       )
   }
   return signals
+}
+
+/** Remember when the heartbeat first saw the current count, because the report rewrites past hours and can backdate a gain. */
+export function observeE2eValue(
+  /** Coverage history, the metric, the previous sighting and the current time. */
+  args: ObserveE2eValueArgs,
+): E2eObservation | undefined {
+  const value = readSamples(args.history, args.metric).at(-1)?.value
+  if (value === undefined) return undefined
+  if (args.previous?.value === value) return args.previous
+  return { value, seenAt: args.now.toISOString() }
 }
 
 /** Look into a stalled result at most every two hours, which is how long an explanation lasts. */
@@ -144,6 +156,14 @@ export function settleE2eResult(
     summary: `${args.signals.join(" ")} ${args.result.summary}`,
     blockerKey: "e2e-no-progress",
   }
+}
+
+/** List the hours that recorded a count for the metric, oldest first. */
+function readSamples(history: CoverageHistoryEntry[], metric: string) {
+  return history.flatMap(({ hour, claims }) => {
+    const value = claims?.[metric]
+    return value === undefined ? [] : [{ hour, value }]
+  })
 }
 
 /** Convert a coverage history hour such as 2026-11-02T10 to a time. */
@@ -234,6 +254,26 @@ export type FindE2eSignalsArgs = {
   history: CoverageHistoryEntry[]
   /** The result being watched. */
   target: E2eTarget
+  /** Current time. */
+  now: Date
+  /** When the heartbeat first saw the current count, if it has. */
+  lastChangeSeenAt?: Date
+}
+
+export type E2eObservation = {
+  /** Latest count of the watched metric. */
+  value: number
+  /** ISO time the heartbeat first saw this count. */
+  seenAt: string
+}
+
+export type ObserveE2eValueArgs = {
+  /** Hourly coverage history, oldest first. */
+  history: CoverageHistoryEntry[]
+  /** Coverage claim count being watched. */
+  metric: string
+  /** The heartbeat's previous sighting, if any. */
+  previous?: E2eObservation
   /** Current time. */
   now: Date
 }

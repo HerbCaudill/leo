@@ -5,6 +5,7 @@ import {
   findQuietSessions,
   hasWatchedWork,
   isE2eInvestigationDue,
+  observeE2eValue,
   parseCoverageHistory,
   planHerbAsk,
   readE2eTarget,
@@ -136,6 +137,14 @@ describe("findE2eSignals", () => {
     ])
   })
 
+  it("starts the clock when the heartbeat first saw the count, since the report backdates gains", () => {
+    const history = [entry("2026-11-02T01", 100), entry("2026-11-02T02", 150)]
+    const now = new Date("2026-11-02T06:30:00Z")
+    expect(
+      findE2eSignals({ history, target, now, lastChangeSeenAt: new Date("2026-11-02T05:25:00Z") }),
+    ).toEqual([])
+  })
+
   it("flags a daily rate that halved two days running", () => {
     const history = [
       entry("2026-11-01T23", 0),
@@ -159,6 +168,30 @@ describe("findE2eSignals", () => {
       entry("2026-11-04T01", 600),
     ]
     expect(findE2eSignals({ history, target, now: new Date("2026-11-04T02:00:00Z") })).toEqual([])
+  })
+})
+
+describe("observeE2eValue", () => {
+  const history = [
+    { hour: "2026-11-02T01", claims: { newAppPassing: 100 } },
+    { hour: "2026-11-02T02", claims: null },
+  ]
+  const now = new Date("2026-11-02T06:30:00Z")
+
+  it("keeps the first sighting while the count holds", () => {
+    const previous = { value: 100, seenAt: "2026-11-02T03:00:00.000Z" }
+    expect(observeE2eValue({ history, metric: "newAppPassing", previous, now })).toEqual(previous)
+  })
+
+  it("records a new sighting when the count changes or nothing was seen before", () => {
+    const seenNow = { value: 100, seenAt: now.toISOString() }
+    const previous = { value: 90, seenAt: "2026-11-02T03:00:00.000Z" }
+    expect(observeE2eValue({ history, metric: "newAppPassing", previous, now })).toEqual(seenNow)
+    expect(observeE2eValue({ history, metric: "newAppPassing", now })).toEqual(seenNow)
+  })
+
+  it("is undefined when the report has no count", () => {
+    expect(observeE2eValue({ history, metric: "routeCheckPassing", now })).toBeUndefined()
   })
 })
 
