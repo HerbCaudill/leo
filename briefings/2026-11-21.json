@@ -1,0 +1,152 @@
+{
+  "sections": [
+    {
+      "stories": [
+        {
+          "body": "Poland said two Russian missiles likely landed in its southeast on Friday and accused Moscow of a provocation, raising concern about the war spilling into NATO territory. The report came as Russia launched large-scale strikes on Ukraine, with Kyiv reporting at least six people killed in the capital. Vladimir Putin had earlier threatened a painful response to Ukrainian strikes on the Crimea bridge. The supplied reporting does not establish whether the missiles entered Poland deliberately.",
+          "headline": "Poland reports likely Russian missile strikes as Moscow attacks Ukraine",
+          "sources": [
+            {
+              "name": "France 24",
+              "url": "https://www.france24.com/en/video/20261120-russia-pummels-ukraine-with-massive-strikes-missile-hits-poland"
+            }
+          ]
+        },
+        {
+          "body": "The Nasdaq fell 5.3% on Friday, leaving it below its level at the start of 2026, while the S&P 500 and Dow entered correction territory, at least 10% below recent highs. Anthropic closed down about 9% on its second trading day, retreating toward its $83 IPO price, and Nvidia fell nearly 14%. Heavy losses spread across Asian and European markets. Investors are questioning when enormous AI infrastructure investments will produce sufficient profits; Anthropic’s record IPO has failed to restore confidence in the sector.",
+          "headline": "Global AI sell-off wipes out Nasdaq’s gains for 2026",
+          "sources": [
+            {
+              "name": "BBC News",
+              "url": "https://www.bbc.com/news/articles/c6808ym10vzgo"
+            },
+            {
+              "name": "The Guardian",
+              "url": "https://www.theguardian.com/business/2026/nov/20/global-stock-markets-slump-anthropic-ipo-ai-sell-off"
+            }
+          ]
+        },
+        {
+          "body": "The UK and EU announced agreements to remove most checks on plant and animal products, link their emissions trading systems and establish reciprocal youth mobility. The mobility program would allow 100,000 people from each side annually, aged 18 to 31, to live in the other jurisdiction for up to three years, with restrictions on benefits and dependents and requirements for fees and sufficient funds. The food agreement is expected to take effect in March 2028 and requires Britain to adopt EU rules, reducing paperwork and reopening markets for some British products.",
+          "headline": "UK and EU agree on food trade, carbon markets and youth mobility",
+          "sources": [
+            {
+              "name": "France 24",
+              "url": "https://www.france24.com/en/video/20261120-burnham-hails-landmark-eu-uk-deal-as-good-day-for-britain-europe"
+            },
+            {
+              "name": "El Periódico",
+              "url": "https://www.elperiodico.com/es/internacional/20261120/acuerdo-ue-reino-unido-claves-movilidad-juvenil-intercambio-emisiones-alimentos-136676538"
+            }
+          ]
+        },
+        {
+          "body": "France’s Senate gave final parliamentary approval to legislation granting police and gendarmes a presumption of legitimate self-defense when using firearms. Supporters say the requirements of necessity and proportionality remain intact and that officers need protection from automatic criminal suspicion. La Vanguardia reports that criminal investigations following shootings would instead depend on a complaint from victims or relatives. Rights groups warn this could weaken accountability and give officers time to coordinate their accounts. Left-wing lawmakers plan to challenge the legislation before the Constitutional Council.",
+          "headline": "France passes police self-defense presumption amid accountability concerns",
+          "sources": [
+            {
+              "name": "France 24",
+              "url": "https://www.france24.com/en/france/20261120-licence-to-kill-french-parliament-adopts-police-shootings-law-slammed-activists"
+            },
+            {
+              "name": "La Vanguardia",
+              "url": "https://www.lavanguardia.com/internacional/20261120/11689501/policia-francesa-tendra-restricciones-disparar.html"
+            }
+          ]
+        }
+      ],
+      "title": "World"
+    },
+    {
+      "stories": [
+        {
+          "body": "Donald Trump threatened to prohibit US companies from building AI data centers overseas and impose substantial taxes or penalties on those that do. He offered no enforcement mechanism and said his own officials had not previously heard the proposal, leaving its policy status uncertain. The remarks follow new restrictions on foreign access to advanced US computing chips and come as American communities push back against data centers’ energy use and local impacts. Existing overseas projects and agreements involving companies including Meta and Anthropic could be affected if the proposal becomes policy.",
+          "headline": "Trump threatens penalties for US companies building AI data centers abroad",
+          "sources": [
+            {
+              "name": "BBC News",
+              "url": "https://www.bbc.com/news/articles/cmde1lw9y54ko"
+            },
+            {
+              "name": "The Guardian",
+              "url": "https://www.theguardian.com/us-news/2026/nov/20/trump-datacenters-white-house"
+            }
+          ]
+        },
+        {
+          "body": "A Missouri judge approved Bayer’s nationwide settlement providing up to $7.25 billion for Roundup users who have developed non-Hodgkin lymphoma or develop it in the future. Payments to participants range from $10,000 to $165,000, depending on exposure and illness, with Bayer funding the settlement through annual payments over as many as 21 years. Some lawyers argued the compensation was insufficient, but the judge cited the need to avoid delaying payments to sick claimants. Bayer, which has already paid roughly $10 billion to resolve related litigation, continues to deny that Roundup causes cancer.",
+          "headline": "Judge approves $7.25 billion Roundup cancer settlement",
+          "sources": [
+            {
+              "name": "BBC News",
+              "url": "https://www.bbc.com/news/articles/cwvg21gyl650o"
+            }
+          ]
+        },
+        {
+          "body": "New York Mayor Zohran Mamdani proposed moving the legally required closure of Rikers Island from 2027 to 2032, allowing time to complete four replacement jails in Brooklyn, the Bronx, Queens and Manhattan. His plan also seeks to reduce the detainee population from more than 6,500 to about 4,100, a target opposed by the correction officers’ union. The City Council must approve the revised deadline. Rikers remains under outside oversight following a federal court intervention, and nine detainees have died there this year.",
+          "headline": "Mamdani proposes delaying Rikers Island’s closure until 2032",
+          "sources": [
+            {
+              "name": "BBC News",
+              "url": "https://www.bbc.com/news/articles/cmjeqv89egylo"
+            },
+            {
+              "name": "The Washington Post",
+              "url": "https://www.washingtonpost.com/nation/2026/11/20/mamdani-proposes-five-year-extension-shutter-notorious-rikers-island-prison/"
+            }
+          ]
+        }
+      ],
+      "title": "US"
+    },
+    {
+      "stories": [
+        {
+          "body": "Spain’s Supreme Court ordered electoral authorities to enforce its interim voting restrictions ahead of the November 29 general election against a list of 163,355 people granted citizenship under the grandchildren provision of the Democratic Memory Law. The order applies to residents of Spain and those living abroad, but exempts 901 people who supplied the required consular certification and allows others to qualify by providing it before voting day. The dispute concerns a government instruction that presumed exile status for people who left Spain between 1936 and 1955, allowing descendants to obtain citizenship without individually documenting that circumstance.",
+          "headline": "Supreme Court reaffirms voting restrictions for citizenship-by-descent recipients",
+          "sources": [
+            {
+              "name": "El Mundo",
+              "url": "https://www.elmundo.es/elecciones/elecciones-generales/2026/11/20/6b00537121efa0dc428b4583.html"
+            }
+          ]
+        },
+        {
+          "body": "Spain approved rules phasing in an 80% renewable-electricity requirement for data centers over five years, starting with 60% coverage through 2028. Grid operator Red Eléctrica would be able to require centers to reduce their electricity load to zero when the system needs it, without compensation. Facilities below 10 megawatts and some strategic projects are exempt. Industry group Spain DC plans a legal challenge and a request to suspend the rules; Madrid and Aragón also announced legal action. The government says the measures protect consumers from additional electricity costs, while operators warn they threaten investment and continuous service.",
+          "headline": "Spain approves data-center energy rules as industry and regions prepare challenges",
+          "sources": [
+            {
+              "name": "3Cat",
+              "url": "https://www.3cat.cat/3catinfo/el-govern-espanyol-flexibilitza-les-exigencies-energetiques-per-als-centres-de-dades/noticia/3436389/"
+            },
+            {
+              "name": "RTVE",
+              "url": "https://www.rtve.es/noticias/20261120/patronal-centros-datos-madrid-aragon-exigencias-medioambientales-gobierno/17324125.shtml"
+            }
+          ]
+        }
+      ],
+      "title": "Spain"
+    },
+    {
+      "stories": [
+        {
+          "body": "Civil Protection activated Catalunya’s wind emergency alert ahead of strong winds on Sunday, November 22. Gusts could exceed 72 km/h across affected areas, with betevé forecasting speeds approaching 90 km/h in parts of the southern central coast and nearby inland areas. The episode is expected to affect Barcelona’s coastal and inland districts, Camp de Tarragona and other parts of Catalunya from early morning into the evening. Saturday should be calmer. Secure awnings and loose balcony or terrace objects, and avoid wooded areas and exposed structures during the strongest winds.",
+          "headline": "Strong Sunday winds trigger emergency alert across parts of Catalunya",
+          "sources": [
+            {
+              "name": "El Periódico",
+              "url": "https://www.elperiodico.com/es/tiempo/20261120/cataluna-activa-alerta-emergencias-viento-fuertes-rachas-barcelona-136681986"
+            },
+            {
+              "name": "betevé",
+              "url": "https://beteve.cat/medi-ambient/temps-barcelona-dissabte-21-novembre-dia-canviant-vent-diumenge/"
+            }
+          ]
+        }
+      ],
+      "title": "Barcelona & Catalunya"
+    }
+  ]
+}
