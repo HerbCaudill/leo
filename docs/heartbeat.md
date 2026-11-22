@@ -6,4 +6,6 @@ When `Watching.md` names an e2e target (for example `**Target:** routeCheckPassi
 
 Every investigation result goes to `leo/log/YYYY-MM-DD.md`. Herb's T3 sidebar is his only inbox (his decision, November 11, 2026), so a `needs_herb` result never posts to the morning briefing. Instead the investigation names the thread that owns the decision and writes the question for Herb. The script sends that thread a message telling it to ask him, on the mini or the Mac, so the thread shows up waiting for his input. When no thread owns the decision, the script starts a new thread in the Leo project to ask. Each blocker is asked once. The investigation never asks Herb to lift a pause or stop he placed himself.
 
+Red CI on devresults-next's main isn't the heartbeat's job: the model-free [CI watcher](ci-watch.md) on the Mac handles it.
+
 Never use T3 scheduled tasks for this: they activate a session on every run. Daily follow-ups, checkup prods and team-drift flags run in the briefing's `leo` lane, which keeps `leo/Follow-ups.md` current and may write Gmail drafts.
