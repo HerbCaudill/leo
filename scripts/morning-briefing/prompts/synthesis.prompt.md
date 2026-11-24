@@ -27,6 +27,7 @@ Under Sources, include every source below in this exact order. Use `- [x] Source
 - Apple Messages
 - Facebook Messenger
 - LinkedIn
+- Discord
 - GitHub
 - Meeting transcripts
 - Local agent sessions

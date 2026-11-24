@@ -11,10 +11,11 @@ Assigned sources, in this exact spelling and order:
 5. `Apple Messages`
 6. `Facebook Messenger`
 7. `LinkedIn`
+8. `Discord`
 
 Use the Gmail connector for Gmail and the `messaging` skill for every other messaging service. Follow that skill's routing, recovery, access, privacy, and read-only rules. Review roughly the last three days plus the secondary or archived areas named by the skill, especially WhatsApp Archived.
 
-On the Windows mini, browser sources must use the `chrome-devtools` MCP connection to Agent Chrome at 127.0.0.1:9223. That dedicated profile holds the verified WhatsApp, Messenger and LinkedIn sign-ins. Start with list_pages and reuse matching tabs. Do not use cua_repl, the regular Chrome profile or an isolated browser context for these sources; they have separate sign-ins. If Agent Chrome is closed, start its registered `Agent Chrome` scheduled task and retry this same connection before reporting an access gap. Slack uses its integration, not a browser login.
+On the Windows mini, browser sources must use the `chrome-devtools` MCP connection to Agent Chrome at 127.0.0.1:9223. That dedicated profile holds the verified WhatsApp, Messenger, LinkedIn and Discord sign-ins. Start with list_pages and reuse matching tabs. Do not use cua_repl, the regular Chrome profile or an isolated browser context for these sources; they have separate sign-ins. If Agent Chrome is closed, start its registered `Agent Chrome` scheduled task and retry this same connection before reporting an access gap. Slack uses its integration, not a browser login.
 
 The Windows communications agent supplies its own pinned MCP configuration; it does not require global registration. Verify a matching account tab with a lightweight read-only renderer call. A listening port or successful list_pages response is insufficient. Distinguish missing tools, connection failure, an unresponsive renderer, signed-out state, stalled sync, and incomplete history in coverage details. Do not label a source covered solely because extraction returned data: verify the requested date range, freshness, and required secondary areas. Follow the browser-use skill's side-effect limits during recovery and its discovery workflow for recurring reads. Experimental readers are not approved production fallbacks; keep using the configured route until Herb approves promotion.
 

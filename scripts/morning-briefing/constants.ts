@@ -65,6 +65,7 @@ export const MORNING_BRIEFING_LANES = [
       "Apple Messages",
       "Facebook Messenger",
       "LinkedIn",
+      "Discord",
     ],
   },
   {

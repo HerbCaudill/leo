@@ -74,6 +74,7 @@ const SOURCES = [
   ["WhatsApp", "web.whatsapp.com"],
   ["Facebook Messenger", "www.messenger.com"],
   ["LinkedIn", "www.linkedin.com"],
+  ["Discord", "discord.com"],
 ] as const
 
 type BrowserTarget = {
