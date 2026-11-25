@@ -1,0 +1,126 @@
+{
+  "sections": [
+    {
+      "stories": [
+        {
+          "body": "BBC Russian’s analysis of leaked Russian government records identifies at least 490,334 Russian military deaths since the full-scale invasion of Ukraine in 2022. Working with Mediazona, the BBC checked the dataset against independently documented military deaths and found matches for 90% of those records. The analysis indicates that war accounted for 65% of deaths among Russian men aged 18–24 in 2025. France 24 reports a higher estimate exceeding 700,000 when missing soldiers are included. Russia’s statistics agency acknowledged a cyberattack but denied that protected information had leaked.",
+          "headline": "Leaked Russian records reveal nearly 500,000 military deaths in Ukraine",
+          "sources": [
+            {
+              "name": "BBC News",
+              "url": "https://www.bbc.com/news/articles/cmx27g533zwyo"
+            },
+            {
+              "name": "France 24",
+              "url": "https://www.france24.com/en/russian-losses-on-ukrainian-front-top-700-000-including-missing"
+            }
+          ]
+        },
+        {
+          "body": "The Saudi-led coalition said it struck operational capabilities at the Houthi-controlled port of Hodeidah and other sites in northern Yemen. Separately, Yemen’s military said Houthi fighters had advanced to about 60 kilometers from Aden, the internationally recognized government’s stronghold, following government withdrawals near the Red Sea. A military spokesman said defenses were prepared to repel an assault. The developments put a major port and the government’s southern base under renewed military pressure.",
+          "headline": "Saudi-led coalition strikes Hodeidah as Houthi forces approach Aden",
+          "sources": [
+            {
+              "name": "Al Jazeera",
+              "url": "https://www.aljazeera.com/news/liveblog/2026/11/25/iran-war-live-houthis-threaten-saudi-ports-over-coalitions-hodeidah-order"
+            },
+            {
+              "name": "France 24",
+              "url": "https://www.france24.com/en/middle-east/20261124-yemen-army-houthi-attack-aden"
+            }
+          ]
+        },
+        {
+          "body": "A federal jury in Brooklyn found Huawei guilty on 10 of 12 counts, including conspiracy to steal trade secrets, bank fraud and conspiracy to violate US sanctions. It acquitted the company of racketeering conspiracy and obstruction of justice. Prosecutors accused Huawei of stealing competitors’ technology and misleading banks about its dealings in Iran; its lawyers argued that its growth came from innovation and hard work. Huawei welcomed the racketeering acquittal and said it would defend its interests. Sentencing is scheduled for September 2027, and its defense lawyer expects an appeal.",
+          "headline": "US jury convicts Huawei of trade-secret theft and fraud but rejects racketeering charge",
+          "sources": [
+            {
+              "name": "BBC News",
+              "url": "https://www.bbc.com/news/articles/cmy49ngydqzpo"
+            },
+            {
+              "name": "France 24",
+              "url": "https://www.france24.com/en/americas/20261124-new-york-jury-convicts-huawei-of-stealing-trade-secrets"
+            }
+          ]
+        }
+      ],
+      "title": "World"
+    },
+    {
+      "stories": [
+        {
+          "body": "Kilmar Ábrego García departed for Spain on Tuesday night under an agreement allowing him to leave voluntarily rather than face deportation to another country. His departure follows his wrongful removal to El Salvador in March 2025 despite a court order protecting him from deportation there, imprisonment and eventual return to the US after Supreme Court intervention. The administration subsequently sought to send him to several African countries. A federal judge dismissed a human-smuggling prosecution against him in May, finding it retaliatory; the government is appealing that ruling.",
+          "headline": "Kilmar Ábrego García leaves the US for Spain after deportation battle",
+          "sources": [
+            {
+              "name": "The Washington Post",
+              "url": "https://www.washingtonpost.com/immigration/2026/11/24/kilmar-abrego-garcia/"
+            },
+            {
+              "name": "The Guardian",
+              "url": "https://www.theguardian.com/us-news/2026/nov/24/kilmar-abrego-garcia-leaves-us"
+            }
+          ]
+        }
+      ],
+      "title": "US"
+    },
+    {
+      "stories": [
+        {
+          "body": "Spain’s cabinet approved a package before Sunday’s general election that would extend paid birth leave from 19 to 20 weeks, provide 34 weeks for single-parent families and increase bereavement leave for close relatives from two to 10 days. It also approved tax relief and simpler filings for self-employed workers, including a larger deduction for expenses that are difficult to document and an annual VAT filing option for businesses with turnover below €85,000. Public transport subsidies would be extended, alongside a bank tax intended to fund housing. The decree measures still require ratification by Congress’s standing committee.",
+          "headline": "Spain approves longer family leave, tax relief for the self-employed and transport subsidies",
+          "sources": [
+            {
+              "name": "El País",
+              "url": "https://elpais.com/espana/elecciones-generales/2026-11-24/el-gobierno-reivindica-su-traca-final-con-impuesto-a-la-banca-rebaja-de-autonomos-aborto-y-permiso-por-fallecimiento-cumplimos-con-nuestro-deber-gobernamos.html"
+            },
+            {
+              "name": "3Cat",
+              "url": "https://www.3cat.cat/3catinfo/el-govern-espanyol-aprovara-en-plena-campanya-ampliar-a-10-dies-el-permis-per-defuncio-dun-familiar/noticia/3441559/"
+            },
+            {
+              "name": "La Vanguardia",
+              "url": "https://www.lavanguardia.com/economia/20261124/11692145/hacienda-rebaja-irpf-autonomos-465-millones-simplifica-liquidaciones-iva.html"
+            }
+          ]
+        },
+        {
+          "body": "Spain’s Central Electoral Board unanimously rejected requests from PP and Vox for further investigations into alleged problems with overseas voting ahead of the November 29 election. According to El País, board members, including those nominated by PP, said the complaints lacked supporting evidence and declined to request additional reports from electoral and consular authorities. Separately, Pedro Sánchez warned in an RTVE interview that PP and Vox might reject the result if they failed to secure a majority. That was his campaign allegation, not a finding by the electoral board; Sánchez said he would accept the outcome.",
+          "headline": "Electoral board unanimously rejects unsupported complaints about overseas voting",
+          "sources": [
+            {
+              "name": "El País",
+              "url": "https://elpais.com/espana/2026-11-25/la-junta-electoral-rechaza-por-unanimidad-las-quejas-de-pp-y-vox-sobre-noticias-sin-pruebas-contra-el-voto-cera.html"
+            },
+            {
+              "name": "RTVE",
+              "url": "https://www.rtve.es/noticias/20261124/sanchez-pide-movilizacion-contundente-29n-advierte-pp-vox-si-no-suman-no-van-a-aceptar-restado-electoral/17327851.shtml"
+            }
+          ]
+        }
+      ],
+      "title": "Spain"
+    },
+    {
+      "stories": [
+        {
+          "body": "Collserola will remain closed for the rest of 2026 under African swine fever restrictions. Catalonia’s agriculture minister said access conditions could change very early in 2027 if disease data allow, but stressed that this would not mean a full reopening. A scientific and municipal working group is preparing a phased approach, while restrictions in lower-risk areas elsewhere could begin easing in December. Barcelona has proposed prioritizing the Carretera de les Aigües. Nearly a year after the outbreak began, authorities report 448 positive wild boars, and the virus’s origin remains publicly unresolved.",
+          "headline": "Collserola will stay closed through year-end, with limited access changes possible in early 2027",
+          "sources": [
+            {
+              "name": "betevé",
+              "url": "https://beteve.cat/medi-ambient/parc-collserola-reobrira-2027-pesta-porcina-desescalada/"
+            },
+            {
+              "name": "El Periódico",
+              "url": "https://www.elperiodico.com/es/economia/20261124/primer-aniversario-peste-porcina-catalunya-claves-desescalada-136784426"
+            }
+          ]
+        }
+      ],
+      "title": "Barcelona & Catalunya"
+    }
+  ]
+}
