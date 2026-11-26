@@ -11,6 +11,7 @@ import {
   DAILY_NOTES_DIRECTORY_PATH,
   MORNING_BRIEFING_LANES,
   MORNING_BRIEFING_ROLE,
+  MORNING_BRIEFING_SYNTHESIS_ROLE,
   MORNING_BRIEFING_STATE_DIRECTORY_PATH,
 } from "./constants.ts"
 import { publishDailyBriefingToNote } from "./dailyNote.ts"
@@ -166,13 +167,10 @@ export async function runLiveMorningBriefing(
         runStage("synthesis", [paths.mergedPath], () =>
           synthesizeMorningBriefing({
             carryoverPath: paths.carryoverPath,
-            codexCommand,
-            cwd,
             date: args.date,
-            environment,
             gatherResults,
             mergedPath: paths.mergedPath,
-            role: MORNING_BRIEFING_ROLE,
+            role: MORNING_BRIEFING_SYNTHESIS_ROLE,
             schemaPath: synthesisSchemaPath,
             synthesisDirectoryPath: paths.synthesisDirectoryPath,
             timeZone: args.timeZone,

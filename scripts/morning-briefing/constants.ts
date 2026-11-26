@@ -38,8 +38,14 @@ export const NEWS_T3_WEBHOOK_URL_PATH = join(
   ".config/morning-briefing/news-t3-webhook-url",
 )
 
-/** Model role for source gathering and final synthesis. These agents rely on Codex features, so the role must use Codex. */
+/** Model role for source gathering. These agents rely on Codex features, so the role must use Codex. */
 export const MORNING_BRIEFING_ROLE = "author"
+
+/** Model role that writes the final briefing. It gets every input in its prompt, so any harness works. */
+export const MORNING_BRIEFING_SYNTHESIS_ROLE = "writer"
+
+/** The shared `llm` CLI in dotfiles, which reads the model roles table. */
+export const LLM_CLI_PATH = join(homedir(), "Code/HerbCaudill/dotfiles/scripts/llm/cli.ts")
 
 /** Independent source groups gathered in parallel. */
 export const MORNING_BRIEFING_LANES = [

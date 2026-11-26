@@ -1,6 +1,6 @@
 import { execFileSync } from "node:child_process"
-import { homedir } from "node:os"
-import { join } from "node:path"
+
+import { LLM_CLI_PATH } from "./constants.ts"
 
 /** Ask the shared `llm` CLI for a model role's Codex model and effort. */
 export function resolveCodexVariant(
@@ -18,8 +18,6 @@ export function resolveCodexVariant(
     throw new Error(`The ${role} role uses ${variant.harness}; Leo's agents need a Codex role`)
   return variant
 }
-
-const LLM_CLI_PATH = join(homedir(), "Code/HerbCaudill/dotfiles/scripts/llm/cli.ts")
 
 export type CodexVariant = {
   /** Reasoning effort. */

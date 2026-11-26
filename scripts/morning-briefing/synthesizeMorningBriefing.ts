@@ -1,10 +1,11 @@
+import { readFileSync } from "node:fs"
 import { join } from "node:path"
 
 import { writeTextAtomically } from "./atomicWrite.ts"
-import { runCodexAgent } from "./codexAgent.ts"
 import { decodeSynthesisResult } from "./decodeAgentOutput.ts"
 import { readMorningBriefingContext } from "./readMorningBriefingContext.ts"
 import { readMorningBriefingPrompt } from "./readPromptFile.ts"
+import { runLlmRole, type LlmRoleRequest } from "./runLlmRole.ts"
 import type { MorningBriefingGatherResult, MorningBriefingSynthesisResult } from "./types.ts"
 import { isWeekendDate } from "./date.ts"
 import { validateSynthesizedBriefingMarkdown } from "./validateBriefing.ts"
@@ -13,17 +14,16 @@ const MAX_AGENT_ATTEMPTS = 2
 
 /** Persist merged gather results and synthesize one validated canonical briefing. */
 export async function synthesizeMorningBriefing(
-  /** Gather results, run paths, and Codex settings. */
+  /** Gather results, run paths, and the model role. */
   args: SynthesizeMorningBriefingArgs,
 ): Promise<MorningBriefingSynthesisResult> {
-  writeTextAtomically(
-    args.mergedPath,
-    `${JSON.stringify(
-      { date: args.date, gatherResults: args.gatherResults, timeZone: args.timeZone },
-      null,
-      2,
-    )}\n`,
-  )
+  const merged = `${JSON.stringify(
+    { date: args.date, gatherResults: args.gatherResults, timeZone: args.timeZone },
+    null,
+    2,
+  )}\n`
+  writeTextAtomically(args.mergedPath, merged)
+  const runRole = args.runRole ?? runLlmRole
 
   const prompt = `${readMorningBriefingPrompt("synthesis.prompt.md")}
 
@@ -38,27 +38,28 @@ ${readMorningBriefingContext()}
 - Local date: ${args.date}
 - Proposed standup: ${isWeekendDate(args.date) ? "omit (weekend)" : "include"}
 - Local time zone: ${args.timeZone}
-- Carryover artifact: ${args.carryoverPath}
-- Merged gather artifact: ${args.mergedPath}
+
+## Carryover artifact
+
+<carryover>
+${readFileSync(args.carryoverPath, "utf8")}
+</carryover>
+
+## Merged gather artifact
+
+<merged>
+${merged}</merged>
 `
   let lastError: Error | undefined
 
   for (let attempt = 1; attempt <= MAX_AGENT_ATTEMPTS; attempt += 1) {
     const outputPath = join(args.synthesisDirectoryPath, `attempt-${attempt}.json`)
-    const eventsPath = join(args.synthesisDirectoryPath, `attempt-${attempt}.events.jsonl`)
 
     try {
-      await runCodexAgent({
-        codexCommand: args.codexCommand,
-        cwd: args.cwd,
-        environment: args.environment,
-        eventsPath,
-        role: args.role,
+      writeTextAtomically(
         outputPath,
-        prompt,
-        schemaPath: args.schemaPath,
-        threadSource: "morning-briefing-synthesis",
-      })
+        await runRole({ prompt, role: args.role, schemaPath: args.schemaPath }),
+      )
       const result = decodeSynthesisResult(outputPath)
       return {
         ...result,
@@ -77,20 +78,16 @@ ${readMorningBriefingContext()}
 type SynthesizeMorningBriefingArgs = {
   /** Carryover artifact path. */
   carryoverPath: string
-  /** Codex executable path. */
-  codexCommand: string
-  /** Working repository path. */
-  cwd: string
   /** Target local date. */
   date: string
-  /** Environment inherited by Codex. */
-  environment: NodeJS.ProcessEnv
   /** Schema-checked gather results. */
   gatherResults: MorningBriefingGatherResult[]
   /** Combined gather artifact path. */
   mergedPath: string
   /** Model role from the roles table in the global AGENTS.md. */
   role: string
+  /** Run the role; tests replace the `llm` CLI here. */
+  runRole?: (request: LlmRoleRequest) => Promise<string>
   /** Synthesis output JSON Schema path. */
   schemaPath: string
   /** Directory for synthesis attempts and event logs. */
