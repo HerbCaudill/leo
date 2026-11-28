@@ -29,8 +29,15 @@ export const MORNING_BRIEFING_STATE_DIRECTORY_PATH = join(
 /** T3 Code desktop app that hosts the pinned briefing thread. */
 export const T3_APP_NAME = "T3 Code (Nightly)"
 
-/** Private file holding the URL of the T3 webhook task that presents the briefing. */
-export const T3_WEBHOOK_URL_PATH = join(homedir(), ".config/morning-briefing/t3-webhook-url")
+/** Model role that owns the morning briefing thread, from presentation through the reviews. */
+export const MORNING_BRIEFING_THREAD_ROLE = "writer"
+
+/** T3 provider instance for each `llm` harness. */
+export const T3_PROVIDER_INSTANCES: Record<string, string> = {
+  antigravity: "antigravity",
+  claude: "claudeAgent",
+  codex: "codex",
+}
 
 /** Private URL of the separate news presentation webhook task. */
 export const NEWS_T3_WEBHOOK_URL_PATH = join(

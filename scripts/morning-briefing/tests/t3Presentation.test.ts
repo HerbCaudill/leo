@@ -3,7 +3,11 @@ import { tmpdir } from "node:os"
 import { join } from "node:path"
 import { afterEach, expect, test, vi } from "vitest"
 
-import { presentBriefingInT3, presentMorningBriefingInT3 } from "../t3Presentation.ts"
+import {
+  presentBriefingInT3,
+  presentMorningBriefingInT3,
+  type StartT3ThreadRequest,
+} from "../t3Presentation.ts"
 
 const directories: string[] = []
 
@@ -12,58 +16,60 @@ afterEach(() => {
   directories.length = 0
 })
 
-test("opens T3 Code, then sends the date and daily note path to the webhook", async () => {
+test("starts the morning thread on the writer role's model with the saved briefing location", async () => {
   const calls: string[] = []
-  const openT3 = vi.fn(async () => {
-    calls.push("open")
-  })
-  const fetch = vi.fn(async (_url: string, _init: RequestInit) => {
-    void _url
-    void _init
-    calls.push("post")
-    return new Response(null, { status: 202 })
+  const startThread = vi.fn(async (_request: StartT3ThreadRequest) => {
+    void _request
+    calls.push("start")
   })
 
   await presentMorningBriefingInT3({
     dailyNotePath: "/notes/daily/2026-10-09.md",
     date: "2026-10-09",
-    fetch,
-    openT3,
-    webhookUrlPath: writeWebhookUrl("https://relay.example/hook/secret\n"),
+    openT3: async () => {
+      calls.push("open")
+    },
+    resolveRole: role => ({ effort: "high", harness: "antigravity", model: `${role}-model` }),
+    startThread,
   })
 
-  expect(calls).toEqual(["open", "post"])
-  const [url, init] = fetch.mock.calls[0]!
-  expect(url).toBe("https://relay.example/hook/secret")
-  expect(init.method).toBe("POST")
-  expect(JSON.parse(String(init.body))).toEqual({
+  expect(calls).toEqual(["open", "start"])
+  const request = startThread.mock.calls[0]![0]
+  expect(request.provider).toBe("antigravity")
+  expect(request.model).toBe("writer-model")
+  expect(request.message).toContain("for 2026-10-09 from /notes/daily/2026-10-09.md")
+  expect(request.message).not.toContain("{{")
+})
+
+test("retries starting the thread while T3 is still starting up", async () => {
+  const startThread = vi
+    .fn<(request: StartT3ThreadRequest) => Promise<void>>()
+    .mockRejectedValueOnce(new Error("server not running"))
+    .mockResolvedValueOnce()
+
+  await presentMorningBriefingInT3({
     dailyNotePath: "/notes/daily/2026-10-09.md",
     date: "2026-10-09",
+    openT3: async () => {},
+    resolveRole: () => ({ effort: "high", harness: "claude", model: "claude-model" }),
+    retryDelayMs: 0,
+    startThread,
   })
+
+  expect(startThread).toHaveBeenCalledTimes(2)
+  expect(startThread.mock.calls[1]![0].provider).toBe("claudeAgent")
 })
 
-test("fails when the webhook rejects the request", async () => {
+test("fails clearly when the role's harness has no T3 provider", async () => {
   await expect(
     presentMorningBriefingInT3({
       dailyNotePath: "/notes/daily/2026-10-09.md",
       date: "2026-10-09",
-      fetch: async () => new Response("gone", { status: 404 }),
       openT3: async () => {},
-      webhookUrlPath: writeWebhookUrl("https://relay.example/hook/secret"),
+      resolveRole: () => ({ effort: "high", harness: "pi", model: "pi-model" }),
+      startThread: vi.fn(),
     }),
-  ).rejects.toThrow("T3 webhook returned 404")
-})
-
-test("fails clearly when the webhook URL file is missing", async () => {
-  await expect(
-    presentMorningBriefingInT3({
-      dailyNotePath: "/notes/daily/2026-10-09.md",
-      date: "2026-10-09",
-      fetch: vi.fn(),
-      openT3: async () => {},
-      webhookUrlPath: "/nonexistent/t3-webhook-url",
-    }),
-  ).rejects.toThrow("/nonexistent/t3-webhook-url")
+  ).rejects.toThrow("pi")
 })
 
 /** Write a webhook URL file in an isolated temporary directory. */
